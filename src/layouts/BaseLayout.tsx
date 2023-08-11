@@ -1,5 +1,7 @@
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
+import Header from './components/Header';
+import BottomBar from './components/BottomBar';
 
 interface LayoutProps {
   children: ReactNode;
@@ -8,15 +10,20 @@ interface LayoutProps {
 const Container = styled.div`
   width: 100%;
   max-width: 500px;
+  min-height: 100vh;
   margin: 0 auto;
-
-  @media (max-width: 500px) {
-    max-width: 100%;
-  }
+  background-color: #fff;
+  position=relative;
 `;
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  return <Container>{children}</Container>;
+  return (
+    <Container >
+      <Header />
+      {children}
+      <BottomBar />
+    </Container>
+  );
 };
 
 export default Layout;
