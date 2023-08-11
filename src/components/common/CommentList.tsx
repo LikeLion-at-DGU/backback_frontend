@@ -1,4 +1,4 @@
-import Post, { CommentProps } from "./Comment";
+import Comment, { CommentProps } from "./Comment";
 
 export interface CommentListProps {
   like_count: number;
@@ -8,7 +8,7 @@ export interface CommentListProps {
 
 const CommentList: React.FC<CommentListProps> = ({ ...prop }) => {
   const listItems = prop.comments.map((item, index) => (
-    <Post
+    <Comment
       key={index.toString()}
       nickname={item.nickname}
       type={item.type}
