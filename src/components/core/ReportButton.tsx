@@ -21,7 +21,10 @@ const ReportButton: React.FC<ButtonProps> = ({ children }) => {
             }}
           >
             신고하기
-            <img src="../../../assets/images/alarm.svg"></img>
+            <img
+              src="../../../assets/images/Report_icon.png"
+              style={{ height: "14px" }}
+            ></img>
           </div>
           <div
             style={{

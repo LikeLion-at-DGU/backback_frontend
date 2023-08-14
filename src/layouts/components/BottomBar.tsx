@@ -43,26 +43,26 @@ const Header: React.FC = () => {
           style={{ cursor: "pointer", placeItems: "center", display: "grid" }}
         >
           <img
-            src="../../../assets/images/back.svg"
+            src="../../../assets/images/Back_icon.png"
             style={{ height: "20px" }}
           ></img>
         </span>
       </div>
       <RouterLink href="/">
         <img
-          src="../../../assets/images/home.svg"
+          src="../../../assets/images/Home_icon.png"
           style={{ height: "20px" }}
         ></img>
       </RouterLink>
       <RouterLink href="/testing">
         <img
-          src="../../../assets/images/scraplist.svg"
+          src="../../../assets/images/Scrap_icon.png"
           style={{ height: "20px" }}
         ></img>
       </RouterLink>
       <RouterLink href="/testing2">
         <img
-          src="../../../assets/images/mypage.svg"
+          src="../../../assets/images/Mypage_icon.png"
           style={{ height: "20px" }}
         ></img>
       </RouterLink>
