@@ -59,14 +59,14 @@ const Header: React.FC = () => {
         <div style={{ flex: "1", textAlign: "center" }}></div>
         <div style={{ flex: "7", textAlign: "center" }}>
           <img
-            src="../../../assets/images/name.svg"
-            style={{ height: "100%" }}
+            src="../../../assets/images/Logo.png"
+            style={{ height: "30px" }}
           ></img>
         </div>
         <div style={{ flex: "1", textAlign: "center" }}>
           <img
-            src="../../../assets/images/search.svg"
-            style={{ height: "100%" }}
+            src="../../../assets/images/find_icon.png"
+            style={{ height: "30px" }}
           ></img>
         </div>
       </header>

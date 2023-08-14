@@ -35,8 +35,8 @@ const Comment: React.FC<CommentProps> = ({ ...prop }) => {
         />
         <ReportButton>
           <img
-            src="../../../assets/images/dot.svg"
-            style={{ height: "100%" }}
+            src="../../../assets/images/Three_Dots_icon.png"
+            style={{ height: "25px" }}
           ></img>
         </ReportButton>
       </div>

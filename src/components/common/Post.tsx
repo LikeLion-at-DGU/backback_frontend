@@ -81,12 +81,15 @@ const Post: React.FC<PostProps> = ({ ...prop }) => {
           }}
         >
           <img
-            src="../../../assets/images/dumbbell_down.svg"
-            style={{ height: "16px", marginRight: "5px" }}
+            src="../../../assets/images/Like_icon.png"
+            style={{
+              height: "16px",
+              marginRight: "5px",
+            }}
           ></img>
           {prop.like_count}
           <img
-            src="../../../assets/images/comment.svg"
+            src="../../../assets/images/Message_icon.png"
             style={{ height: "16px", marginLeft: "5px", marginRight: "5px" }}
           ></img>
           {prop.comments_count}

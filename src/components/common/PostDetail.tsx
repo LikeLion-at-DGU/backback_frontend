@@ -86,8 +86,8 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
           />
           <ReportButton>
             <img
-              src="../../../assets/images/dot.svg"
-              style={{ height: "100%" }}
+              src="../../../assets/images/Three_Dots_icon.png"
+              style={{ height: "25px" }}
             ></img>
           </ReportButton>
         </div>
@@ -131,25 +131,26 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
             <div
               style={{
                 cursor: "pointer",
+                display: "flex",
                 placeItems: "center",
               }}
             >
               <img
-                src="../../../assets/images/dumbbell_down.svg"
-                style={{ height: "100%" }}
+                src="../../../assets/images/Like_icon.png"
+                style={{ height: "25px" }}
               ></img>
             </div>
             <div style={{ margin: "5px" }}>좋아요 {prop.like_count}</div>
             <img
-              src="../../../assets/images/comment.svg"
-              style={{ height: "100%" }}
+              src="../../../assets/images/Message_icon.png"
+              style={{ height: "25px" }}
             ></img>
             <div style={{ margin: "5px" }}>댓글 {prop.comments_count}</div>
           </div>
           <div style={{ cursor: "pointer", placeItems: "center" }}>
             <img
               src="../../../assets/images/noscrap.svg"
-              style={{ height: "100%" }}
+              style={{ height: "25px" }}
             ></img>
           </div>
         </div>
@@ -205,6 +206,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
               width: "38px",
               height: "30px",
               fontSize: "14px",
+              cursor: "pointer",
             }}
           >
             등록
