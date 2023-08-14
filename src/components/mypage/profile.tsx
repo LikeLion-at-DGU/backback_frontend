@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { MyPageDropDown } from "./mypagedropdown";
+import { ReportDropDown } from "./reportdropdown";
 
 interface Profile {
     id: number;
@@ -30,6 +31,11 @@ export function Profile({profile, is_mine}: ProfileProps) {
     const [isFollow, setIsFollow] = useState(false);
     const follow = () => {
         setIsFollow(!isFollow)
+    }
+
+    const [isReportDropdownOpen, setIsReportDropdownOpen] = useState(false);
+    const reportDropDown = () => {
+        setIsReportDropdownOpen(!isReportDropdownOpen)
     }
 
     return (
@@ -138,16 +144,28 @@ export function Profile({profile, is_mine}: ProfileProps) {
                     <p>
                         팔로잉 {profile.following_cnt}
                     </p>
-                    {!is_mine && (
-                        <img
-                            src={threeDotIconPath}
-                            style={{
-                                width: '17px',
-                                height: '17px',
-                                marginLeft: 'auto'
-                            }}
-                        />
-                    )}
+                    <div
+                        style={{
+                            position: 'relative',
+                            marginLeft: 'auto'
+                        }}
+                    >
+                        {!is_mine && (
+                            <img
+                                src={threeDotIconPath}
+                                style={{
+                                    width: '17px',
+                                    height: '17px',
+                                    marginLeft: 'auto',
+                                    marginRight: '2px'
+                                }}
+                                onClick={reportDropDown}
+                            />
+                        )}
+                        {isReportDropdownOpen && (
+                            <ReportDropDown/>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

@@ -26,6 +26,8 @@ const listItemProfileStyle = {
     marginRight: '10px'
 }
 
+export { listItemStyle, listItemTextStyle, listItemProfileStyle };
+
 export function MyPageDropDown() {
     const updateIconPath = '/assets/images/Update_icon.png';
     const logoutIconPath = '/assets/images/Logout_icon.png';
