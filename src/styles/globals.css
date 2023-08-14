@@ -109,3 +109,21 @@ a {
 body {
   background-color: white;
 }
+
+@font-face {
+  font-family: 'MainFont'; /* 폰트 이름을 지정하세요 */
+  src: url('/fonts/KoPubWorld Dotum_Pro Medium.otf'); /* 폰트 파일의 경로를 정확하게 지정하세요 */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'BoldFont'; /* 폰트 이름을 지정하세요 */
+  src: url('/fonts/KoPubWorld Dotum_Pro Bold.otf'); /* 폰트 파일의 경로를 정확하게 지정하세요 */
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'MainFont'; /* 폰트 이름을 body에 적용하세요 */
+}
