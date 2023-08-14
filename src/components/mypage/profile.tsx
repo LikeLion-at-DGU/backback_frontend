@@ -27,6 +27,11 @@ export function Profile({profile, is_mine}: ProfileProps) {
         setIsMyPageDropDownOpen(!isMyPageDropdownOpen)
     }
 
+    const [isFollow, setIsFollow] = useState(false);
+    const follow = () => {
+        setIsFollow(!isFollow)
+    }
+
     return (
         <div
             style={{
@@ -96,10 +101,13 @@ export function Profile({profile, is_mine}: ProfileProps) {
                                 marginLeft: 'auto',
                                 border: '1px solid rgba(183, 187, 200, 1)',
                                 padding: '2px 12px 1px 12px',
-                                borderRadius: '10px'
+                                borderRadius: '10px',
+                                backgroundColor: isFollow ? 'rgba(183, 187, 200, 1)' : 'white',
+                                color: isFollow ? 'white' : 'rgba(0, 0, 0, 1)',
                             }}
+                            onClick={follow}
                         >
-                            팔로우
+                            {isFollow ? '팔로잉' : '팔로우'}
                         </p>
                     )}
                 </div>

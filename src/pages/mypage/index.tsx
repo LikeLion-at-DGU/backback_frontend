@@ -14,6 +14,6 @@ export default function MyPage(){
     };
 
     return (
-        <Profile profile={profileData} is_mine={true} />
+        <Profile profile={profileData} is_mine={false} />
     )
 }
