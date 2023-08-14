@@ -3,10 +3,14 @@ import React from "react";
 export interface UserInfoProps {
   nickname: string;
   type: string;
-  image: string;
+  profileimage: string;
 }
 
-const UserInfo: React.FC<UserInfoProps> = ({ nickname, type, image }) => {
+const UserInfo: React.FC<UserInfoProps> = ({
+  nickname,
+  type,
+  profileimage,
+}) => {
   return (
     <div
       style={{
@@ -17,13 +21,13 @@ const UserInfo: React.FC<UserInfoProps> = ({ nickname, type, image }) => {
       }}
     >
       <img
-        src={image}
+        src={profileimage}
         alt="profile"
         style={{
           height: "100%",
           borderRadius: "50%",
           flex: "1",
-          marginRight: "5px",
+          marginRight: "10px",
         }}
       ></img>
       <div
@@ -31,7 +35,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ nickname, type, image }) => {
           flex: "1",
           textAlign: "center",
           whiteSpace: "nowrap",
-          fontSize: "18px",
+          fontSize: "16px",
         }}
       >
         {nickname}
@@ -43,7 +47,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ nickname, type, image }) => {
           height: "100%",
           borderRadius: "50%",
           flex: "1",
-          marginLeft: "5px",
+          marginLeft: "10px",
         }}
       ></img>
     </div>

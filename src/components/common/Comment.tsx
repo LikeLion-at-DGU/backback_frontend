@@ -1,5 +1,6 @@
 import React from "react";
 import UserInfo, { UserInfoProps } from "./UserInfo";
+import ReportButton from "../core/ReportButton";
 
 export interface CommentProps extends UserInfoProps {
   comment: string;
@@ -14,7 +15,7 @@ const Comment: React.FC<CommentProps> = ({ ...prop }) => {
         alignItems: "center",
         display: "flex",
         flexDirection: "column",
-        padding: "0px 20px 0px 20px",
+        fontSize: "16px",
       }}
     >
       <div
@@ -24,25 +25,28 @@ const Comment: React.FC<CommentProps> = ({ ...prop }) => {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "0px 10px 0px 10px",
           margin: "10px 0px 10px 0px",
         }}
       >
         <UserInfo
           nickname={prop.nickname}
           type={prop.type}
-          image={prop.image}
+          profileimage={prop.profileimage}
         />
-        <button>버튼</button>
+        <ReportButton>
+          <img
+            src="../../../assets/images/dot.svg"
+            style={{ height: "100%" }}
+          ></img>
+        </ReportButton>
       </div>
 
       <div
         style={{
           flex: "1",
           width: "100%",
-          padding: "10px 40px 10px 40px",
+          padding: "10px 30px 10px 30px",
           wordWrap: "break-word",
-          fontSize: "18px",
           borderBottom: "1px solid black",
         }}
       >
