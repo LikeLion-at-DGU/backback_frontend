@@ -28,7 +28,7 @@ export function CompletedPool({joinDate, completedList}: CompletedPoolProps) {
     const joinDateForm = new Date(joinDate);
     const joinYear = joinDateForm.getFullYear();
     const joinMonth = joinDateForm.getMonth() + 1;
-
+    
     return(
         <div>
             <div
