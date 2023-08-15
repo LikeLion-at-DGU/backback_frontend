@@ -1,4 +1,4 @@
-interface ExpertInfoprops {
+interface ExpertInfoProps {
     infoList: string[]
 }
 
@@ -14,7 +14,7 @@ const exportTextStyle = {
     marginLeft: '26px'
 }
 
-export function ExpertInfo({infoList}: ExpertInfoprops) {
+export function ExpertInfo({infoList}: ExpertInfoProps) {
     if (!infoList || infoList.length === 0) {
         return null;
     }
