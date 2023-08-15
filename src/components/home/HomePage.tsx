@@ -1,5 +1,3 @@
-import { useState } from "react";
-import styled from "styled-components";
 import Post, { PostProps } from "../common/post/Post";
 import { ScrollContent } from "../common/post/PostDetail";
 import ImageSwiper from "../core/ImageSwiper";
@@ -9,13 +7,6 @@ export interface HomeProps {
   posts: PostProps[];
   images: string[];
 }
-
-// const ImageSwiperStyle = styled(ImageSwiper)`
-//   .carousel .control-dots {
-//     position: relative !important;
-//     margin-top: 50px !important;
-//   }
-// `;
 
 const Homepage: React.FC<HomeProps> = ({ ...prop }) => {
   const listItems = prop.posts.map((item, index) => (

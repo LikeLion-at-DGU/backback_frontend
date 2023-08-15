@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { ScrollContent } from "../post/PostDetail";
 import UserInfo, { UserInfoProps } from "@/components/common/UserInfo";
 import ReportButton from "@/components/core/ReportButton";
@@ -76,7 +75,7 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
             width: "100%",
             borderBottom: "1px solid #B7BBC8",
             padding: "10px 0px 10px 0px",
-            postion: "relative",
+            position: "relative",
           }}
         >
           <UserInfo
