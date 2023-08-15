@@ -1,22 +1,85 @@
-// 사진 첨부, 제목, 내용은 write.tsx에서 컴포넌트로 작성
-// 사진 수정/삭제 불가능 
-// 오운완에서는 사진 필수, 나머지는 선택인데 이거 프론트에서 작업해야함?
-// null 값 처리는 어떻게 해야할지 모르겠음
+import React, { useState } from 'react';
+import styles from '../../styles/PostForm.module.css'
 
-
-export interface WriteProps {
-    title: string;
-    content: string;
+interface PostWriteProps {
+    onSubmit: (title: string, content: string, images: File[]) => void;
 }
 
-const PostWrite: React.FC<WriteProps> = (WriteProps: WriteProps) => {
+const PostWrite: React.FC<PostWriteProps> = ({ onSubmit }) => {
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+    const [images, setImages] = useState<File[]>([]);
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedImages = e.target.files;
+        if (selectedImages) {
+            setImages(Array.from(selectedImages));
+        }
+    };
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        onSubmit(title, content, images);
+    };
+
     return (
-        <div style={{ width: "100%", padding: "0px 20px 0px 20px" }}>
-
-
-        </div>
-    )
-}
+        <form className={styles.container} onSubmit={handleSubmit}>
+            <label htmlFor='inputTitle'
+                style={{
+                    borderBottom: '1px solid #B7BBC8',
+                    width: '360px',
+                    height: '45px',
+                }}
+            >
+            </label>
+            <input
+                id='inputTitle'
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                hidden
+            />
+            <label htmlFor='inputContent'
+                style={{
+                    marginTop: '23px',
+                    border: '1px solid #B7BBC8',
+                    width: '360px',
+                    height: '150px',
+                }}
+            >
+            </label>
+            <textarea
+                placeholder="내용을 입력해주세요."
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                className={styles.contentForm}
+                hidden
+            />
+            <label htmlFor='inputFile'
+                style={{
+                    border: '1px solid #B7BBC8',
+                    borderRadius: '10px',
+                    height: '45px',
+                    width: '360px',
+                    marginTop: '23px',
+                    padding: '10px 0px 0px 120px',
+                    display: 'flex',
+                }}
+            >
+                <img src="../../../assets/images/Camera_icon.png" style={{ height: "20px", width: "20px" }} alt="camera" />
+                <div style={{ marginLeft: '10px' }}>사진 첨부하기</div>
+            </label>
+            <input
+                type='file'
+                id='inputFile'
+                multiple
+                onChange={handleImageChange}
+                accept='image/*'
+                hidden
+            />
+            {/* <button type="submit">등록</button> */}
+        </form>
+    );
+};
 
 export default PostWrite;
 
