@@ -1,0 +1,42 @@
+.dropdown {
+    position: relative;
+    width: 170px;
+    height: 40px;
+    border: 1px solid #B7BBC8;
+    cursor: pointer;
+}
+
+.selectedOption {
+    padding: 10px;
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.options {
+    position: absolute;
+    top: 120%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #B7BBC8;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+.options__list {
+    list-style: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+.option {
+    cursor: pointer;
+    height: 24px;
+    font-size: 14px;
+    padding: 2px 15px;
+}
+
+.option:hover {
+    background-color: #B7BBC8;
+}
