@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MyPageDropDown } from "./MypageDropdown";
 import { ReportDropDown } from "./ReportDropdown";
+import Modal from "./Modal";
 
 interface Profile {
     id: number;
@@ -36,6 +37,21 @@ export function Profile({profile, is_mine}: ProfileProps) {
     const [isReportDropdownOpen, setIsReportDropdownOpen] = useState(false);
     const reportDropDown = () => {
         setIsReportDropdownOpen(!isReportDropdownOpen)
+    }
+
+    const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+    const handleReportItemClick = () => {
+        setIsReportModalOpen(true);
+        reportDropDown();
+    }
+
+    const closeReportModal = () => {
+        setIsReportModalOpen(false);
+    }
+
+    const confirmReportModal = () => {
+        // 동작 추가해야함~
+        setIsReportModalOpen(false);
     }
 
     return (
@@ -163,7 +179,12 @@ export function Profile({profile, is_mine}: ProfileProps) {
                             />
                         )}
                         {isReportDropdownOpen && (
-                            <ReportDropDown reportDropDown={reportDropDown}/>
+                            <ReportDropDown handleReportItemClick={handleReportItemClick}/>
+                        )}
+                        {isReportModalOpen && (
+                            <Modal onClose={closeReportModal} onConfirm={confirmReportModal}>
+                                <p>해당 신고는 익명으로 처리됩니다. 해당 계정을 신고하시겠습니까?</p>
+                            </Modal>
                         )}
                     </div>
                 </div>
