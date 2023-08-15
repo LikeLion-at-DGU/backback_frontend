@@ -26,6 +26,21 @@ const copyIconStyle = {
     height: '14px'
 }
 
+const updateTitleStyle = {
+    fontWeight: 500,
+    fontSize: '14px',
+    marginRight: '15px'
+}
+
+const updateInputStyle = {
+    marginLeft: 'auto',
+    fontWeight: 500,
+    fontSize: '12px',
+    padding: '5px 10px 3px 10px',
+    border: '1px solid rgba(183, 187, 200, 1)',
+    borderRadius: '10px'
+}
+
 export function Profile({profile, is_mine}: ProfileProps) {
     const imagePath = `/assets/images/Character${profile.level}.png`;
     const exportIconPath = '/assets/images/Expert_icon.png';
@@ -90,6 +105,20 @@ export function Profile({profile, is_mine}: ProfileProps) {
         setIsDeleteModalOpen(false);
     }
 
+    const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+    const handelUpdateItemClick = () => {
+        setIsUpdateModalOpen(true);
+        myPageDropdown();
+    }
+
+    const closeUpdateModal = () => {
+        setIsUpdateModalOpen(false);
+    }
+
+    const confirmUpdateModal = () => {
+        setIsUpdateModalOpen(false);
+    }
+
     return (
         <div
             style={{
@@ -151,7 +180,47 @@ export function Profile({profile, is_mine}: ProfileProps) {
                             <MyPageDropDown 
                                 handleExpertItemClick={handleExpertItemClick}
                                 handleDeleteItemClick={handleDeleteItemClick}
+                                handleUpdateItemClick={handelUpdateItemClick}
                             />
+                        )}
+                        {isUpdateModalOpen && (
+                            <Modal onClose={closeUpdateModal} onConfirm={confirmUpdateModal} isRed={false}>
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        alignItems: "center"
+                                    }}
+                                >
+                                    <p
+                                        style={updateTitleStyle}
+                                    >
+                                        닉네임
+                                    </p>
+                                    <textarea
+                                        style={updateInputStyle}
+                                        rows={1}
+                                    >
+
+                                    </textarea>
+                                </div>
+                                <div
+                                    style={{
+                                        display: "flex"
+                                    }}
+                                >
+                                    <p
+                                        style={updateTitleStyle}
+                                    >
+                                        한줄 소개
+                                    </p>
+                                    <textarea
+                                        style={updateInputStyle}
+                                        rows={3}
+                                    >
+
+                                    </textarea>
+                                </div>
+                            </Modal>
                         )}
                         {isExpertModalOpen && (
                             <Modal onClose={colseExpertModal} onConfirm={confirmExpertModal} isRed={false}>

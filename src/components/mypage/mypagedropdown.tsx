@@ -1,6 +1,7 @@
 interface MyPageDropDownProps {
     handleExpertItemClick: any;
     handleDeleteItemClick: any;
+    handleUpdateItemClick: any;
 }
 
 const listItemStyle = {
@@ -33,7 +34,12 @@ const listItemProfileStyle = {
 
 export { listItemStyle, listItemTextStyle, listItemProfileStyle };
 
-export function MyPageDropDown({handleExpertItemClick: handleExpertItemClick, handleDeleteItemClick: handleDeleteItemClick}: MyPageDropDownProps) {
+export function MyPageDropDown({
+        handleExpertItemClick: handleExpertItemClick, 
+        handleDeleteItemClick: handleDeleteItemClick,
+        handleUpdateItemClick: handelUpdateItemClick
+        }: MyPageDropDownProps
+    ) {
     const updateIconPath = '/assets/images/Update_icon.png';
     const logoutIconPath = '/assets/images/Logout_icon.png';
     const expertIconPath = '/assets/images/Expert_Check_icon.png';
@@ -59,6 +65,7 @@ export function MyPageDropDown({handleExpertItemClick: handleExpertItemClick, ha
                         ...listItemStyle,
                         borderBottom: 'none'
                     }}
+                    onClick={handelUpdateItemClick}
                 >
                     <p style={listItemTextStyle}>수정하기</p>
                     <img src={updateIconPath} style={listItemProfileStyle}/>
