@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ScrollContent } from "../post/PostDetail";
 import Gym, { GymProps } from "./Gym";
+import KakaoMap from "./map";
 
 export interface GymListProps {
   gyms: GymProps[];
@@ -8,6 +9,14 @@ export interface GymListProps {
 
 const GymList: React.FC<GymListProps> = ({ ...prop }) => {
   const [isopen, setIsopen] = useState(false);
+  const [mapopen, setMapopen] = useState(false);
+  const [lat, setLat] = useState(0);
+  const [lng, setLng] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handlemapopen = () => {
+    setMapopen(!mapopen);
+  };
   const listItems = prop.gyms.map((item, index) => (
     <Gym
       key={index.toString()}
@@ -24,6 +33,24 @@ const GymList: React.FC<GymListProps> = ({ ...prop }) => {
   const openFilter = () => {
     setIsopen(!isopen);
   };
+  useEffect(() => {
+    const { geolocation } = navigator;
+
+    geolocation.getCurrentPosition(
+      (position) => {
+        // success.
+        setLat(position.coords.latitude);
+        setLng(position.coords.longitude);
+        setIsLoading(false);
+      },
+      (error) => {
+        console.warn("Fail to fetch current location", error);
+        setLat(37);
+        setLng(127);
+        setIsLoading(false);
+      }
+    );
+  }, []);
 
   return (
     <ScrollContent>
@@ -61,6 +88,7 @@ const GymList: React.FC<GymListProps> = ({ ...prop }) => {
                 padding: "3px",
                 marginRight: "5px",
               }}
+              onClick={handlemapopen}
             ></input>
             <img
               src="../../../../assets/images/find_icon.png"
@@ -107,6 +135,25 @@ const GymList: React.FC<GymListProps> = ({ ...prop }) => {
             )}
           </div>
         </div>
+      </div>
+      <div style={{ padding: "0px 15px 0px 15px" }}>
+        {mapopen &&
+          (!isLoading ? (
+            <KakaoMap latitude={lat} longitude={lng} />
+          ) : (
+            <div
+              style={{
+                width: "100%",
+                height: "270px",
+                backgroundColor: "#B7BBC8",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              잠시만 기다려 주세요
+            </div>
+          ))}
       </div>
       <div
         style={{
