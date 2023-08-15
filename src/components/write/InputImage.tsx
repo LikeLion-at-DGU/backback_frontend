@@ -30,7 +30,7 @@ const InputImage: React.FC<InputImageProps> = ({ onChange, previewCount }) => {
                     borderRadius: '10px',
                     height: '45px',
                     width: '360px',
-                    marginTop: '23px',
+                    marginTop: '13px',
                     padding: '10px 0px 0px 120px',
                     display: 'flex',
                 }}
@@ -40,11 +40,12 @@ const InputImage: React.FC<InputImageProps> = ({ onChange, previewCount }) => {
                     {previewCount === 0 ? '사진 첨부하기' : `${previewCount}장의 사진`}
                 </div>
                 <input
+                    id='inputFile'
                     type='file'
                     multiple
                     onChange={handleImageChange}
                     accept='image/*'
-                    hidden
+                    style={{ display: 'none' }}
                 />
             </label>
             <div style={{ overflowX: 'auto', maxWidth: '100vw', display: 'flex' }}>
