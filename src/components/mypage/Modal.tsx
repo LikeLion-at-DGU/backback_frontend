@@ -47,7 +47,7 @@ const modalButtonItemStyle = {
 } as React.CSSProperties;
 
 const modalStyle = {
-    margin: '0px 78px'
+    margin: '0px 43px'
 } as React.CSSProperties;
 
 const modalBackgroundStyle = {

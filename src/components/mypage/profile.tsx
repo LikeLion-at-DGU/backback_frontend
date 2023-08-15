@@ -2,6 +2,7 @@ import { useState } from "react";
 import { MyPageDropDown } from "./MypageDropdown";
 import { ReportDropDown } from "./ReportDropdown";
 import Modal from "./Modal";
+import { text } from "stream/consumers";
 
 interface Profile {
     id: number;
@@ -19,10 +20,17 @@ interface ProfileProps {
     is_mine: boolean;
 }
 
+const copyIconStyle = {
+    marginLeft: '14px',
+    width: '16px',
+    height: '14px'
+}
+
 export function Profile({profile, is_mine}: ProfileProps) {
     const imagePath = `/assets/images/Character${profile.level}.png`;
     const exportIconPath = '/assets/images/Expert_icon.png';
     const threeDotIconPath = '/assets/images/Three_Dots_icon.png';
+    const copyIconPath = 'assets/images/Copy_icon.png';
 
     const [isMyPageDropdownOpen, setIsMyPageDropDownOpen] = useState(false);
     const myPageDropdown = () => {
@@ -135,15 +143,28 @@ export function Profile({profile, is_mine}: ProfileProps) {
                         )}
                         {isExpertModalOpen && (
                             <Modal onClose={colseExpertModal} onConfirm={confirmExpertModal}>
-                                <p
+                                <div
                                     style={{
-                                        fontWeight: 500,
-                                        fontSize: '16px',
-                                        color: 'rgba(77, 46, 39, 1)'
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center"
                                     }}
                                 >
-                                    ulkkeun.official@gmail.com
-                                </p>
+                                    <p
+                                        style={{
+                                            fontWeight: 500,
+                                            fontSize: '16px',
+                                            color: 'rgba(77, 46, 39, 1)'
+                                        }}
+                                    >
+                                        ulkkeun.official@gmail.com
+                                    </p>
+                                    <img
+                                        src={copyIconPath}
+                                        style={copyIconStyle}
+                                        onClick={() => copyClipBoard("ulkkeun.official@gmail.com")}
+                                    />
+                                </div>
                                 <p
                                     style={{
                                         fontWeight: 500,
@@ -231,4 +252,13 @@ export function Profile({profile, is_mine}: ProfileProps) {
             </div>
         </div>
     )
+}
+
+const copyClipBoard = async (text: string) => {
+    try {
+        await navigator.clipboard.writeText(text);
+        alert("클립보드에 링크가 복사되었어요.");
+    } catch (err) {
+        console.log(err);
+    }
 }
