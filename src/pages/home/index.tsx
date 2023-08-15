@@ -8,7 +8,7 @@ export default function Home() {
     <HomePage
       images={[
         "./../../assets/images/Column_img.png",
-        "../../assets/images/Column_img.png",
+        "../../assets/images/completion1.png",
         "../../assets/images/Column_img.png",
         "../../assets/images/Column_img.png",
       ]}
