@@ -5,6 +5,7 @@ interface ModalProps {
     onClose: () => void;
     onConfirm: () => void;
     children: React.ReactNode;
+    isRed: boolean;
 }
 
 const modalTitleStyle = {
@@ -14,7 +15,6 @@ const modalTitleStyle = {
     borderTopLeftRadius: '10px',
     borderTopRightRadius: '10px',
     padding: '12px 90px 7px 90px',
-    background: 'rgba(183, 187, 200, 1)',
     whiteSpace: 'nowrap'
 } as React.CSSProperties;
 
@@ -72,7 +72,11 @@ export function Modal(props: ModalProps) {
                 style={modalStyle}
             >
                 <p
-                    style={modalTitleStyle}
+                    style={{
+                        ...modalTitleStyle,
+                        backgroundColor: props.isRed ? 'rgba(248, 51, 61, 1)' : 'rgba(183, 187, 200, 1)',
+                        color: props.isRed ? 'white' : 'rgba(0, 0, 0, 1)',
+                    }}
                 >
                     계정 신고
                 </p>

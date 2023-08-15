@@ -62,15 +62,10 @@ export function Profile({profile, is_mine}: ProfileProps) {
         setIsReportModalOpen(false);
     }
 
-    const [isExpertDropdownOpen, setIsExpertDropdownOpen] = useState(false);
-    const expertDropdown = () => {
-        setIsExpertDropdownOpen(!isExpertDropdownOpen)
-    }
-
     const [isExpertModalOpen, setIsExpertModalOpen] = useState(false);
     const handleExpertItemClick = () => {
         setIsExpertModalOpen(true);
-        expertDropdown();
+        myPageDropdown();
     }
 
     const colseExpertModal = () => {
@@ -79,6 +74,20 @@ export function Profile({profile, is_mine}: ProfileProps) {
 
     const confirmExpertModal = () => {
         setIsExpertModalOpen(false);
+    }
+
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const handleDeleteItemClick = () => {
+        setIsDeleteModalOpen(true);
+        myPageDropdown();
+    }
+
+    const closeDeleteModal = () => {
+        setIsDeleteModalOpen(false);
+    }
+
+    const confirmDeleteModal = () => {
+        setIsDeleteModalOpen(false);
     }
 
     return (
@@ -139,10 +148,13 @@ export function Profile({profile, is_mine}: ProfileProps) {
                             />
                         )}
                         {isMyPageDropdownOpen && (
-                            <MyPageDropDown handleExpertItemClick={handleExpertItemClick}/>
+                            <MyPageDropDown 
+                                handleExpertItemClick={handleExpertItemClick}
+                                handleDeleteItemClick={handleDeleteItemClick}
+                            />
                         )}
                         {isExpertModalOpen && (
-                            <Modal onClose={colseExpertModal} onConfirm={confirmExpertModal}>
+                            <Modal onClose={colseExpertModal} onConfirm={confirmExpertModal} isRed={false}>
                                 <div
                                     style={{
                                         display: "flex",
@@ -173,6 +185,11 @@ export function Profile({profile, is_mine}: ProfileProps) {
                                 >
                                     전문가 인증 마크를 위해 전문가 관련 자격증, 서류등의 사진을 위 이메일로 보내주세요.<br></br>주민등록번호 등의 개인정보는 가려서 첨부해주세요.<br></br><br></br>예시) 생활스포츠지도사, 필라테스 지도사 자격증 등<br></br><br></br>해당 인증 마크는 관리자의 확인을 거쳐 부여됩니다.
                                 </p>
+                            </Modal>
+                        )}
+                        {isDeleteModalOpen && (
+                            <Modal onClose={closeDeleteModal} onConfirm={confirmDeleteModal} isRed={true}>
+                                <p>정말로 탈퇴하시겠습니까?<br></br>모든 게시물과 댓글 등의 데이터가 모두 삭제됩니다</p>
                             </Modal>
                         )}
                     </div>
@@ -243,7 +260,7 @@ export function Profile({profile, is_mine}: ProfileProps) {
                             <ReportDropDown handleReportItemClick={handleReportItemClick}/>
                         )}
                         {isReportModalOpen && (
-                            <Modal onClose={closeReportModal} onConfirm={confirmReportModal}>
+                            <Modal onClose={closeReportModal} onConfirm={confirmReportModal} isRed={false}>
                                 <p>해당 신고는 익명으로 처리됩니다. 해당 계정을 신고하시겠습니까?</p>
                             </Modal>
                         )}
