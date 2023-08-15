@@ -1,4 +1,4 @@
-import PostList from "@/components/common/PostList";
+import PostList from "@/components/common/post/PostList";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
