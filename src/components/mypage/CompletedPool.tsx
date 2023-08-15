@@ -1,4 +1,4 @@
-import { Pool } from "./Pool"
+import { Pool } from "./pool"
 
 interface CompletedPoolProps {
     joinDate: string,

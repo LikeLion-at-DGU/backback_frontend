@@ -1,7 +1,7 @@
 import { ExpertInfo } from "@/components/mypage/ExpertInfo";
 import { PostList } from "@/components/mypage/PostList";
-import { Profile } from "@/components/mypage/Profile";
-import { ScrollContent } from "@/components/common/PostDetail";
+import { Profile } from "@/components/mypage/profile";
+import { ScrollContent } from "@/components/common/post/PostDetail";
 import { CompletedPool } from "@/components/mypage/CompletedPool";
 
 export default function MyPage(){
