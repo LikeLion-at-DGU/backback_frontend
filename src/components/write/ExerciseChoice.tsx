@@ -32,9 +32,13 @@ const ExerciseChoice = () => {
     return (
         <div>
             <div className={styles.dropdown}>
-                <div className={styles.selectedOption} onClick={handleToggle}>
-                    {selectedOption || '운동 종목'}
-                    <img src="../../../assets/images/Category_Under_icon.png" style={{ marginLeft: "50px", height: "8px", width: "13px" }} alt="cancel_logo" />
+                <div className={styles.selectedOption} onClick={handleToggle} style={{ display: 'flex', flexDirection: 'row' }}>
+                    <div style={{ textAlign: 'left', flex: '2' }}>
+                        {selectedOption || '운동 종목'}
+                    </div>
+                    <div style={{ alignItems: 'right', justifyContent: 'flex-end', flex: '1' }}>
+                        <img src="../../../assets/images/Category_Under_icon.png" style={{ marginLeft: "50px", height: "8px", width: "13px" }} alt="cancel_logo" />
+                    </div>
                 </div>
                 {isOpen && (
                     <div className={styles.options}>

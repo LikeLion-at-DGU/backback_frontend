@@ -12,16 +12,17 @@ const Community = styled.div<CommunityProps>`
   cursor: pointer;
   place-items: center;
   font-size: 16px;
+  font-family: 'MainFont';
   &:hover {
-    border-bottom: 1.5px solid blue;
+    border-bottom: 3px solid #6A81AA;
     font-weight: 700;
   }
   ${(props) =>
     props.active &&
     css`
-      border-bottom: 1.5px solid blue;
+      border-bottom: 3px solid #6A81AA;
       font-weight: 700;
-    `}
+      `}
 `;
 
 const Header: React.FC = () => {
@@ -54,6 +55,7 @@ const Header: React.FC = () => {
           padding: "10px",
           display: "flex",
           alignItems: "center",
+          marginTop: '22px',
         }}
       >
         <div style={{ flex: "1", textAlign: "center" }}></div>
@@ -76,10 +78,10 @@ const Header: React.FC = () => {
           height: "50px",
           display: "flex",
           alignItems: "center",
-          borderBottom: "1px solid black",
+          borderBottom: "1px solid #B7BBC8",
         }}
       >
-        <div style={{ flex: "1" }}></div>
+        <div style={{ flex: "1", fontFamily: 'MainFont' }}></div>
         <Community active={post}>커뮤니티</Community>
         <Community active={pro}>전문가</Community>
         <Community active={popular}>인기</Community>

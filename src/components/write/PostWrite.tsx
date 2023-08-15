@@ -66,7 +66,7 @@ const PostWrite: React.FC<PostWriteProps> = ({ onSubmit }) => {
                 }}
             >
                 <img src="../../../assets/images/Camera_icon.png" style={{ height: "20px", width: "20px" }} alt="camera" />
-                <div style={{ marginLeft: '10px' }}>사진 첨부하기</div>
+                <div style={{ marginLeft: '10px', fontFamily: 'MainFont' }}>사진 첨부하기</div>
             </label>
             <input
                 type='file'

@@ -35,7 +35,7 @@ const InputImage: React.FC<InputImageProps> = ({ onChange, previewCount }) => {
                     display: 'flex',
                 }}
             >
-                <img src="../../../assets/images/Camera_icon.png" style={{ height: "20px", width: "20px" }} alt="camera" />
+                <img src="../../../assets/images/Camera_icon.png" style={{ height: "20px", width: "20px", alignItems: 'vertical' }} alt="camera" />
                 <div style={{ marginLeft: '10px', cursor: 'pointer' }}>
                     {previewCount === 0 ? '사진 첨부하기' : `${previewCount}장의 사진`}
                 </div>
