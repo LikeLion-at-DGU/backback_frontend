@@ -79,12 +79,7 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({ ...prop }) =
             type={prop.type}
             profileimage={prop.profileimage}
           />
-          <ReportButton>
-            <img
-              src="../../../assets/images/Three_Dots_icon.png"
-              style={{ height: "17px" }}
-            ></img>
-          </ReportButton>
+          <ReportButton/>
         </div>
         <div
           style={{
