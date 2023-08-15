@@ -10,6 +10,7 @@ export interface HotColumnProps extends UserInfoProps {
     id: string;
     views: number;
     index?: number;
+    isHot?: boolean;
 }
 
 const HotColumn: React.FC<HotColumnProps> = ({ ... prop }) => {
@@ -17,11 +18,12 @@ const HotColumn: React.FC<HotColumnProps> = ({ ... prop }) => {
         <Link href="/column/[id]" as={`/column/${prop.id}`}>
             <div
                 style={{
-                    minHeight: "242px",
+                    height: "242px",
+                    width: "146px",
                     alignItems: "center",
                     display: "inline-block",
                     flexDirection: "column",
-                    margin: `${prop.index !== undefined && prop.index % 2 === 0 ? "0px 10px 0px 1px" : "0px 1px 0px 10px"}`,
+                    margin: `${prop.isHot ? "0px 8px 0px 0px" : (prop.index !== undefined && prop.index % 2 === 0 ? "0px 10px 0px 1px" : "0px 1px 0px 10px")}`,
                     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                 }}>
                 <img

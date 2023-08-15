@@ -23,6 +23,7 @@ const Post: React.FC<PostProps> = ({ ...prop }) => {
           display: "flex",
           flexDirection: "column",
           fontSize: "16px",
+          padding: "0px 11px",
           borderBottom: "1px solid black",
         }}
       >
