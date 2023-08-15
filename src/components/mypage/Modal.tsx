@@ -4,6 +4,7 @@ import React from "react";
 interface ModalProps {
     onClose: () => void;
     onConfirm: () => void;
+    title: string;
     children: React.ReactNode;
     isRed: boolean;
 }
@@ -78,7 +79,7 @@ export function Modal(props: ModalProps) {
                         color: props.isRed ? 'white' : 'rgba(0, 0, 0, 1)',
                     }}
                 >
-                    계정 신고
+                    {props.title}
                 </p>
                 {React.Children.map(props.children, (child) => (
                     <p

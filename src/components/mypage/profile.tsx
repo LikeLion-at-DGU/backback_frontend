@@ -184,7 +184,7 @@ export function Profile({profile, is_mine}: ProfileProps) {
                             />
                         )}
                         {isUpdateModalOpen && (
-                            <Modal onClose={closeUpdateModal} onConfirm={confirmUpdateModal} isRed={false}>
+                            <Modal onClose={closeUpdateModal} onConfirm={confirmUpdateModal} title={"프로필 수정"} isRed={false}>
                                 <div
                                     style={{
                                         display: "flex",
@@ -223,7 +223,7 @@ export function Profile({profile, is_mine}: ProfileProps) {
                             </Modal>
                         )}
                         {isExpertModalOpen && (
-                            <Modal onClose={colseExpertModal} onConfirm={confirmExpertModal} isRed={false}>
+                            <Modal onClose={colseExpertModal} onConfirm={confirmExpertModal} title={"전문가 인증"} isRed={false}>
                                 <div
                                     style={{
                                         display: "flex",
@@ -257,7 +257,7 @@ export function Profile({profile, is_mine}: ProfileProps) {
                             </Modal>
                         )}
                         {isDeleteModalOpen && (
-                            <Modal onClose={closeDeleteModal} onConfirm={confirmDeleteModal} isRed={true}>
+                            <Modal onClose={closeDeleteModal} onConfirm={confirmDeleteModal} title={"탈퇴하기"} isRed={true}>
                                 <p>정말로 탈퇴하시겠습니까?<br></br>모든 게시물과 댓글 등의 데이터가 모두 삭제됩니다</p>
                             </Modal>
                         )}
@@ -329,7 +329,7 @@ export function Profile({profile, is_mine}: ProfileProps) {
                             <ReportDropDown handleReportItemClick={handleReportItemClick}/>
                         )}
                         {isReportModalOpen && (
-                            <Modal onClose={closeReportModal} onConfirm={confirmReportModal} isRed={false}>
+                            <Modal onClose={closeReportModal} onConfirm={confirmReportModal} title={"계정 신고"} isRed={false}>
                                 <p>해당 신고는 익명으로 처리됩니다. 해당 계정을 신고하시겠습니까?</p>
                             </Modal>
                         )}
