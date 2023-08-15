@@ -72,8 +72,8 @@ const postApi = () => {
     scrapPost: (id: number) => api.post(`/posts/${id}/clip`, {}),
     screappedPost: () => api.get(`/posts/clips`),
     likePost: (id: number) => api.post(`/posts/${id}/like`, {}),
-    getComments: (id: number) => api.get(`/posts/${id}/comments`),
-    postComment: (id: number, data: { content: string }) =>
+    getPostComments: (id: number) => api.get(`/posts/${id}/comments`),
+    postPostComment: (id: number, data: { content: string }) =>
       api.post(`/posts/${id}/comments`, data),
     deleteComment: (id: number) => api.delete(`/comments/${id}`),
     reportComment: (id: number, data: { reason: string }) =>
