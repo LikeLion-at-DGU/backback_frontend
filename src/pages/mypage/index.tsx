@@ -1,6 +1,7 @@
 import { ExpertInfo } from "@/components/mypage/ExpertInfo";
 import { PostList } from "@/components/mypage/PostList";
 import { Profile } from "@/components/mypage/Profile";
+import { ScrollContent } from "@/components/common/PostDetail";
 import { Inter } from "next/font/google";
 
 export default function MyPage(){
@@ -70,15 +71,29 @@ export default function MyPage(){
     const isMine = true;
 
     return (
-        <div>
-            <Profile profile={profileData} is_mine={isMine} />
-            <hr
+        <ScrollContent>
+            <div
                 style={{
-                    margin: '0 15px'
+                width: "100%",
+                display: "block",
+                flexDirection: "column",
+                alignItems: "center",
+                flex: "1",
+                overflow: "auto",
+                scrollBehavior: "smooth",
                 }}
-            ></hr>
-            <ExpertInfo infoList={expertInfo} />
-            <PostList isMine={isMine} currentPage={3} totalPages={5} postList={postList} />
-        </div>
+            >
+                <div>
+                    <Profile profile={profileData} is_mine={isMine} />
+                    <hr
+                        style={{
+                            margin: '0 15px'
+                        }}
+                    ></hr>
+                    <ExpertInfo infoList={expertInfo} />
+                    <PostList isMine={isMine} currentPage={3} totalPages={5} postList={postList} />
+                </div>
+            </div>
+        </ScrollContent>
     )
 }
