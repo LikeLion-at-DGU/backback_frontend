@@ -2,7 +2,9 @@ import { Carousel } from "react-responsive-carousel";
 import styled from "styled-components";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-import { HomeProps } from "../home/HomePage";
+interface ImagesProps {
+  images: string[];
+}
 
 const CustomCarousel = styled(Carousel)`
   .carousel {
@@ -28,7 +30,7 @@ const CustomCarousel = styled(Carousel)`
   padding-bottom: 20px;
 `;
 
-const ImageSwiper: React.FC<HomeProps> = ({ ...prop }) => {
+const ImageSwiper: React.FC<ImagesProps> = ({ ...prop }) => {
   const listItems = prop.images.map((item) => (
     <div
       style={{

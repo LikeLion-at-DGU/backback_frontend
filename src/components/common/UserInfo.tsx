@@ -20,16 +20,18 @@ const UserInfo: React.FC<UserInfoProps> = ({
         justifyContent: "space-around",
       }}
     >
-      {profileimage && <img
-        src={profileimage}
-        alt="profile"
-        style={{
-          height: "100%",
-          borderRadius: "50%",
-          flex: "1",
-          marginRight: "10px",
-        }}
-      ></img>}
+      {profileimage && (
+        <img
+          src={profileimage}
+          alt="profile"
+          style={{
+            height: "100%",
+            borderRadius: "50%",
+            flex: "1",
+            marginRight: "10px",
+          }}
+        ></img>
+      )}
       <div
         style={{
           flex: "1",

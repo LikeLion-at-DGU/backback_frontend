@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { UserInfoProps } from "../UserInfo";
 import Link from "../../../../node_modules/next/link";
 
