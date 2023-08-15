@@ -1,3 +1,4 @@
+import { ExpertInfo } from "@/components/mypage/ExpertInfo";
 import { Profile } from "@/components/mypage/profile";
 import { Inter } from "next/font/google";
 
@@ -13,6 +14,15 @@ export default function MyPage(){
         user_id: 1
     };
 
+    const expertInfo = {
+        infoList: [
+            "생활스포츠지도사 2급",
+            "EPCI 필라테스 지도자 자격증 LV.1",
+            "경희대학교 스포츠의학과 졸업",
+            "나의근육사용설명서 근막스트레칭 마스터"
+        ]
+    }
+
     return (
         <div>
             <Profile profile={profileData} is_mine={true} />
@@ -21,6 +31,7 @@ export default function MyPage(){
                     margin: '0 15px'
                 }}
             ></hr>
+            <ExpertInfo infoList={expertInfo.infoList} />
         </div>
     )
 }
