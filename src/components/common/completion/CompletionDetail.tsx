@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { ScrollContent } from "@/components/common/PostDetail";
-import UserInfo, {UserInfoProps} from "@/components/common/UserInfo";
+import { ScrollContent } from "../post/PostDetail";
+import UserInfo, { UserInfoProps } from "@/components/common/UserInfo";
 import ReportButton from "@/components/core/ReportButton";
 
-export interface CompletionDetailProps extends UserInfoProps{
+export interface CompletionDetailProps extends UserInfoProps {
   id: string;
   title: string;
   createdAt: string;
@@ -13,7 +13,9 @@ export interface CompletionDetailProps extends UserInfoProps{
   is_liked: boolean;
 }
 
-export const CompletionDetail: React.FC<CompletionDetailProps> = ({ ...prop }) => {
+export const CompletionDetail: React.FC<CompletionDetailProps> = ({
+  ...prop
+}) => {
   return (
     <ScrollContent>
       <div
@@ -36,11 +38,14 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({ ...prop }) =
             fontSize: "14px",
           }}
         >
-          <img src="../../../assets/images/Category_right_icon.png" style={{
-            height: "11px",
-            width: "7px",
-            marginRight: "7px",
-          }}/>
+          <img
+            src="../../../assets/images/Category_right_icon.png"
+            style={{
+              height: "11px",
+              width: "7px",
+              marginRight: "7px",
+            }}
+          />
           오운완 기록
         </div>
         <div
@@ -69,7 +74,7 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({ ...prop }) =
             alignItems: "center",
             justifyContent: "space-between",
             width: "100%",
-            borderBottom: "1px solid black",
+            borderBottom: "1px solid #B7BBC8",
             padding: "10px 0px 10px 0px",
             postion: "relative",
           }}
@@ -79,13 +84,13 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({ ...prop }) =
             type={prop.type}
             profileimage={prop.profileimage}
           />
-          <ReportButton/>
+          <ReportButton />
         </div>
         <div
           style={{
             width: "100%",
             padding: "9px 0px 5px 0px",
-            borderBottom: "1px solid black",
+            borderBottom: "1px solid #B7BBC8",
             zIndex: "1",
           }}
         >
@@ -115,7 +120,7 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({ ...prop }) =
               height: "25px",
               display: "flex",
               alignItems: "center",
-                marginLeft: "13px",
+              marginLeft: "13px",
               justifyContent: "space-between",
             }}
           >
