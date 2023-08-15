@@ -37,7 +37,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
           display: "block",
           flexDirection: "column",
           alignItems: "center",
-          padding: "20px",
+          padding: "15px",
           flex: "1",
           overflow: "auto",
           scrollBehavior: "smooth",
