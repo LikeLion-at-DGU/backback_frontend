@@ -14,6 +14,13 @@ export default function MyPage(){
     };
 
     return (
-        <Profile profile={profileData} is_mine={false} />
+        <div>
+            <Profile profile={profileData} is_mine={false} />
+            <hr
+                style={{
+                    margin: '0 15px'
+                }}
+            ></hr>
+        </div>
     )
 }

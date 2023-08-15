@@ -163,7 +163,7 @@ export function Profile({profile, is_mine}: ProfileProps) {
                             />
                         )}
                         {isReportDropdownOpen && (
-                            <ReportDropDown/>
+                            <ReportDropDown reportDropDown={reportDropDown}/>
                         )}
                     </div>
                 </div>

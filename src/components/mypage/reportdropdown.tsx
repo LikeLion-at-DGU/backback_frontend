@@ -1,7 +1,18 @@
+import { useState } from "react";
 import { listItemStyle, listItemTextStyle, listItemProfileStyle } from "./mypagedropdown";
 
-export function ReportDropDown() {
+interface ReportDropDownProps {
+    reportDropDown: any;
+}
+
+export function ReportDropDown({reportDropDown: reportDropDown}: ReportDropDownProps) {
     const reportIconPath = '/assets/images/Report_icon.png';
+
+    const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+    const handleReportItemClick = () => {
+        setIsReportModalOpen(true);
+        reportDropDown();
+    }
 
     return(
         <div
@@ -20,6 +31,7 @@ export function ReportDropDown() {
             >
                 <li
                     style={listItemStyle}
+                    onClick={reportDropDown}
                 >
                     <p style={listItemTextStyle}>신고하기</p>
                     <img src={reportIconPath} style={listItemProfileStyle}/>
