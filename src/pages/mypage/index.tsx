@@ -2,8 +2,7 @@ import { ExpertInfo } from "@/components/mypage/ExpertInfo";
 import { PostList } from "@/components/mypage/PostList";
 import { Profile } from "@/components/mypage/Profile";
 import { ScrollContent } from "@/components/common/PostDetail";
-import { Pool } from "@/components/mypage/Pool";
-import { Inter } from "next/font/google";
+import { CompletedPool } from "@/components/mypage/CompletedPool";
 
 export default function MyPage(){
     const profileData = {
@@ -98,13 +97,7 @@ export default function MyPage(){
                             margin: '0 15px'
                         }}
                     ></hr>
-                    <div
-                        style={{
-                            overflowX: 'auto'
-                        }}
-                    >
-                        <Pool completedList={completedList}/>
-                    </div>
+                    <CompletedPool joinDate="2023-07" completedList={completedList} />
                     <ExpertInfo infoList={expertInfo} />
                     <PostList isMine={isMine} currentPage={3} totalPages={5} postList={postList} />
                 </div>
