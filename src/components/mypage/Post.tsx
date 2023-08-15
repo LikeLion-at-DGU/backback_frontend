@@ -55,10 +55,6 @@ const postSubTextStyle = {
     fontSize: '10px'
 } as React.CSSProperties;
 
-const postCountImageStyle = {
-
-}
-
 export function Post({post}: PostProps) {
     const profileImagePath = `/assets/images/Character${post.writer.level}.png`;
     const exportIconPath = '/assets/images/Expert_icon.png';
