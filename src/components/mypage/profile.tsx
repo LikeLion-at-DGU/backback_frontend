@@ -35,14 +35,14 @@ export function Profile({profile, is_mine}: ProfileProps) {
     }
 
     const [isReportDropdownOpen, setIsReportDropdownOpen] = useState(false);
-    const reportDropDown = () => {
+    const reportDropdown = () => {
         setIsReportDropdownOpen(!isReportDropdownOpen)
     }
 
     const [isReportModalOpen, setIsReportModalOpen] = useState(false);
     const handleReportItemClick = () => {
         setIsReportModalOpen(true);
-        reportDropDown();
+        reportDropdown();
     }
 
     const closeReportModal = () => {
@@ -52,6 +52,25 @@ export function Profile({profile, is_mine}: ProfileProps) {
     const confirmReportModal = () => {
         // 동작 추가해야함~
         setIsReportModalOpen(false);
+    }
+
+    const [isExpertDropdownOpen, setIsExpertDropdownOpen] = useState(false);
+    const expertDropdown = () => {
+        setIsExpertDropdownOpen(!isExpertDropdownOpen)
+    }
+
+    const [isExpertModalOpen, setIsExpertModalOpen] = useState(false);
+    const handleExpertItemClick = () => {
+        setIsExpertModalOpen(true);
+        expertDropdown();
+    }
+
+    const colseExpertModal = () => {
+        setIsExpertModalOpen(false);
+    }
+
+    const confirmExpertModal = () => {
+        setIsExpertModalOpen(false);
     }
 
     return (
@@ -112,7 +131,28 @@ export function Profile({profile, is_mine}: ProfileProps) {
                             />
                         )}
                         {isMyPageDropdownOpen && (
-                            <MyPageDropDown/>
+                            <MyPageDropDown handleExpertItemClick={handleExpertItemClick}/>
+                        )}
+                        {isExpertModalOpen && (
+                            <Modal onClose={colseExpertModal} onConfirm={confirmExpertModal}>
+                                <p
+                                    style={{
+                                        fontWeight: 500,
+                                        fontSize: '16px',
+                                        color: 'rgba(77, 46, 39, 1)'
+                                    }}
+                                >
+                                    ulkkeun.official@gmail.com
+                                </p>
+                                <p
+                                    style={{
+                                        fontWeight: 500,
+                                        fontSize: '14px'
+                                    }}
+                                >
+                                    전문가 인증 마크를 위해 전문가 관련 자격증, 서류등의 사진을 위 이메일로 보내주세요.<br></br>주민등록번호 등의 개인정보는 가려서 첨부해주세요.<br></br><br></br>예시) 생활스포츠지도사, 필라테스 지도사 자격증 등<br></br><br></br>해당 인증 마크는 관리자의 확인을 거쳐 부여됩니다.
+                                </p>
+                            </Modal>
                         )}
                     </div>
                     {!is_mine && (
@@ -175,7 +215,7 @@ export function Profile({profile, is_mine}: ProfileProps) {
                                     marginLeft: 'auto',
                                     marginRight: '2px'
                                 }}
-                                onClick={reportDropDown}
+                                onClick={reportDropdown}
                             />
                         )}
                         {isReportDropdownOpen && (

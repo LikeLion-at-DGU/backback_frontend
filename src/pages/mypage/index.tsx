@@ -15,7 +15,7 @@ export default function MyPage(){
 
     return (
         <div>
-            <Profile profile={profileData} is_mine={false} />
+            <Profile profile={profileData} is_mine={true} />
             <hr
                 style={{
                     margin: '0 15px'

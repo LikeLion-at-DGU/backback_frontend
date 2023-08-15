@@ -8,8 +8,8 @@ interface ModalProps {
 }
 
 const modalTitleStyle = {
-    textWeight: 500,
-    textSize: '14px',
+    fontWeight: 500,
+    fontSize: '14px',
     textAlign: 'center',
     borderTopLeftRadius: '10px',
     borderTopRightRadius: '10px',
@@ -19,8 +19,8 @@ const modalTitleStyle = {
 } as React.CSSProperties;
 
 const modalButtonStyle = {
-    textWeight: 500,
-    textSize: '12px',
+    fontWeight: 500,
+    fontSize: '12px',
     textAlign: 'center',
     borderBottomLeftRadius: '10px',
     borderBottomRightRadius: '10px',
@@ -32,8 +32,8 @@ const modalButtonStyle = {
 } as React.CSSProperties;
 
 const modalChildrenStyle = {
-    textWeight: 500,
-    textSize: '14px',
+    fontWeight: 500,
+    fontSize: '14px',
     textAlign: 'center',
     padding: '15px 28px 7px 28px',
     borderLeft: '1px solid rgba(183, 187, 200, 1)',

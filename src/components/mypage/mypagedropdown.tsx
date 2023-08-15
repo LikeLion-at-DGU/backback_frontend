@@ -1,3 +1,7 @@
+interface MyPageDropDownProps {
+    handleExpertItemClick: any;
+}
+
 const listItemStyle = {
     border: '1px solid rgba(183, 187, 200, 1)',
     display: "flex",
@@ -28,7 +32,7 @@ const listItemProfileStyle = {
 
 export { listItemStyle, listItemTextStyle, listItemProfileStyle };
 
-export function MyPageDropDown() {
+export function MyPageDropDown({handleExpertItemClick: handleExpertItemClick}: MyPageDropDownProps) {
     const updateIconPath = '/assets/images/Update_icon.png';
     const logoutIconPath = '/assets/images/Logout_icon.png';
     const expertIconPath = '/assets/images/Expert_Check_icon.png';
@@ -72,6 +76,7 @@ export function MyPageDropDown() {
                         ...listItemStyle,
                         borderBottom: 'none'
                     }}
+                    onClick={handleExpertItemClick}
                 >
                     <p style={listItemTextStyle}>전문가 인증</p>
                     <img src={expertIconPath} style={listItemProfileStyle}/>
