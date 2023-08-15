@@ -4,7 +4,7 @@ import React, { useState, ChangeEvent } from 'react';
 import InputTitle from "@/components/write/InputTitle";
 import InputContent from "@/components/write/InputContent";
 import InputImage from "@/components/write/InputImage";
-import { ScrollContent } from "@/components/common/PostDetail";
+import { ScrollContent } from "@/components/common/post/PostDetail";
 
 export default function Home() {
     const [selectedImages, setSelectedImages] = useState<FileList | null>(null);

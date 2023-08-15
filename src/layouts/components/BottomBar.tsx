@@ -24,11 +24,11 @@ const Header: React.FC = () => {
   return (
     <div
       style={{
-        height: "50px",
+        height: "60px",
         width: "100%",
         maxWidth: "480px",
         padding: "10px",
-        borderTop: "1px solid black",
+        borderTop: "2px solid #B7BBC8",
         display: "flex",
         justifyContent: "space-around",
       }}
