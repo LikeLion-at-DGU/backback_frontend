@@ -2,6 +2,7 @@ import { ExpertInfo } from "@/components/mypage/ExpertInfo";
 import { PostList } from "@/components/mypage/PostList";
 import { Profile } from "@/components/mypage/Profile";
 import { ScrollContent } from "@/components/common/PostDetail";
+import { Pool } from "@/components/mypage/Pool";
 import { Inter } from "next/font/google";
 
 export default function MyPage(){
@@ -70,6 +71,13 @@ export default function MyPage(){
 
     const isMine = true;
 
+    const completedList = [
+        1, 2, 3, 4, 0, 6, 7, 8, 9, 10,
+        11, 12, 13, 14, 15, 16, 17, 0, 19, 20,
+        21, 22, 23, 0, 25, 26, 27, 28, 29, 30,
+        31
+    ]
+
     return (
         <ScrollContent>
             <div
@@ -90,6 +98,13 @@ export default function MyPage(){
                             margin: '0 15px'
                         }}
                     ></hr>
+                    <div
+                        style={{
+                            overflowX: 'auto'
+                        }}
+                    >
+                        <Pool completedList={completedList}/>
+                    </div>
                     <ExpertInfo infoList={expertInfo} />
                     <PostList isMine={isMine} currentPage={3} totalPages={5} postList={postList} />
                 </div>
