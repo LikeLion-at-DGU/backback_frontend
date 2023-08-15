@@ -154,7 +154,6 @@ export function Profile({profile, is_mine}: ProfileProps) {
                                 width: '16px',
                                 height: '16px',
                                 marginLeft: '3px'
-
                             }}
                         />
                     )}
