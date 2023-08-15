@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { MyPageDropDown } from "./mypagedropdown";
-import { ReportDropDown } from "./reportdropdown";
+import { MyPageDropDown } from "./MypageDropdown";
+import { ReportDropDown } from "./ReportDropdown";
 
 interface Profile {
     id: number;

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { listItemStyle, listItemTextStyle, listItemProfileStyle } from "./mypagedropdown";
+import { listItemStyle, listItemTextStyle, listItemProfileStyle } from "./MypageDropdown";
 
 interface ReportDropDownProps {
     reportDropDown: any;

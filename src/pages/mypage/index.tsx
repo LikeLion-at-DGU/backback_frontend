@@ -1,4 +1,4 @@
-import { Profile } from "@/components/mypage/profile";
+import { Profile } from "@/components/mypage/Profile";
 import { Inter } from "next/font/google";
 
 export default function MyPage(){
