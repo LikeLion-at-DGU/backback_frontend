@@ -67,7 +67,7 @@ export default function MyPage(){
         }
     ]
 
-    const isMine = false;
+    const isMine = true;
 
     return (
         <div>

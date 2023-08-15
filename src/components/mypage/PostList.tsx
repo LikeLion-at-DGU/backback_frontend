@@ -1,4 +1,5 @@
 import { Post } from "./Post"
+import { PostPage } from "./PostPage"
 
 interface PostListProps {
     isMine: boolean,
@@ -26,6 +27,7 @@ export function PostList({isMine, currentPage, totalPages, postList}: PostListPr
                     <Post post={post} />
                 ))}
             </div>
+            <PostPage currentPage={currentPage} totalPages={totalPages} />
         </div>
     )
 }
