@@ -5,7 +5,7 @@ interface DateDropdownProps {
 }
 
 const dateDropdownTextStyle = {
-  fontWeight: 500,
+  fontFamily: "MainFont",
   fontSize: "12px",
   marginRight: "5px",
 };
@@ -30,7 +30,7 @@ const dateDropdownStyle = {
 } as React.CSSProperties;
 
 const dateDropdownBoxTextStyle = {
-  fontWeight: 500,
+  fontFamily: "MainFont",
   fontSize: "14px",
   margin: "1px 0px 0px ",
 } as React.CSSProperties;

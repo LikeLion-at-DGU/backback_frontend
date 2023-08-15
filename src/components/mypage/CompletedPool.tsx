@@ -7,7 +7,7 @@ interface CompletedPoolProps {
 }
 
 const completedPoolTitleTextstyle = {
-  fontWeight: 700,
+  fontFamily: "BoldFont",
   fontSize: "16px",
 };
 
