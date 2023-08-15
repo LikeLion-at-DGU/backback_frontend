@@ -1,8 +1,9 @@
-import api from '@/api';
+import api from "@/api";
 
 const bannerApi = () => {
-    return {
-    }
+  return {
+    getBanners: () => api.get("/banners"),
+  };
 };
 
 export default bannerApi;
