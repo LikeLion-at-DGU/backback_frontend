@@ -1,0 +1,25 @@
+.signupContainer {
+    background: url("../../public/assets/images/signupillust.png") no-repeat center center;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 160px;
+}
+
+.cancelLogoContainer {
+    position: absolute;
+    top: 63px;
+    left: 30px;
+}
