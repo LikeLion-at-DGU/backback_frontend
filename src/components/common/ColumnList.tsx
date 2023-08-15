@@ -6,7 +6,7 @@ export interface ColumnListProps {
 }
 
 const ColumnList: React.FC<ColumnListProps> = ({ ...prop }) => {
-const listItems = prop.columns.map((item, index) => (
+    const listItems = prop.columns.map((item, index) => (
         <Column
             id={item.id}
             key={index}
