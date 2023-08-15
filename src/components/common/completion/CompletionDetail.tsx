@@ -22,7 +22,7 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({ ...prop }) =
           display: "block",
           flexDirection: "column",
           alignItems: "center",
-          padding: "20px",
+          padding: "20px 15px 0px 15px",
           flex: "1",
           overflow: "auto",
           scrollBehavior: "smooth",
@@ -133,7 +133,7 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({ ...prop }) =
             >
               <img
                 src="../../../assets/images/Like_icon.png"
-                style={{ height: "25px" }}
+                style={{ height: "30px" }}
               ></img>
             </div>
             <div style={{ margin: "8px" }}>좋아요 {prop.like_count}</div>
