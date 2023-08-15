@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 import styles from '../../styles/CategoryChoice.module.css'
 
 const purpose_options = [
+    '바디프로필',
+    '근육 증가',
     '체중 증가',
     '체중 감량',
-    '재활',
     '체형 개선',
+    '재활',
     '대회 준비',
-    '체력 증진',
+    '청소년 성장',
+    '학교 체육',
+    '체력 강화',
+    '관절 보호',
     '기타',
 ];
 
