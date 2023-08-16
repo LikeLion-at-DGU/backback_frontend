@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef } from "react";
+import { GymProps } from "./Gym";
 
 declare global {
   interface Window {
@@ -8,6 +9,7 @@ declare global {
 export interface KakaoMapProps {
   latitude: number;
   longitude: number;
+  gyms?: GymProps[];
 }
 
 const KakaoMap: React.FC<KakaoMapProps> = ({ ...prop }) => {
@@ -37,6 +39,26 @@ const KakaoMap: React.FC<KakaoMapProps> = ({ ...prop }) => {
           position: new window.kakao.maps.LatLng(prop.latitude, prop.longitude),
           image: markerImage,
         });
+        if (prop.gyms) {
+          prop.gyms.map((gym) => {
+            const gymImageSrc =
+              "../../../../assets/images/Location_Red_icon.png"; // 마커이미지의 주소입니다
+            const gymImageSize = new window.kakao.maps.Size(18, 18); // 마커이미지의 크기입니다
+
+            const gymMarkerImage = new window.kakao.maps.MarkerImage(
+              gymImageSrc,
+              gymImageSize
+            );
+            new window.kakao.maps.Marker({
+              map: map,
+              position: new window.kakao.maps.LatLng(
+                gym.latitude,
+                gym.longitude
+              ),
+              image: gymMarkerImage,
+            });
+          });
+        }
       });
     });
   }, []);

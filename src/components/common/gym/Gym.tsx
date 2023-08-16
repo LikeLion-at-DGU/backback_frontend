@@ -7,6 +7,8 @@ export interface GymProps {
   createdAt: string;
   updatedAt: string;
   index?: number;
+  latitude: number;
+  longitude: number;
 }
 
 const Gym: React.FC<GymProps> = ({ ...prop }) => {

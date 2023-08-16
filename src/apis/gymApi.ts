@@ -2,7 +2,7 @@ import api from "@/api";
 
 const gymApi = () => {
   return {
-    getGyms: (query: { address: string }) => {
+    getGyms: (query: { address?: string }) => {
       const queryParams: { address?: string } = {};
       if (query.address) queryParams.address = query.address;
       return api.get("/gyms", { params: queryParams });

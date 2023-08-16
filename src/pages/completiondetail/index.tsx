@@ -1,8 +1,10 @@
 import CompletionDetail from "@/components/common/completion/CompletionDetail";
+import NavBar from "@/layouts/components/NavBar";
 
 export default function Home() {
   return (
     <>
+      <NavBar />
       <CompletionDetail
         id={"1"}
         title={"안녕하세요"}

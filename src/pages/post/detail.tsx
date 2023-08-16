@@ -1,4 +1,5 @@
 import PostDetail from "@/components/common/post/PostDetail";
+import NavBar from "@/layouts/components/NavBar";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -6,6 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   return (
     <>
+      <NavBar />
       <PostDetail
         id={"1"}
         category={["헬스", "요가"]}

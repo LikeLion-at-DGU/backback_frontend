@@ -26,6 +26,20 @@ export default function Home() {
       <div
         style={{
           width: "100%",
+          height: "50px",
+          padding: "0px 15px 0px 15px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-end",
+          fontSize: "16px",
+          borderBottom: "1px solid #B7BBC8",
+        }}
+      >
+        등록
+      </div>
+      <div
+        style={{
+          width: "100%",
           flexDirection: "column",
           alignItems: "center",
           padding: "15px",
