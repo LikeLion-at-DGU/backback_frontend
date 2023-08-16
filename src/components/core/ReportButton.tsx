@@ -16,7 +16,7 @@ export const ReportBox = styled.div`
   }
 `;
 
-const ReportButton = () => {
+const ReportButton = ({}) => {
   const [isopen, setIsopen] = useState(false);
   const [report, setReport] = useState(false);
   const [reportReason, setReportReason] = useState("");

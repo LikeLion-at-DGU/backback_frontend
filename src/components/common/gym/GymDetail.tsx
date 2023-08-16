@@ -3,12 +3,18 @@ import { ScrollContent } from "../post/PostDetail";
 import ReportButton from "@/components/core/ReportButton";
 import KakaoMap from "./map";
 import ReviewList, { ReviewListProps } from "./ReviewList";
-import React from "react";
+import React, { useRef } from "react";
+import gymApi from "@/apis/gymApi";
+import { AxiosError, isAxiosError } from "axios";
 
+interface ContentProps {
+  content: string;
+  key: string;
+}
 export interface GymDetailProps extends ReviewListProps {
   id: string;
   name: string;
-  square_feet: number;
+  squareFeet: number;
   address: string;
   info: {
     exercises: string[];
@@ -20,7 +26,7 @@ export interface GymDetailProps extends ReviewListProps {
   updatedAt: string;
   latitude: number;
   longitude: number;
-  review_count: number;
+  reviewCnt: string;
 }
 
 export const ContainerBox = styled.div`
@@ -34,7 +40,36 @@ export const ContainerBox = styled.div`
 
 const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
   const exercises = prop.info.exercises.join(" / ");
-  const certifications = prop.info.certifications.join("\n");
+  const certifications = prop.info.certifications?.join("\n");
+  const inputRef = useRef<HTMLTextAreaElement | null>(null);
+  const keyRef = useRef<HTMLInputElement | null>(null);
+
+  const postReviews = async ({ content, key }: ContentProps) => {
+    try {
+      await gymApi().postGymReview(prop.id, { content: content, key: key });
+      console.log("리뷰가 성공적으로 작성되었습니다.");
+      // 성공 상태에 따른 처리를 여기에 추가할 수 있음
+    } catch (error) {
+      if (isAxiosError(error)) {
+        const axiosError = error as AxiosError;
+        if (axiosError.response?.data?.detail) {
+          alert(axiosError.response.data.detail);
+          // 실패 상태에 따른 처리를 여기에 추가할 수 있음
+        }
+      } else {
+        console.log("잠시 후 다시 시도해주세요.");
+      }
+    } finally {
+      // window.location.reload();
+    }
+  };
+  const handleSubmit = () => {
+    const inputValue = inputRef.current?.value;
+    const keyValue = keyRef.current?.value;
+    if (inputValue !== undefined && keyValue !== undefined) {
+      postReviews({ content: inputValue, key: keyValue });
+    }
+  };
   return (
     <ScrollContent>
       <div
@@ -84,7 +119,7 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
             {prop.address}
           </div>
           <div style={{ width: "100%", fontSize: "16px", marginBottom: "5px" }}>
-            {prop.square_feet} 평
+            {prop.squareFeet} 평
           </div>
         </ContainerBox>
         <ContainerBox>
@@ -120,7 +155,7 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
               marginBottom: "5px",
             }}
           >
-            {certifications.split("\n").map((cert, index) => (
+            {certifications?.split("\n").map((cert, index) => (
               <React.Fragment key={index}>
                 {cert}
                 <br />
@@ -141,10 +176,10 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
         >
           <img
             src="../../../assets/images/Message_icon.png"
-            style={{ height: "30px" }}
+            style={{ height: "21px", width: "23px" }}
           ></img>
           <div style={{ marginLeft: "5px", fontSize: "16px" }}>
-            리뷰 {prop.review_count}
+            리뷰 {prop.reviewCnt}
           </div>
         </div>
         <ReviewList reviews={...prop.reviews} />
@@ -182,6 +217,12 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
                 scrollBehavior: "smooth",
                 marginTop: "5px",
               }}
+              ref={inputRef}
+              onKeyUp={(e) => {
+                if (e.key === "Enter") {
+                  handleSubmit();
+                }
+              }}
             />
           </div>
           <div
@@ -202,6 +243,12 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
                 border: "1px solid #B7BBC8",
                 padding: "5px",
               }}
+              ref={keyRef}
+              onKeyUp={(e) => {
+                if (e.key === "Enter") {
+                  handleSubmit();
+                }
+              }}
             ></input>
             <button
               style={{
@@ -213,6 +260,7 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
                 fontSize: "14px",
                 cursor: "pointer",
               }}
+              onClick={handleSubmit}
             >
               등록
             </button>

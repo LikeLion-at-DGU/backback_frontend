@@ -2,9 +2,9 @@ import api from "@/api";
 
 const gymApi = () => {
   return {
-    getGyms: (query: { address?: string }) => {
-      const queryParams: { address?: string } = {};
-      if (query.address) queryParams.address = query.address;
+    getGyms: (query: { search?: string }) => {
+      const queryParams: { search?: string } = {};
+      if (query.search) queryParams.search = query.search;
       return api.get("/gyms", { params: queryParams });
     },
     getGymsBylocation: (data: { latitude: number; longitude: number }) =>

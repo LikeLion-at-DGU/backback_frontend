@@ -23,19 +23,33 @@ const GymList: React.FC<GymListProps> = ({ ...prop }) => {
 
   return (
     <>
-      <div
-        style={{
-          display: "grid",
-          width: "100%",
-          gridTemplateColumns: "repeat(2, 1fr)",
-          overflow: "auto",
-          scrollBehavior: "smooth",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        {listItems}
-      </div>
+      {prop.gyms.length === 0 ? (
+        <div
+          style={{
+            width: "100%",
+            flex: "1",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          검색 결과가 없습니다.
+        </div>
+      ) : (
+        <div
+          style={{
+            display: "grid",
+            width: "100%",
+            gridTemplateColumns: "repeat(2, 1fr)",
+            overflow: "auto",
+            scrollBehavior: "smooth",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {listItems}
+        </div>
+      )}
     </>
   );
 };

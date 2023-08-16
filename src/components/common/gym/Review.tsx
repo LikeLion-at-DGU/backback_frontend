@@ -3,8 +3,8 @@ import ReportButton from "../../core/ReportButton";
 
 export interface ReviewProps {
   id: string;
-  comment: string;
-  index: number;
+  content: string;
+  index?: number;
 }
 
 const Comment: React.FC<ReviewProps> = ({ ...prop }) => {
@@ -37,7 +37,7 @@ const Comment: React.FC<ReviewProps> = ({ ...prop }) => {
             padding: "0px 15px 0px 15px",
           }}
         >
-          리뷰 {prop.index}
+          익명 {prop.index}
         </div>
         <ReportButton />
       </div>
@@ -51,7 +51,7 @@ const Comment: React.FC<ReviewProps> = ({ ...prop }) => {
           borderBottom: "1px solid #B7BBC8",
         }}
       >
-        {prop.comment}
+        {prop.content}
       </div>
     </div>
   );

@@ -8,8 +8,8 @@ const ReviewList: React.FC<ReviewListProps> = ({ ...prop }) => {
   const listItems = prop.reviews.map((item, index) => (
     <Review
       key={index.toString()}
-      index={index + 1}
-      comment={item.comment}
+      index={prop.reviews.length - index}
+      content={item.content}
       id={item.id}
     />
   ));
