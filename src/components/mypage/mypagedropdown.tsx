@@ -15,7 +15,7 @@ const listItemTextStyle = {
   marginTop: "5px",
   marginBottom: "4px",
   marginRight: "10px",
-  fontWeight: 500,
+  fontFamily: "MainFont",
   fontSize: "14px",
   whiteSpace: "nowrap",
 } as React.CSSProperties;

@@ -9,7 +9,7 @@ interface ModalProps {
 }
 
 const modalTitleStyle = {
-  fontWeight: 500,
+  fontFamily: "MainFont",
   fontSize: "14px",
   textAlign: "center",
   borderTopLeftRadius: "10px",
@@ -19,7 +19,7 @@ const modalTitleStyle = {
 } as React.CSSProperties;
 
 const modalButtonStyle = {
-  fontWeight: 500,
+  fontFamily: "MainFont",
   fontSize: "12px",
   textAlign: "center",
   borderBottomLeftRadius: "10px",
@@ -32,7 +32,7 @@ const modalButtonStyle = {
 } as React.CSSProperties;
 
 const modalChildrenStyle = {
-  fontWeight: 500,
+  fontFamily: "MainFont",
   fontSize: "14px",
   textAlign: "center",
   padding: "15px 28px 7px 28px",

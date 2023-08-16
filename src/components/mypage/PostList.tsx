@@ -9,7 +9,7 @@ interface PostListProps {
 }
 
 const postListTitleTextstyle = {
-  fontWeight: 700,
+  fontFamily: "BoldFont",
   fontSize: "16px",
   margin: "12px 0px 2px 26px",
 };

@@ -3,13 +3,13 @@ interface ExpertInfoProps {
 }
 
 const profileTitleTextStyle = {
-  fontWeight: 700,
+  fontFamily: "BoldFont",
   fontSize: "16px",
   margin: "13px 0px 6px 26px",
 };
 
 const exportTextStyle = {
-  fontWeight: 500,
+  fontFamily: "MainFont",
   fontSize: "12px",
   marginLeft: "26px",
 };

@@ -26,12 +26,12 @@ const postProfileImageStyle = {
 };
 
 const postProfileNicknameStyle = {
-  fontWeight: 500,
+  fontFamily: "MainFont",
   fontSize: "14px",
 };
 
 const postProfileDateStyle = {
-  fontWeight: 500,
+  fontFamily: "MainFont",
   fontSize: "10px",
   marginLeft: "auto",
 };
@@ -42,7 +42,7 @@ const postDetailStyle = {
 };
 
 const postDetailTitleStyle = {
-  fontWeight: 700,
+  fontFamily: "BoldFont",
   fontSize: "14px",
   overflow: "hidden",
   textOverflow: "ellipsis",
@@ -51,7 +51,7 @@ const postDetailTitleStyle = {
 } as React.CSSProperties;
 
 const postSubTextStyle = {
-  fontWeight: 500,
+  fontFamily: "MainFont",
   fontSize: "10px",
 } as React.CSSProperties;
 

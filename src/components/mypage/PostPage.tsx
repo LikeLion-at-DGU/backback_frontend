@@ -9,7 +9,7 @@ const postPageIconStyle = {
 };
 
 const postPageTextStyle = {
-  fontWeight: 400,
+  fontFamily: "MainFont",
   fontSize: "14px",
   margin: "10px 13px",
 };

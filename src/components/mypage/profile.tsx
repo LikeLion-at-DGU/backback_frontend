@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MyPageDropDown } from "./mypagedropdown";
+import { MyPageDropDown } from "./MypageDropdown";
 import { ReportDropDown } from "./reportdropdown";
 import Modal from "./Modal";
 
@@ -26,14 +26,14 @@ const copyIconStyle = {
 };
 
 const updateTitleStyle = {
-  fontWeight: 500,
+  fontFamily: "MainFont",
   fontSize: "14px",
   marginRight: "15px",
 };
 
 const updateInputStyle = {
   marginLeft: "auto",
-  fontWeight: 500,
+  fontFamily: "MainFont",
   fontSize: "12px",
   padding: "5px 10px 3px 10px",
   border: "1px solid rgba(183, 187, 200, 1)",
@@ -139,7 +139,7 @@ export function Profile({ profile, is_mine }: ProfileProps) {
       >
         <div
           style={{
-            fontWeight: 700,
+            fontFamily: "BoldFont",
             fontSize: "22px",
             display: "flex",
             alignItems: "center",
@@ -223,7 +223,7 @@ export function Profile({ profile, is_mine }: ProfileProps) {
                 >
                   <p
                     style={{
-                      fontWeight: 500,
+                      fontFamily: "MainFont",
                       fontSize: "16px",
                       color: "rgba(77, 46, 39, 1)",
                     }}
@@ -238,7 +238,7 @@ export function Profile({ profile, is_mine }: ProfileProps) {
                 </div>
                 <p
                   style={{
-                    fontWeight: 500,
+                    fontFamily: "MainFont",
                     fontSize: "14px",
                   }}
                 >
@@ -269,7 +269,7 @@ export function Profile({ profile, is_mine }: ProfileProps) {
             <p
               style={{
                 fontSize: "12px",
-                fontWeight: 500,
+                fontFamily: "MainFont",
                 marginLeft: "auto",
                 border: "1px solid rgba(183, 187, 200, 1)",
                 padding: "2px 12px 1px 12px",
@@ -287,7 +287,7 @@ export function Profile({ profile, is_mine }: ProfileProps) {
           style={{
             marginTop: "5px",
             width: "100%",
-            fontWeight: 500,
+            fontFamily: "MainFont",
             fontSize: "14px",
           }}
         >
@@ -296,7 +296,7 @@ export function Profile({ profile, is_mine }: ProfileProps) {
         <div
           style={{
             marginTop: "26px",
-            fontWeight: 500,
+            fontFamily: "MainFont",
             display: "flex",
           }}
         >

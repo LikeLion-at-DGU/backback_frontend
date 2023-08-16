@@ -83,13 +83,6 @@ export default function MyPage() {
       <div
         style={{
           width: "100%",
-          height: "50px",
-          borderBottom: "1px solid #B7BBC8",
-        }}
-      ></div>
-      <div
-        style={{
-          width: "100%",
           display: "block",
           flexDirection: "column",
           alignItems: "center",
@@ -105,7 +98,7 @@ export default function MyPage() {
               margin: "0 15px",
             }}
           ></hr>
-          <CompletedPool joinDate="2023-07" completedList={completedList} />
+          <CompletedPool joinDate="2022-07" completedList={completedList} />
           <ExpertInfo infoList={expertInfo} />
           <PostList
             isMine={isMine}
