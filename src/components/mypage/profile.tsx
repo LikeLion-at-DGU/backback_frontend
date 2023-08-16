@@ -2,7 +2,6 @@ import { useState } from "react";
 import { MyPageDropDown } from "./MypageDropdown";
 import { ReportDropDown } from "./reportdropdown";
 import Modal from "./Modal";
-import { text } from "stream/consumers";
 
 interface Profile {
   id: number;

@@ -2,11 +2,13 @@ import { useState } from "react";
 import Post, { PostProps } from "./Post";
 import { ScrollContent } from "./PostDetail";
 import CategoryBox from "./Category";
+import { useRouter } from "next/router";
 
 export interface PostListProps {
   posts: PostProps[];
 }
 const PostList: React.FC<PostListProps> = ({ ...prop }) => {
+  const router = useRouter();
   const choose: string[] = [];
   const category = [
     "체중 증가",
@@ -50,6 +52,9 @@ const PostList: React.FC<PostListProps> = ({ ...prop }) => {
       category={item.category}
     />
   ));
+  const handleWrite = () => {
+    router.push("/post/write");
+  };
 
   return (
     <ScrollContent>
@@ -70,6 +75,7 @@ const PostList: React.FC<PostListProps> = ({ ...prop }) => {
               flex: "1",
               fontSize: "14px",
             }}
+            onClick={handleWrite}
           >
             글쓰기
           </div>

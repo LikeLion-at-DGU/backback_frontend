@@ -1,4 +1,3 @@
-import { Margarine } from "next/font/google";
 import React from "react";
 
 interface ModalProps {
