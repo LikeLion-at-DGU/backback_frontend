@@ -2,12 +2,14 @@ import {
   PopularColumnList,
   PopularPostList,
 } from "@/components/common/Popular";
+import NavBar from "@/layouts/components/NavBar";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   return (
     <>
+      <NavBar />
       <PopularPostList
         posts={[
           {
