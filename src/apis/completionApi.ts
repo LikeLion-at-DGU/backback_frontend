@@ -18,13 +18,17 @@ const completionApi = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
     },
-    getCompletion: (id: number) => api.get(`/completions/${id}`),
-    patchCompletion: (id: number, data: { title: string; content: string }) => {
+    getCompletion: (id: number | string) => api.get(`/completions/${id}`),
+    patchCompletion: (
+      id: number | string,
+      data: { title: string; content: string }
+    ) => {
       api.patch(`/completions/${id}`, data);
     },
-    deleteCompletion: (id: number) => api.delete(`/completions/${id}`),
-    likeCompletion: (id: number) => api.post(`/completions/${id}/like`, {}),
-    reportCompletion: (id: number, data: { reason: string }) =>
+    deleteCompletion: (id: number | string) => api.delete(`/completions/${id}`),
+    likeCompletion: (id: number | string) =>
+      api.post(`/completions/${id}/like`, {}),
+    reportCompletion: (id: number | string, data: { reason: string }) =>
       api.post(`/completions/${id}/report`, { reason: data.reason }),
   };
 };
