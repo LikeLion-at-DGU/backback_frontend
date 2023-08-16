@@ -1,6 +1,6 @@
-import { listItemTextStyle } from "./MypageDropdown";
-import { listItemProfileStyle } from "./MypageDropdown";
-import { listItemStyle } from "./MypageDropdown";
+import { listItemTextStyle } from "./mypagedropdown";
+import { listItemProfileStyle } from "./mypagedropdown";
+import { listItemStyle } from "./mypagedropdown";
 
 interface ReportDropDownProps {
   handleReportItemClick: any;
