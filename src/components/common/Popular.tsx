@@ -128,7 +128,7 @@ const PopularColumnList: React.FC<ColumnListProps> = ({ ...prop }) => {
           justifyContent: "center",
           alignItems: "center",
           padding: "1px 0px",
-          overflow: "hidden",
+          overflow: "auto",
         }}
       >
         <div
