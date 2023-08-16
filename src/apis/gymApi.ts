@@ -9,14 +9,16 @@ const gymApi = () => {
     },
     getGymsBylocation: (data: { latitude: number; longitude: number }) =>
       api.post(`/gyms/use-location`, data),
-    getGym: (id: number) => api.get(`/gyms/${id}`),
-    reportGym: (id: number, data: { reason: string }) =>
+    getGym: (id: number | string) => api.get(`/gyms/${id}`),
+    reportGym: (id: number | string, data: { reason: string }) =>
       api.post(`/gyms/${id}/report`, data),
-    getGymReviews: (id: number) => api.get(`/gyms/${id}/reviews`),
-    postGymReview: (id: number, data: { content: string; key: string }) =>
-      api.post(`/gyms/${id}/reviews`, data),
-    deleteReview: (id: number) => api.delete(`/reviews/${id}`),
-    reportReview: (id: number, data: { reason: string }) =>
+    getGymReviews: (id: number | string) => api.get(`/gyms/${id}/reviews`),
+    postGymReview: (
+      id: number | string,
+      data: { content: string; key: string }
+    ) => api.post(`/gyms/${id}/reviews`, data),
+    deleteReview: (id: number | string) => api.delete(`/reviews/${id}`),
+    reportReview: (id: number | string, data: { reason: string }) =>
       api.post(`/reviews/${id}/report`, data),
   };
 };
