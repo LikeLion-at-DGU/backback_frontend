@@ -144,6 +144,14 @@ export function Profile({
     setIsUpdateModalOpen(false);
   };
 
+  const handleLogoutItemClick = () => {
+    profileApi()
+      .logoutProfile()
+      .then((res) => {
+        window.location.href = "/";
+      });
+  };
+
   const confirmUpdateModal = () => {
     profileApi()
       .patchMe({
@@ -216,6 +224,7 @@ export function Profile({
               <MyPageDropDown
                 handleExpertItemClick={handleExpertItemClick}
                 handleDeleteItemClick={handleDeleteItemClick}
+                handleLogoutItemClick={handleLogoutItemClick}
                 handleUpdateItemClick={handelUpdateItemClick}
               />
             )}
