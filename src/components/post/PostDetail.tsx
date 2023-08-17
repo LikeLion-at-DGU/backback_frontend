@@ -10,6 +10,7 @@ import postApi from "@/apis/postApi";
 import { isAxiosError } from "axios";
 import { useCookies } from "react-cookie";
 import DeleteButton from "../core/DeleteButton";
+import RouterLink from "../core/RouterLink";
 
 export interface PostDetailProps extends CommentListProps {
   id: string;
@@ -155,12 +156,20 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
             padding: "10px 0px 10px 0px",
           }}
         >
-          <UserInfo
-            nickname={prop.writer.nickname}
-            type={prop.writer.type}
-            profileId={prop.writer.profileId}
-            level={prop.writer.level}
-          />
+          <RouterLink
+            href={
+              cookies.uid == prop.writer.profileId
+                ? "/mypage"
+                : "/profile/" + prop.writer.profileId
+            }
+          >
+            <UserInfo
+              nickname={prop.writer.nickname}
+              type={prop.writer.type}
+              profileId={prop.writer.profileId}
+              level={prop.writer.level}
+            />
+          </RouterLink>
           {cookies.uid == prop.writer.profileId ? (
             <DeleteButton id={prop.id} type={"post"} />
           ) : (
