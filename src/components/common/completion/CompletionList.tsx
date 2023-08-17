@@ -1,6 +1,6 @@
 import Link from "../../../../node_modules/next/link";
 import Completion, { CompletionProps } from "./Completion";
-import { ScrollContent } from "../post/PostDetail";
+import { ScrollContent } from "../../post/PostDetail";
 import RouterLink from "@/components/core/RouterLink";
 import { UserInfoProps } from "../UserInfo";
 

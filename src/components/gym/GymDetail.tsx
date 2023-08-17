@@ -47,17 +47,14 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
   const postReviews = async ({ content, key }: ContentProps) => {
     try {
       await gymApi().postGymReview(prop.id, { content: content, key: key });
-      console.log("리뷰가 성공적으로 작성되었습니다.");
-      // 성공 상태에 따른 처리를 여기에 추가할 수 있음
     } catch (error) {
       if (isAxiosError(error)) {
         const axiosError = error as AxiosError;
         if (axiosError.response?.data?.detail) {
           alert(axiosError.response.data.detail);
-          // 실패 상태에 따른 처리를 여기에 추가할 수 있음
         }
       } else {
-        console.log("잠시 후 다시 시도해주세요.");
+        alert("잠시 후 다시 시도해주세요.");
       }
     } finally {
       window.location.reload();
@@ -216,11 +213,6 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
                 marginTop: "5px",
               }}
               ref={inputRef}
-              onKeyUp={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
             />
           </div>
           <div
@@ -242,11 +234,6 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
                 padding: "5px",
               }}
               ref={keyRef}
-              onKeyUp={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
             ></input>
             <button
               style={{

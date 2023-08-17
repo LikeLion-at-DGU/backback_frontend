@@ -1,7 +1,9 @@
 import { useState } from "react";
 
 interface DateDropdownProps {
-  joinDate: string;
+  dateOptions: string[];
+  selectedDate: string;
+  setSelectedDate: (newValue: string) => void;
 }
 
 const dateDropdownTextStyle = {
@@ -35,38 +37,38 @@ const dateDropdownBoxTextStyle = {
   margin: "1px 0px 0px ",
 } as React.CSSProperties;
 
-export function DateDropdown({ joinDate }: DateDropdownProps) {
+function convertToYYYYMM(dateString: string) {
+  const parts = dateString.split(" ");
+  const year = parts[0].slice(0, -1);
+  const month = parts[1].slice(0, -1);
+  const formattedDate = `${year}-${month.padStart(2, "0")}`;
+  return formattedDate;
+}
+
+function convertToDate(dateString: string) {
+  const parts = dateString.split("-");
+  const year = parts[0];
+  const month = parseInt(parts[1], 10);
+
+  const date = `${year}년 ${month}월`;
+  return date;
+}
+
+export function DateDropdown({
+  dateOptions,
+  selectedDate,
+  setSelectedDate,
+}: DateDropdownProps) {
   const categotyUnderIconPath = "/assets/images/Category_Under_icon.png";
 
-  const joinDateForm = new Date(joinDate);
-  const joinYear = joinDateForm.getFullYear();
-  const joinMonth = joinDateForm.getMonth() + 1;
-  const currentDateForm = new Date();
-  const currentYear = currentDateForm.getFullYear();
-  const currentMonth = currentDateForm.getMonth() + 1;
-
-  const dateOptions = [];
-
-  for (let year = joinYear; year <= currentYear; year++) {
-    const startMonth = year === joinYear ? joinMonth : 1;
-    const endMonth = year === currentYear ? currentMonth : 12;
-
-    for (let month = startMonth; month <= endMonth; month++) {
-      dateOptions.push(`${year}년 ${month}월`);
-    }
-  }
-
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(
-    dateOptions[dateOptions.length - 1]
-  );
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
 
   const handleOptionClick = (option: any) => {
-    setSelectedOption(option);
+    setSelectedDate(option);
     setIsOpen(false);
   };
 
@@ -79,7 +81,7 @@ export function DateDropdown({ joinDate }: DateDropdownProps) {
         }}
         onClick={handleToggle}
       >
-        <p style={dateDropdownTextStyle}>{selectedOption}</p>
+        <p style={dateDropdownTextStyle}>{convertToDate(selectedDate)}</p>
         <img src={categotyUnderIconPath} style={dateDropdownImageStyle} />
       </div>
       {isOpen && (
@@ -93,7 +95,7 @@ export function DateDropdown({ joinDate }: DateDropdownProps) {
               {dateOptions.map((option: string, index: number) => (
                 <li
                   key={index}
-                  onClick={() => handleOptionClick(option)}
+                  onClick={() => handleOptionClick(convertToYYYYMM(option))}
                   style={dateDropdownBoxTextStyle}
                 >
                   {option}

@@ -1,9 +1,4 @@
-import { useState } from "react";
 import Post, { PostProps } from "./Post";
-import { ScrollContent } from "./PostDetail";
-import CategoryBox from "./Category";
-import { useRouter } from "next/router";
-import { purpose_options } from "@/components/write/PurposeChoice";
 
 export interface PostListProps {
   posts: PostProps[];

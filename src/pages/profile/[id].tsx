@@ -1,0 +1,116 @@
+import { ExpertInfo } from "@/components/mypage/ExpertInfo";
+import { PostList } from "@/components/mypage/PostList";
+import { Profile } from "@/components/mypage/profile";
+import { ScrollContent } from "@/components/common/post/PostDetail";
+import { CompletedPool } from "@/components/mypage/CompletedPool";
+import profileApi from "@/apis/profileApi";
+
+export async function getMyProfileData() {
+  const data = await profileApi()
+    .getMe()
+    .then((response) => response.data.results);
+
+  return {
+    profileData: {
+      data,
+    },
+  };
+}
+
+export default function MyPage() {
+  const isMine: boolean = true;
+  const { profileData }: any = getMyProfileData();
+
+  const expertInfo = [
+    "생활스포츠지도사 2급",
+    "EPCI 필라테스 지도자 자격증 LV.1",
+    "경희대학교 스포츠의학과 졸업",
+    "나의근육사용설명서 근막스트레칭 마스터",
+  ];
+
+  const postList = [
+    {
+      id: 1,
+      createdAt: "2023.08.05 14:29",
+      writer: {
+        profileId: 1,
+        nickname: "재니재니",
+        level: 3,
+        type: "TRAINER",
+      },
+      title: "복부비만 다이어트 식단 정리 공유",
+      content:
+        "안녕하세요! 오늘은 복부비만 체형을 가지신 분들을 위해 다이어트 식단을 공유해볼까 해요 :) 직접 겪으면서 만든 식단이라 꿀팁까지 적어놨으니까 유용하게 사용해주세요 ^^ 어쩌구 저쩌구,,,,",
+      likesCnt: 10,
+      commentsCnt: 100,
+    },
+    {
+      id: 2,
+      createdAt: "2023.08.05 15:33",
+      writer: {
+        profileId: 1,
+        nickname: "재니재니",
+        level: 3,
+        type: "TRAINER",
+      },
+      title: "복부비만 다이어트 식단 정리 공유",
+      content:
+        "안녕하세요! 오늘은 복부비만 체형을 가지신 분들을 위해 다이어트 식단을 공유해볼까 해요 :) 직접 겪으면서 만든 식단이라 꿀팁까지 적어놨으니까 유용하게 사용해주세요 ^^ 어쩌구 저쩌구,,,,",
+      likesCnt: 9,
+      commentsCnt: 12,
+    },
+    {
+      id: 3,
+      createdAt: "2023.08.13 18:03",
+      writer: {
+        profileId: 1,
+        nickname: "재니재니",
+        level: 3,
+        type: "TRAINER",
+      },
+      title: "복부비만 다이어트 식단 정리 공유",
+      content:
+        "안녕하세요! 오늘은 복부비만 체형을 가지신 분들을 위해 다이어트 식단을 공유해볼까 해요 :) 직접 겪으면서 만든 식단이라 꿀팁까지 적어놨으니까 유용하게 사용해주세요 ^^ 어쩌구 저쩌구,,,,",
+      likesCnt: 1,
+      commentsCnt: 192,
+    },
+  ];
+
+  const completedList = [
+    1, 2, 3, 4, 0, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 0, 19, 20, 21,
+    22, 23, 0, 25, 26, 27, 28, 29, 30, 31,
+  ];
+
+  return (
+    <ScrollContent>
+      <div
+        style={{
+          width: "100%",
+          display: "block",
+          flexDirection: "column",
+          alignItems: "center",
+          flex: "1",
+          overflow: "auto",
+          scrollBehavior: "smooth",
+        }}
+      >
+        <div>
+          <Profile profile={profileData} is_mine={isMine} />
+          <hr
+            style={{
+              margin: "0 15px",
+            }}
+          ></hr>
+          <CompletedPool joinDate="2022-07" completedList={completedList} />
+          <ExpertInfo infoList={expertInfo} />
+          <PostList
+            isMine={isMine}
+            currentPage={3}
+            totalPages={5}
+            postList={postList}
+          />
+        </div>
+      </div>
+    </ScrollContent>
+  );
+}

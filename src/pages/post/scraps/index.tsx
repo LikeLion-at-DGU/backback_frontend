@@ -1,7 +1,7 @@
 import postApi from "@/apis/postApi";
 import { UserInfoProps } from "@/components/common/UserInfo";
-import { ScrollContent } from "@/components/common/post/PostDetail";
-import ScrapList from "@/components/common/post/ScrapList";
+import { ScrollContent } from "@/components/post/PostDetail";
+import ScrapList from "@/components/post/ScrapList";
 import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";

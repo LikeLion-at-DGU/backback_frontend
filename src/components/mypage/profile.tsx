@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { MyPageDropDown } from "./MypageDropdown";
+import { useEffect, useState } from "react";
+import { MyPageDropDown } from "./mypagedropdown";
 import { ReportDropDown } from "./reportdropdown";
 import Modal from "./Modal";
+import profileApi from "@/apis/profileApi";
 
-interface Profile {
+export interface ProfileData {
   id: number;
   nickname: string;
   intro: string;
@@ -15,7 +16,7 @@ interface Profile {
 }
 
 interface ProfileProps {
-  profile: Profile;
+  profile: ProfileData;
   is_mine: boolean;
 }
 
@@ -45,6 +46,17 @@ export function Profile({ profile, is_mine }: ProfileProps) {
   const exportIconPath = "/assets/images/Expert_icon.png";
   const threeDotIconPath = "/assets/images/Three_Dots_icon.png";
   const copyIconPath = "assets/images/Copy_icon.png";
+
+  const [nickname, setNickname] = useState("");
+  const [intro, setIntro] = useState("");
+
+  const handleNicknameChange = (event: any) => {
+    setNickname(event.target.value);
+  };
+
+  const handleIntroChange = (event: any) => {
+    setIntro(event.target.value);
+  };
 
   const [isMyPageDropdownOpen, setIsMyPageDropDownOpen] = useState(false);
   const myPageDropdown = () => {
@@ -115,7 +127,14 @@ export function Profile({ profile, is_mine }: ProfileProps) {
   };
 
   const confirmUpdateModal = () => {
-    setIsUpdateModalOpen(false);
+    profileApi()
+      .patchMe({
+        nickname: nickname,
+        intro: intro,
+      })
+      .then((res) => {
+        window.location.reload();
+      });
   };
 
   return (
@@ -134,6 +153,7 @@ export function Profile({ profile, is_mine }: ProfileProps) {
       />
       <div
         style={{
+          width: "100%",
           margin: "21px 15px 19px 0px",
         }}
       >
@@ -143,6 +163,7 @@ export function Profile({ profile, is_mine }: ProfileProps) {
             fontSize: "22px",
             display: "flex",
             alignItems: "center",
+            width: "100%",
           }}
         >
           {profile.nickname}
@@ -159,18 +180,17 @@ export function Profile({ profile, is_mine }: ProfileProps) {
           <div
             style={{
               position: "relative",
+              width: "17px",
+              height: "17px",
               marginLeft: "auto",
+              marginRight: "12px",
+              marginBottom: "15px",
             }}
           >
             {is_mine && (
               <img
                 src={threeDotIconPath}
-                style={{
-                  width: "17px",
-                  height: "17px",
-                  marginLeft: "auto",
-                  marginRight: "12px",
-                }}
+                style={{ width: "100%" }}
                 onClick={myPageDropdown}
               />
             )}
@@ -195,7 +215,12 @@ export function Profile({ profile, is_mine }: ProfileProps) {
                   }}
                 >
                   <p style={updateTitleStyle}>닉네임</p>
-                  <textarea style={updateInputStyle} rows={1}></textarea>
+                  <textarea
+                    style={updateInputStyle}
+                    rows={1}
+                    value={nickname}
+                    onChange={handleNicknameChange}
+                  ></textarea>
                 </div>
                 <div
                   style={{
@@ -203,7 +228,12 @@ export function Profile({ profile, is_mine }: ProfileProps) {
                   }}
                 >
                   <p style={updateTitleStyle}>한줄 소개</p>
-                  <textarea style={updateInputStyle} rows={3}></textarea>
+                  <textarea
+                    style={updateInputStyle}
+                    rows={3}
+                    value={intro}
+                    onChange={handleIntroChange}
+                  ></textarea>
                 </div>
               </Modal>
             )}

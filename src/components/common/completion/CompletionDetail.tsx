@@ -1,11 +1,14 @@
-import { ScrollContent } from "../post/PostDetail";
+import { ScrollContent } from "../../post/PostDetail";
 import UserInfo, { UserInfoProps } from "@/components/common/UserInfo";
+import DeleteButton from "@/components/core/DeleteButton";
 import ReportButton from "@/components/core/ReportButton";
 import RouterLink from "@/components/core/RouterLink";
 import completionApi from "@/apis/completionApi";
 import { useState } from "react";
 import ImageSwiper from "@/components/core/ImageSwiper";
 import { isAxiosError } from "../../../../node_modules/axios/index";
+import { cookies } from "next/dist/client/components/headers";
+import { useCookies } from "react-cookie";
 
 export interface CompletionDetailProps extends UserInfoProps {
   id: string;
@@ -30,7 +33,6 @@ const deleteCompletion = (id: string) => {
 export const CompletionDetail: React.FC<CompletionDetailProps> = ({
   ...prop
 }) => {
-  console.log(prop);
   const completionLike = async () => {
     try {
       await completionApi()
@@ -59,6 +61,7 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
     }
   };
 
+  const [cookies] = useCookies(["uid"]);
   return (
     <ScrollContent>
       <div
@@ -127,7 +130,11 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
             profileId={prop.writer?.profileId}
             level={prop.writer?.level}
           />
-          <ReportButton id={prop.id} type={"completion"} />
+          {cookies.uid == prop.writer.profileId ? (
+            <DeleteButton id={prop.id} type={"completion"} />
+          ) : (
+            <ReportButton id={prop.id} type={"completion"} />
+          )}
         </div>
         <div
           style={{

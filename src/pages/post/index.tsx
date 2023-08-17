@@ -1,8 +1,8 @@
 import postApi from "@/apis/postApi";
-import CategoryBox from "@/components/common/post/Category";
-import { PostProps } from "@/components/common/post/Post";
-import { ScrollContent } from "@/components/common/post/PostDetail";
-import PostList from "@/components/common/post/PostList";
+import CategoryBox from "@/components/post/Category";
+import { PostProps } from "@/components/post/Post";
+import { ScrollContent } from "@/components/post/PostDetail";
+import PostList from "@/components/post/PostList";
 import RouterLink from "@/components/core/RouterLink";
 import { purpose_options } from "@/components/write/PurposeChoice";
 import NavBar from "@/layouts/components/NavBar";
