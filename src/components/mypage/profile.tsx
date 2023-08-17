@@ -161,6 +161,7 @@ export function Profile({ profile, is_mine }: ProfileProps) {
           )}
           <div
             style={{
+              position: "relative",
               width: "17px",
               height: "17px",
               marginLeft: "auto",
