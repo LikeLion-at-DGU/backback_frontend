@@ -15,7 +15,7 @@ const postListTitleTextstyle = {
 };
 
 export function PostList({ isMine, userId }: PostListProps) {
-  const [postList, setPostList] = useState<Post[]>([]);
+  const [postList, setPostList] = useState<PostProps[]>([]);
   const [isNext, setIsNext] = useState<boolean>(false);
   const [isPrevious, setIsPrevious] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
