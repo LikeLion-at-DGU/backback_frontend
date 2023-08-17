@@ -65,8 +65,23 @@ export function Profile({ profile, is_mine }: ProfileProps) {
 
   const [isFollow, setIsFollow] = useState(false);
   const follow = () => {
-    setIsFollow(!isFollow);
+    profileApi()
+      .followProfile(profile.id)
+      .then((res) => {
+        setIsFollow(!isFollow);
+      });
   };
+
+  // const confirmUpdateModal = () => {
+  //   profileApi()
+  //     .patchMe({
+  //       nickname: nickname,
+  //       intro: intro,
+  //     })
+  //     .then((res) => {
+  //       window.location.reload();
+  //     });
+  // };
 
   const [isReportDropdownOpen, setIsReportDropdownOpen] = useState(false);
   const reportDropdown = () => {
