@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Post } from "./Post";
 import { PostPage } from "./PostPage";
 import profileApi from "@/apis/profileApi";
+import Post, { PostProps } from "../common/post/Post";
 
 interface PostListProps {
   isMine: boolean;
@@ -37,9 +37,9 @@ export function PostList({ isMine, userId }: PostListProps) {
       </p>
       {total ? (
         <>
-          <div>
-            {postList.map((post: Post, index: number) => (
-              <Post post={post} />
+          <div style={{ width: "90%", margin: "0 auto" }}>
+            {postList.map((post: PostProps, index: number) => (
+              <Post {...post} />
             ))}
           </div>
           <PostPage
