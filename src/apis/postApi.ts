@@ -61,7 +61,6 @@ const postApi = () => {
       formData.append("purpose", data.purpose.toString());
       formData.append("exercise", data.exercise.toString());
       formData.append("content", data.content);
-      formData.append("type", data.type ? data.type : "ORDINARY");
       return api.patch(`/posts/${id}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
