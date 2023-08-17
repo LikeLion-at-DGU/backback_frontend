@@ -72,17 +72,6 @@ export function Profile({ profile, is_mine }: ProfileProps) {
       });
   };
 
-  // const confirmUpdateModal = () => {
-  //   profileApi()
-  //     .patchMe({
-  //       nickname: nickname,
-  //       intro: intro,
-  //     })
-  //     .then((res) => {
-  //       window.location.reload();
-  //     });
-  // };
-
   const [isReportDropdownOpen, setIsReportDropdownOpen] = useState(false);
   const reportDropdown = () => {
     setIsReportDropdownOpen(!isReportDropdownOpen);
