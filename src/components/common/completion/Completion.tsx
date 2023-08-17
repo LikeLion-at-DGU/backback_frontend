@@ -17,7 +17,7 @@ const Completion: React.FC<CompletionProps> = ({ ...prop }) => {
         flexDirection: "row",
         flexWrap: "wrap",
         width: "100%",
-        height: "100%",
+        height: "120px",
       }}
     >
       <RouterLink href={`/completion/${prop.id}`}>

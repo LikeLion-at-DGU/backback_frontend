@@ -203,7 +203,7 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
               )}
             </div>
             <div style={{ margin: "8px", fontSize: "16px", fontFamily: "MainFont" }}>
-              좋아요
+              좋아요{" "}
               {prop.likesCnt}
             </div>
           </div>
