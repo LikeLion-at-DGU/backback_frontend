@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ScrollContent } from "@/components/common/post/PostDetail";
+import { ScrollContent } from "@/components/post/PostDetail";
 
-import KakaoMap from "@/components/common/gym/map";
+import KakaoMap from "@/components/gym/map";
 import gymApi from "@/apis/gymApi";
-import GymList from "@/components/common/gym/GymList";
+import GymList from "@/components/gym/GymList";
 import NavBar from "@/layouts/components/NavBar";
-import { GymProps } from "@/components/common/gym/Gym";
+import { GymProps } from "@/components/gym/Gym";
 
 export default function Home() {
   const [isopen, setIsopen] = useState(false);
@@ -39,9 +39,7 @@ export default function Home() {
       .then((res) => {
         setGyms(res.data.results);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, [setGyms, address, gymApi]);
   const getGymsByAddress = useCallback(() => {
     gymApi()
@@ -50,9 +48,7 @@ export default function Home() {
         console.log(res);
         setGyms(res.data.results);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, [setGyms, address, gymApi]);
 
   const getGymByLocation = useCallback(() => {
@@ -61,9 +57,7 @@ export default function Home() {
       .then((res) => {
         setGymlocation(res.data.results);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, [setGymlocation, lat, lng, gymApi]);
 
   useEffect(() => {
@@ -173,8 +167,8 @@ export default function Home() {
                   width: "300px",
                   height: "60px",
                   position: "absolute",
-                  top: "140px",
-                  left: "80px",
+                  top: "145px",
+                  right: "15px",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",

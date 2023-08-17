@@ -1,6 +1,6 @@
 import Link from "../../../../node_modules/next/link";
 import Completion, { CompletionProps } from "./Completion";
-import { ScrollContent } from "../post/PostDetail";
+import { ScrollContent } from "../../post/PostDetail";
 
 export interface CompletionListProps {
   completions: CompletionProps[];
@@ -15,7 +15,8 @@ const CompletionList: React.FC<CompletionListProps> = ({ ...prop }) => {
         image={item.image}
         nickname={item.nickname}
         type={item.type}
-        profileimage={item.profileimage}
+        profileId={item.profileId}
+        level={item.level}
       />
     </div>
   ));

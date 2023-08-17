@@ -1,6 +1,9 @@
-import { ScrollContent } from "../post/PostDetail";
+import { ScrollContent } from "../../post/PostDetail";
 import UserInfo, { UserInfoProps } from "@/components/common/UserInfo";
+import DeleteButton from "@/components/core/DeleteButton";
 import ReportButton from "@/components/core/ReportButton";
+import { cookies } from "next/dist/client/components/headers";
+import { useCookies } from "react-cookie";
 
 export interface CompletionDetailProps extends UserInfoProps {
   id: string;
@@ -15,6 +18,7 @@ export interface CompletionDetailProps extends UserInfoProps {
 export const CompletionDetail: React.FC<CompletionDetailProps> = ({
   ...prop
 }) => {
+  const [cookies] = useCookies(["uid"]);
   return (
     <ScrollContent>
       <div
@@ -84,7 +88,11 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
             type={prop.type}
             level={prop.level}
           />
-          <ReportButton />
+          {cookies.uid == prop.writer.profileId ? (
+            <DeleteButton id={prop.id} type={"post"} />
+          ) : (
+            <ReportButton id={prop.id} type={"post"} />
+          )}
         </div>
         <div
           style={{

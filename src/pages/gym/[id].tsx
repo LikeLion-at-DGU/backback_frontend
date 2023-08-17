@@ -1,6 +1,6 @@
 import gymApi from "@/apis/gymApi";
-import GymDetail from "@/components/common/gym/GymDetail";
-import { ReviewProps } from "@/components/common/gym/Review";
+import GymDetail from "@/components/gym/GymDetail";
+import { ReviewProps } from "@/components/gym/Review";
 import NavBar from "@/layouts/components/NavBar";
 import { useCallback, useEffect, useState } from "react";
 
@@ -38,9 +38,7 @@ export default function Home(props: { id: string }) {
       .then((res) => {
         setGym(res.data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, [setGym, gymApi]);
   const getReviews = useCallback(() => {
     gymApi()
@@ -48,9 +46,7 @@ export default function Home(props: { id: string }) {
       .then((res) => {
         setReviews(res.data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, [setReviews, gymApi]);
   useEffect(() => {
     getGym();
