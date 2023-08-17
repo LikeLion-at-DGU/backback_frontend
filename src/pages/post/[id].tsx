@@ -53,7 +53,7 @@ export default function Home(props: { id: string }) {
         <PostDetail
           id={post.id}
           isLiked={post.isLiked}
-          isCliped={post.isCliped}
+          isClipped={post.isClipped}
           viewCnt={post.viewCnt}
           type={post.type}
           purpose={post.purpose}

@@ -1,3 +1,4 @@
+import RouterLink from "@/components/core/RouterLink";
 import React from "react";
 
 const Header: React.FC = () => {
@@ -21,10 +22,12 @@ const Header: React.FC = () => {
         ></img>
       </div>
       <div style={{ flex: "1", textAlign: "center" }}>
-        <img
-          src="../../../assets/images/find_icon.png"
-          style={{ height: "30px" }}
-        ></img>
+        <RouterLink href={"/find"}>
+          <img
+            src="../../../assets/images/find_icon.png"
+            style={{ height: "30px", cursor: "pointer" }}
+          ></img>
+        </RouterLink>
       </div>
     </header>
   );
