@@ -18,7 +18,7 @@ const KakaoMap: React.FC<KakaoMapProps> = ({ ...prop }) => {
     script.async = true;
     script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=33ccb9ed924f4f71c3407b8f585df918&autoload=false`;
     document.head.appendChild(script);
-
+    console.log("gyms", prop.gyms);
     script.addEventListener("load", () => {
       window.kakao.maps.load(() => {
         const container = document.getElementById("map");
@@ -61,7 +61,7 @@ const KakaoMap: React.FC<KakaoMapProps> = ({ ...prop }) => {
         }
       });
     });
-  }, []);
+  }, [prop.gyms]);
 
   return (
     <div

@@ -20,7 +20,7 @@ export default function ExportColumn() {
               "인도의 파탄잘리가 고안한 요가 수련의 8단계를 기초로 둔 8개의 자기라는 뜻의 요가로, 인도 마이소르에 있는 아쉬탕가의 어쩌구저쩌구",
             views: 13048,
             image: "../../../assets/images/Column_img.png",
-            profileimage: "",
+            profileId: "1",
           },
           {
             id: "2",
@@ -32,7 +32,7 @@ export default function ExportColumn() {
               "인도의 파탄잘리가 고안한 요가 수련의 8단계를 기초로 둔 8개의 자기라는 뜻의 요가로, 인도 마이소르에 있는 아쉬탕가의 어쩌구저쩌구",
             views: 13048,
             image: "../../../assets/images/Column_img.png",
-            profileimage: "",
+            profileId: "2",
           },
           {
             id: "3",
@@ -44,7 +44,7 @@ export default function ExportColumn() {
               "인도의 파탄잘리가 고안한 요가 수련의 8단계를 기초로 둔 8개의 자기라는 뜻의 요가로, 인도 마이소르에 있는 아쉬탕가의 어쩌구저쩌구",
             views: 13048,
             image: "../../../assets/images/Column_img.png",
-            profileimage: "",
+            profileId: "3",
           },
         ]}
       />

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "../../styles/CategoryChoice.module.css";
 
-const purpose_options = [
+export const purpose_options = [
   "바디프로필",
   "근육 증가",
   "체중 증가",

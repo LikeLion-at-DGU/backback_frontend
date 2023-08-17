@@ -15,9 +15,7 @@ const PopularPostList: React.FC<PostListProps> = ({ ...prop }) => {
     <Post
       id={item.id}
       key={index.toString()}
-      nickname={item.nickname}
-      type={item.type}
-      profileimage={item.profileimage}
+      writer={item.writer}
       content={item.content}
       comments_count={item.comments_count}
       like_count={item.like_count}
@@ -109,7 +107,8 @@ const PopularColumnList: React.FC<ColumnListProps> = ({ ...prop }) => {
       title={item.title}
       image={item.image}
       views={item.views}
-      profileimage={""}
+      profileId={item.profileId}
+      level={item.level}
       index={index}
       isHot={true}
     />
@@ -128,7 +127,7 @@ const PopularColumnList: React.FC<ColumnListProps> = ({ ...prop }) => {
           justifyContent: "center",
           alignItems: "center",
           padding: "1px 0px",
-          overflow: "hidden",
+          overflow: "auto",
         }}
       >
         <div

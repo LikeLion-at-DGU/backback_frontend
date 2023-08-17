@@ -54,8 +54,8 @@ const postApi = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
     },
-    getPost: (id: number) => api.get(`/posts/${id}`),
-    patchPost: (id: number, data: Post) => {
+    getPost: (id: number | string) => api.get(`/posts/${id}`),
+    patchPost: (id: number | string, data: Post) => {
       const formData = new FormData();
       formData.append("title", data.title);
       formData.append("purpose", data.purpose.toString());
@@ -66,17 +66,18 @@ const postApi = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
     },
-    deletePost: (id: number) => api.delete(`/posts/${id}`),
-    reportPost: (id: number, data: { reason: string }) =>
+    deletePost: (id: number | string) => api.delete(`/posts/${id}`),
+    reportPost: (id: number | string, data: { reason: string }) =>
       api.post(`/posts/${id}/report`, { reason: data.reason }),
-    scrapPost: (id: number) => api.post(`/posts/${id}/clip`, {}),
-    screappedPost: () => api.get(`/posts/clips`),
-    likePost: (id: number) => api.post(`/posts/${id}/like`, {}),
-    getPostComments: (id: number) => api.get(`/posts/${id}/comments`),
-    postPostComment: (id: number, data: { content: string }) =>
+    scrapPost: (id: number | string) => api.post(`/posts/${id}/clip`, {}),
+    scrapDelete: (id: number | string) => api.delete(`/posts/${id}/clip`),
+    scrappedPost: () => api.get(`/posts/clips`),
+    likePost: (id: number | string) => api.post(`/posts/${id}/like`, {}),
+    getPostComments: (id: number | string) => api.get(`/posts/${id}/comments`),
+    postPostComment: (id: number | string, data: { content: string }) =>
       api.post(`/posts/${id}/comments`, data),
-    deleteComment: (id: number) => api.delete(`/comments/${id}`),
-    reportComment: (id: number, data: { reason: string }) =>
+    deleteComment: (id: number | string) => api.delete(`/comments/${id}`),
+    reportComment: (id: number | string, data: { reason: string }) =>
       api.post(`/comments/${id}/report`, { reason: data.reason }),
   };
 };

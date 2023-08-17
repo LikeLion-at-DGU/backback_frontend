@@ -1,3 +1,4 @@
+import RouterLink from "@/components/core/RouterLink";
 import React, { useEffect } from "react";
 import styled, { css } from "styled-components";
 interface CommunityProps {
@@ -55,11 +56,21 @@ const NavBar: React.FC = () => {
       }}
     >
       <div style={{ flex: "1", fontFamily: "MainFont" }}></div>
-      <Community active={post}>커뮤니티</Community>
-      <Community active={column}>전문가</Community>
-      <Community active={popular}>인기</Community>
-      <Community active={completion}>오운완</Community>
-      <Community active={gym}>헬스장</Community>
+      <Community active={post}>
+        <RouterLink href={"/post"}>커뮤니티</RouterLink>
+      </Community>
+      <Community active={column}>
+        <RouterLink href={"/column"}>전문가</RouterLink>
+      </Community>
+      <Community active={popular}>
+        <RouterLink href={"/popular"}>인기</RouterLink>
+      </Community>
+      <Community active={completion}>
+        <RouterLink href={"/completion"}>오운완</RouterLink>
+      </Community>
+      <Community active={gym}>
+        <RouterLink href={"/gym"}>헬스장</RouterLink>
+      </Community>
       <div style={{ flex: "1" }}></div>
     </div>
   );

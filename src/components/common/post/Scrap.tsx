@@ -1,21 +1,9 @@
 import React from "react";
-import UserInfo, { UserInfoProps } from "../UserInfo";
+import UserInfo from "../UserInfo";
 import Link from "next/link";
+import { ScrapPostProps } from "@/pages/post/scraps";
 
-export interface PostProps {
-  id: string;
-  category: string[];
-  title: string;
-  createdAt: string;
-  updatedAt: string;
-  contentShort: string;
-  likesCnt: number;
-  commentsCnt: number;
-  writer: UserInfoProps;
-  viewCnt: number;
-}
-
-const Post: React.FC<PostProps> = ({ ...prop }) => {
+const ScrapPost: React.FC<ScrapPostProps> = ({ ...prop }) => {
   const date = prop.createdAt.split("T")[0].split("-").join(".");
   const time = prop.createdAt
     .split("T")[1]
@@ -111,4 +99,4 @@ const Post: React.FC<PostProps> = ({ ...prop }) => {
   );
 };
 
-export default Post;
+export default ScrapPost;

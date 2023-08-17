@@ -1,13 +1,15 @@
-import { Inter } from "next/font/google";
 import Signup from "../../components/common/Signup";
 import styles from "../../styles/Signup.module.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const router = useRouter();
+  const handleGoBack = () => {
+    router.back();
+  };
   return (
     <div className={styles.signupContainer}>
-      <div className={styles.cancelLogoContainer}>
+      <div className={styles.cancelLogoContainer} onClick={handleGoBack}>
         <img
           src="../../../assets/images/Cancel_icon.png"
           style={{ height: "15px", width: "15px" }}
