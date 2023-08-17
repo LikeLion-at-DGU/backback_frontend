@@ -12,16 +12,17 @@ const Community = styled.div<CommunityProps>`
   cursor: pointer;
   place-items: center;
   font-size: 16px;
-  font-family: "MainFont";
+  font-family: ${(props) => (props.active ? "BoldFont" : "MainFont")};
   &:hover {
+    transform: translateY(2px);
     border-bottom: 3px solid #6a81aa;
-    font-weight: 700;
   }
   ${(props) =>
     props.active &&
     css`
-      border-bottom: 3px solid #6a81aa;
-      font-weight: 700;
+    transform: translateY(2px);
+    border-bottom: 3px solid #6a81aa;
+    font-family: "BoldFont";
     `}
 `;
 

@@ -35,6 +35,7 @@ const Post: React.FC<PostProps> = ({ ...prop }) => {
           flexDirection: "column",
           fontSize: "16px",
           borderBottom: "1px solid #B7BBC8",
+          margin: "0px",
         }}
       >
         <div
@@ -44,7 +45,9 @@ const Post: React.FC<PostProps> = ({ ...prop }) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            margin: "10px 0px 10px 0px",
+            margin: "13px 0px 9px 0px",
+            fontSize: "14px",
+            fontFamily: "MainFont",
           }}
         >
           <UserInfo
@@ -55,7 +58,10 @@ const Post: React.FC<PostProps> = ({ ...prop }) => {
           />
           <div
             style={{
-              fontSize: "12px",
+              fontSize: "10px",
+              marginLeft: "auto",
+              marginRight: "22px",
+              fontFamily: "MainFont",
             }}
           >
             {createdAt}
@@ -64,7 +70,7 @@ const Post: React.FC<PostProps> = ({ ...prop }) => {
         <div
           style={{
             fontSize: "14px",
-            fontWeight: "700",
+            fontFamily: "BoldFont",
             width: "100%",
             padding: "0px 15px 0px 15px",
           }}
@@ -77,7 +83,8 @@ const Post: React.FC<PostProps> = ({ ...prop }) => {
             width: "100%",
             padding: "5px 15px 5px 15px",
             wordWrap: "break-word",
-            fontSize: "12px",
+            fontSize: "10px",
+            fontFamily: "MainFont",
           }}
         >
           {prop.contentShort}

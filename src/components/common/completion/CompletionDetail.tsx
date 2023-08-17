@@ -70,7 +70,7 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
           display: "block",
           flexDirection: "column",
           alignItems: "center",
-          padding: "20px 15px 0px 15px",
+          padding: "19px",
           flex: "1",
           overflow: "auto",
           scrollBehavior: "smooth",
@@ -80,8 +80,9 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
           style={{
             width: "100%",
             height: "22px",
-            marginBottom: "7px",
+            marginBottom: "10px",
             fontSize: "14px",
+            fontFamily: "MainFont",
           }}
         >
           <img
@@ -110,6 +111,7 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
             width: "100%",
             height: "18px",
             fontSize: "12px",
+            fontFamily: "MainFont",
           }}
         >
           {prop.createdAt}
@@ -122,6 +124,8 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
             width: "100%",
             borderBottom: "1px solid #B7BBC8",
             padding: "10px 0px 10px 0px",
+            fontFamily: "MainFont",
+            fontSize: "16px"
           }}
         >
           <UserInfo
@@ -148,7 +152,7 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
           <div
             style={{
               width: "100%",
-              padding: "0px 22px 0px 22px",
+              padding: "0px 20px 0px 20px",
               whiteSpace: "pre-wrap",
               fontSize: "16px",
             }}
@@ -197,7 +201,7 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
                 ></img>
               )}
             </div>
-            <div style={{ margin: "8px" }}>
+            <div style={{ margin: "8px", fontSize: "16px", fontFamily: "MainFont" }}>
               좋아요
               {prop.likeCnt}
             </div>

@@ -118,7 +118,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
           display: "block",
           flexDirection: "column",
           alignItems: "center",
-          padding: "15px",
+          padding: "19px",
           flex: "1",
           overflow: "auto",
           scrollBehavior: "smooth",
@@ -127,13 +127,16 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
         <div
           style={{
             width: "100%",
-            marginBottom: "15px",
+            marginBottom: "10px",
             fontSize: "14px",
+            fontFamily: "MainFont",
           }}
         >
           <img
             src="../../../assets/images/Category_right_icon.png"
-            style={{ height: "10px", marginRight: "5px" }}
+            style={{ height: "11px",
+                      width: "7px",
+                      marginRight: "7px", }}
           ></img>
           {category}
         </div>
@@ -141,7 +144,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
           style={{
             width: "100%",
             fontSize: "18px",
-            fontWeight: "700",
+            fontFamily: "BoldFont",
             marginBottom: "5px",
           }}
         >
@@ -151,6 +154,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
           style={{
             width: "100%",
             fontSize: "12px",
+            fontFamily: "MainFont",
           }}
         >
           {createdAt}
@@ -163,6 +167,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
             width: "100%",
             borderBottom: "1px solid #B7BBC8",
             padding: "10px 0px 10px 0px",
+            fontFamily: "MainFont",
           }}
         >
           <RouterLink
@@ -211,7 +216,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            margin: "20px 10px 20px 10px",
+            margin: "14px 10px 20px 10px",
           }}
         >
           <div
@@ -232,47 +237,49 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
               {!prop.isLiked ? (
                 <img
                   src="../../../assets/images/like_icon.png"
-                  style={{ height: "25px" }}
+                  style={{ height: "30px" }}
                   onClick={postLike}
                 ></img>
               ) : (
                 <img
                   src="../../../assets/images/Click_Like_icon.png"
-                  style={{ height: "25px" }}
+                  style={{ height: "30px" }}
                   onClick={postLike}
                 ></img>
               )}
             </div>
-            <div style={{ margin: "5px" }}>좋아요 {prop.likesCnt}</div>
+            <div style={{ margin: "8px", fontSize: "16px", fontFamily: "MainFont" }}>좋아요 {prop.likesCnt}</div>
             <img
               src="../../../assets/images/Message_icon.png"
-              style={{ height: "21px", width: "23px" }}
+              style={{ height: "23px", width: "21px" }}
             ></img>
-            <div style={{ margin: "5px" }}>댓글 {prop.commentsCnt}</div>
+            <div style={{ margin: "8px", fontSize: "16px", fontFamily: "MainFont" }}>댓글 {prop.commentsCnt}</div>
           </div>
           <div style={{ cursor: "pointer", placeItems: "center" }}>
             {!prop.isClipped ? (
               <img
                 src="../../../assets/images/noscrap.svg"
-                style={{ height: "25px" }}
+                style={{ height: "22px" }}
                 onClick={postScrap}
               ></img>
             ) : (
               <img
                 src="../../../assets/images/Click_Scrap_icon.png"
-                style={{ height: "25px" }}
+                style={{ height: "22px" }}
                 onClick={postScrap}
               ></img>
             )}
           </div>
         </div>
         <CommentList comments={[...prop.comments]} />
+        <div style={{ width: "100%", padding: "0px 15px 0px 15px" }}>
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             padding: "10px 0px 10px 0px",
             height: "auto",
+            borderTop: "1px solid #B7BBC8",
           }}
         >
           <div
@@ -284,6 +291,8 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
               border: "1px solid #B7BBC8",
               borderRadius: "10px",
               height: "auto",
+              fontSize: "16px",
+              fontFamily: "BoldFont"
             }}
           >
             {userNickname}
@@ -297,6 +306,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
                 minHeight: "60px",
                 scrollBehavior: "smooth",
                 marginTop: "10px",
+                fontSize: "14px",
                 fontFamily: "MainFont",
               }}
               ref={inputRef}
@@ -319,11 +329,13 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
                 height: "30px",
                 fontSize: "14px",
                 cursor: "pointer",
+                fontFamily: "MainFont"
               }}
               onClick={handleSubmit}
             >
               등록
             </button>
+            </div>
           </div>
         </div>
       </div>

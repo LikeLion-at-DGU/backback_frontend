@@ -127,20 +127,25 @@ export default function Home() {
             }}
           >
             <input
-              placeholder="지역 검색"
+              placeholder="원하는 주소를 입력해주세요"
               style={{
                 height: "20px",
+                width: "274px",
                 flex: "1",
                 padding: "5px",
                 marginRight: "5px",
                 fontFamily: "MainFont",
+                fontSize: "14px",
+                border: "none",         // 사각형 모양 제거
+                borderBottom: "1px solid black",  // 밑줄 스타일 적용
+                outline: "none",
               }}
               ref={inputRef}
             ></input>
             <img
               src="../../../../assets/images/find_icon.png"
               alt="find_icon"
-              style={{ height: "25px", cursor: "pointer", marginTop: "5px" }}
+              style={{ height: "20px", cursor: "pointer", marginTop: "5px" }}
               onClick={handleSearch}
             ></img>
           </div>
