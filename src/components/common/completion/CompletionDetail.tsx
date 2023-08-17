@@ -2,6 +2,11 @@ import { ScrollContent } from "../../post/PostDetail";
 import UserInfo, { UserInfoProps } from "@/components/common/UserInfo";
 import DeleteButton from "@/components/core/DeleteButton";
 import ReportButton from "@/components/core/ReportButton";
+import RouterLink from "@/components/core/RouterLink";
+import completionApi from "@/apis/completionApi";
+import { useState } from "react";
+import ImageSwiper from "@/components/core/ImageSwiper";
+import { isAxiosError } from "../../../../node_modules/axios/index";
 import { cookies } from "next/dist/client/components/headers";
 import { useCookies } from "react-cookie";
 
@@ -9,15 +14,53 @@ export interface CompletionDetailProps extends UserInfoProps {
   id: string;
   title: string;
   createdAt: string;
+  writer: UserInfoProps;
   image: string;
   content: string;
-  like_count: number;
-  is_liked: boolean;
+  likeCnt: number;
+  isLiked: boolean;
+  isPrivate: boolean;
 }
+
+const deleteCompletion = (id: string) => {
+  completionApi()
+    .deleteCompletion(id)
+    .then(() => {
+      window.location.href = `/completion`;
+    });
+};
 
 export const CompletionDetail: React.FC<CompletionDetailProps> = ({
   ...prop
 }) => {
+  const completionLike = async () => {
+    try {
+      await completionApi()
+        .likeCompletion(prop.id)
+        .then((res) => console.log(res.data));
+    } catch (error) {
+      if (isAxiosError(error)) {
+        alert(error.response?.data);
+      }
+    } finally {
+      window.location.reload();
+    }
+  };
+
+  const changeprivate = async () => {
+    try {
+      await completionApi()
+        .privateCompletion(prop.id, { isPrivate: prop.isPrivate })
+        .then((res) => console.log(res.data));
+    } catch (error) {
+      if (isAxiosError(error)) {
+        alert(error.response?.data);
+      }
+    } finally {
+      window.location.reload();
+    }
+  };
+
   const [cookies] = useCookies(["uid"]);
   return (
     <ScrollContent>
@@ -79,19 +122,18 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
             width: "100%",
             borderBottom: "1px solid #B7BBC8",
             padding: "10px 0px 10px 0px",
-            position: "relative",
           }}
         >
           <UserInfo
-            profileId={prop.profileId}
-            nickname={prop.nickname}
-            type={prop.type}
-            level={prop.level}
+            nickname={prop.writer?.nickname}
+            type={prop.writer?.type}
+            profileId={prop.writer?.profileId}
+            level={prop.writer?.level}
           />
           {cookies.uid == prop.writer.profileId ? (
-            <DeleteButton id={prop.id} type={"post"} />
+            <DeleteButton id={prop.id} type={"completion"} />
           ) : (
-            <ReportButton id={prop.id} type={"post"} />
+            <ReportButton id={prop.id} type={"completion"} />
           )}
         </div>
         <div
@@ -139,12 +181,31 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
                 placeItems: "center",
               }}
             >
-              <img
-                src="../../../assets/images/Like_icon.png"
-                style={{ height: "30px" }}
-              ></img>
+              {prop.isLiked ? (
+                <img
+                  src="../../../assets/images/Click_Like_icon.png"
+                  style={{ height: "30px" }}
+                  onClick={completionLike}
+                ></img>
+              ) : (
+                <img
+                  src="../../../assets/images/Like_icon.png"
+                  style={{
+                    height: "30px",
+                  }}
+                  onClick={completionLike}
+                ></img>
+              )}
             </div>
-            <div style={{ margin: "8px" }}>좋아요 {prop.like_count}</div>
+            <div style={{ margin: "8px" }}>
+              좋아요
+              {prop.likeCnt}
+            </div>
+            <RouterLink href={`/completion/edit/${prop.id}/`}>
+              수정하기
+            </RouterLink>
+            <button onClick={() => deleteCompletion(prop.id)}>삭제하기</button>
+            <button onClick={changeprivate}>나만보기</button>
           </div>
         </div>
       </div>
