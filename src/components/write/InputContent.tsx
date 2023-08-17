@@ -18,7 +18,7 @@ const InputContent: React.FC<InputContentProps> = ({
         style={{
           border: "1px solid #B7BBC8",
           width: "360px",
-          height: "420px",
+          height: "430px",
           fontSize: "18px",
           color: "#B3B3B3",
           resize: "none",
