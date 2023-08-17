@@ -4,32 +4,22 @@ import { Profile } from "@/components/mypage/profile";
 import { ScrollContent } from "@/components/common/post/PostDetail";
 import { CompletedPool } from "@/components/mypage/CompletedPool";
 import profileApi from "@/apis/profileApi";
-import { useEffect, useState } from "react";
+
+export async function getMyProfileData() {
+  const data = await profileApi()
+    .getMe()
+    .then((response) => response.data.results);
+
+  return {
+    profileData: {
+      data,
+    },
+  };
+}
 
 export default function MyPage() {
   const isMine: boolean = true;
-  const [profileData, setProfileData] = useState({});
-  const processProfileData = (data: any) => {
-    setProfileData({
-      id: data.id,
-      nickname: data.nickname,
-      intro: data.intro,
-      level: 3,
-      following_cnt: data.followingCnt,
-      follower_cnt: data.followerCnt,
-      type: data.type,
-      user_id: data.userId,
-    });
-  };
-
-  useEffect(() => {
-    profileApi()
-      .getMe()
-      .then((res) => {
-        processProfileData(res.data);
-      });
-  }, []);
-  console.log("테스트" + JSON.stringify(profileData, null, 2));
+  const { profileData }: any = getMyProfileData();
 
   const expertInfo = [
     "생활스포츠지도사 2급",

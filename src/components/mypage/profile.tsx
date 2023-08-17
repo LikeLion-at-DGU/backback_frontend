@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MyPageDropDown } from "./MypageDropdown";
+import { MyPageDropDown } from "./mypagedropdown";
 import { ReportDropDown } from "./reportdropdown";
 import Modal from "./Modal";
 
@@ -42,6 +42,7 @@ const updateInputStyle = {
 
 export function Profile({ profile, is_mine }: ProfileProps) {
   const imagePath = `/assets/images/Character${profile.level}.png`;
+  //const imagePath = `/assets/images/Character1.png`;
   const exportIconPath = "/assets/images/Expert_icon.png";
   const threeDotIconPath = "/assets/images/Three_Dots_icon.png";
   const copyIconPath = "assets/images/Copy_icon.png";
@@ -134,6 +135,7 @@ export function Profile({ profile, is_mine }: ProfileProps) {
       />
       <div
         style={{
+          width: "100%",
           margin: "21px 15px 19px 0px",
         }}
       >
@@ -143,6 +145,7 @@ export function Profile({ profile, is_mine }: ProfileProps) {
             fontSize: "22px",
             display: "flex",
             alignItems: "center",
+            width: "100%",
           }}
         >
           {profile.nickname}
@@ -158,21 +161,16 @@ export function Profile({ profile, is_mine }: ProfileProps) {
           )}
           <div
             style={{
-              position: "relative",
+              width: "17px",
+              height: "17px",
               marginLeft: "auto",
+              marginRight: "12px",
+              marginBottom: "15px",
             }}
+            onClick={myPageDropdown}
           >
             {is_mine && (
-              <img
-                src={threeDotIconPath}
-                style={{
-                  width: "17px",
-                  height: "17px",
-                  marginLeft: "auto",
-                  marginRight: "12px",
-                }}
-                onClick={myPageDropdown}
-              />
+              <img src={threeDotIconPath} style={{ width: "100%" }} />
             )}
             {isMyPageDropdownOpen && (
               <MyPageDropDown

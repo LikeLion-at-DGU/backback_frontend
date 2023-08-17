@@ -60,7 +60,7 @@ const Header: React.FC = () => {
           style={{ height: "20px" }}
         ></img>
       </RouterLink>
-      <RouterLink href="/testing2">
+      <RouterLink href="/mypage">
         <img
           src="../../../assets/images/Mypage_icon.png"
           style={{ height: "20px" }}
