@@ -4,6 +4,8 @@ import postApi from "@/apis/postApi";
 import { AxiosError, isAxiosError } from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
+import RouterLink from "./RouterLink";
+import Button from "./Button";
 
 export const DeleteBox = styled.div`
   width: 100%;
@@ -79,6 +81,23 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ ...prop }) => {
       window.location.reload();
     }
   };
+  const Private = async () => {
+    try {
+      await completionApi().privateCompletion(prop.id, { isPrivate: true });
+      alert("비공개가 완료되었습니다.");
+    } catch (error) {
+      if (isAxiosError(error)) {
+        const axiosError = error as AxiosError;
+        if (axiosError.response?.data?.detail) {
+          alert(axiosError.response.data.detail);
+        }
+      } else {
+        alert("잠시 후 다시 시도해주세요.");
+      }
+    } finally {
+      window.location.reload();
+    }
+  };
   return (
     <div style={{ placeItems: "center", fontSize: "14px" }}>
       {isopen && (
@@ -90,54 +109,186 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ ...prop }) => {
             transform: "translate(-70%, 0)",
             zIndex: "10",
             width: "110px",
-            height: "30px",
+            height: `${
+              prop.type === "comment"
+                ? "30px"
+                : prop.type === "completion"
+                ? "90px"
+                : "60px"
+            }`,
             display: "flex",
-            padding: "0px 5px 0px 5px",
             backgroundColor: "white",
           }}
-          onClick={handleDelete}
         >
-          <div
-            style={{
-              border: "0.5px solid black",
-              width: "100px",
-              height: "100%",
-              fontSize: "14px",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "row",
-              padding: "0px 5px 0px 5px",
-            }}
-          >
+          {prop.type === "comment" ? (
             <div
               style={{
+                border: "0.5px solid black",
+                width: "100px",
+                height: "100%",
+                cursor: "pointer",
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "flex-start",
+                justifyContent: "center",
+                flexDirection: "row",
+                padding: "0px 5px 0px 5px",
+              }}
+              onClick={handleDelete}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                  height: "100%",
+                  flex: "2",
+                  fontSize: "14px",
+                }}
+              >
+                삭제하기
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  height: "100%",
+                  flex: "1",
+                  alignItems: "center",
+                  justifyContent: "flex-end",
+                }}
+              >
+                <img
+                  src="../../../assets/images/Delete_icon.png"
+                  style={{ height: "14px" }}
+                ></img>
+              </div>
+            </div>
+          ) : prop.type === "completion" ? (
+            <div
+              style={{
+                width: "100px",
                 height: "100%",
-                flex: "2",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "column",
+              }}
+            >
+              <Button
+                name={"나만보기"}
+                image={"../../../assets/images/Lock_icon.png"}
+                onClick={Private}
+              />
+              <div
+                style={{
+                  border: "0.5px solid black",
+                  width: "100%",
+                  flex: "1",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "row",
+                  padding: "0px 5px 0px 5px",
+                }}
+              >
+                <RouterLink href={`${prop.type}/${prop.id}/edit`}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "flex-start",
+                      height: "100%",
+                      flex: "3",
+                      fontSize: "14px",
+                    }}
+                  >
+                    수정하기
+                  </div>
+                </RouterLink>
+                <div
+                  style={{
+                    display: "flex",
+                    height: "100%",
+                    flex: "1",
+                    alignItems: "center",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  <img
+                    src={"../../../assets/images/Update_icon.png"}
+                    style={{ height: "14px" }}
+                  ></img>
+                </div>
+              </div>
+              <Button
+                name={"삭제하기"}
+                image={"../../../assets/images/Delete_icon.png"}
+                onClick={Delete}
+              />
+            </div>
+          ) : (
+            <div
+              style={{
+                width: "100px",
+                height: "100%",
                 fontSize: "14px",
-              }}
-            >
-              삭제하기
-            </div>
-            <div
-              style={{
                 display: "flex",
-                height: "100%",
-                flex: "1",
                 alignItems: "center",
-                justifyContent: "flex-end",
+                justifyContent: "center",
+                flexDirection: "column",
+                padding: "0px 5px 0px 5px",
+                flex: "1",
               }}
             >
-              <img
-                src="../../../assets/images/Delete_icon.png"
-                style={{ height: "14px" }}
-              ></img>
+              <div
+                style={{
+                  border: "0.5px solid black",
+                  width: "100%",
+                  flex: "1",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "row",
+                  padding: "0px 5px 0px 5px",
+                }}
+              >
+                <RouterLink href={`${prop.type}/${prop.id}/edit`}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "flex-start",
+                      height: "100%",
+                      flex: "3",
+                      fontSize: "14px",
+                    }}
+                  >
+                    수정하기
+                  </div>
+                </RouterLink>
+                <div
+                  style={{
+                    display: "flex",
+                    height: "100%",
+                    flex: "1",
+                    alignItems: "center",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  <img
+                    src={"../../../assets/images/Update_icon.png"}
+                    style={{ height: "14px" }}
+                  ></img>
+                </div>
+              </div>
+              <Button
+                name={"삭제하기"}
+                image={"../../../assets/images/Delete_icon.png"}
+                onClick={Delete}
+              />
             </div>
-          </div>
+          )}
         </div>
       )}
       <div

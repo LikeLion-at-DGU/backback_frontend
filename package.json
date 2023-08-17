@@ -23,7 +23,6 @@
     "react-cookie": "^5.0.0",
     "react-dom": "18.2.0",
     "react-lazy-load-image-component": "1.6.0",
-    "react-query": "3.39.3",
     "react-responsive-carousel": "^3.2.23",
     "snakecase-keys": "^5.4.6",
     "styled-components": "^6.0.7",

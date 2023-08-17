@@ -35,12 +35,9 @@ export default function Home() {
     await postApi()
       .scrappedPost()
       .then((res) => {
-        console.log(res.data.results);
         setPosts(res.data.results);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, [setPosts, postApi]);
 
   useEffect(() => {

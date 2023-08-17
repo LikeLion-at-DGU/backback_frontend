@@ -27,7 +27,6 @@ export default function Home() {
     } else {
       setChoose([...choose, e]);
     }
-    console.log(choose);
   };
 
   const handleopen = () => {
@@ -37,12 +36,9 @@ export default function Home() {
     await postApi()
       .getPosts({ type: "ORDINARY" })
       .then((res) => {
-        console.log(res.data.results);
         setPosts(res.data.results);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, [setPosts, postApi]);
 
   const getPostsByCategory = useCallback(
@@ -54,7 +50,6 @@ export default function Home() {
         });
         return res.data.results;
       } catch (error) {
-        console.log(error);
         return [];
       }
     },

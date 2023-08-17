@@ -41,10 +41,6 @@ const ReportButton: React.FC<ReportButtonProps> = ({ ...prop }) => {
 
     setDropdownPosition({ top, left });
   };
-
-  const handleGoBack = () => {
-    setIsopen(!isopen);
-  };
   const handleReport = () => {
     if (prop.type === "comment") {
       setReportType("댓글");
@@ -97,28 +93,7 @@ const ReportButton: React.FC<ReportButtonProps> = ({ ...prop }) => {
       window.location.reload();
     }
   };
-  const Delete = async () => {
-    try {
-      if (prop.type === "comment") {
-        await postApi().deleteComment(prop.id);
-      } else if (prop.type === "post") {
-        await postApi().deletePost(prop.id);
-      } else if (prop.type === "completion") {
-        await completionApi().deleteCompletion(prop.id);
-      }
-      alert("삭제가 완료되었습니다.");
-    } catch (error) {
-      if (isAxiosError(error)) {
-        const axiosError = error as AxiosError;
-        if (axiosError.response?.data?.detail) {
-          alert(axiosError.response.data.detail);
-        }
-      } else {
-        alert("잠시 후 다시 시도해주세요.");
-      }
-    } finally {
-    }
-  };
+
   return (
     <div style={{ placeItems: "center", fontSize: "14px" }}>
       {isopen && (

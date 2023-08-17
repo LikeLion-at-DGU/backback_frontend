@@ -1,6 +1,7 @@
 import { ExpertInfo } from "@/components/mypage/ExpertInfo";
 import { PostList } from "@/components/mypage/PostList";
 import { Profile, ProfileData } from "@/components/mypage/profile";
+
 import { CompletedPool } from "@/components/mypage/CompletedPool";
 import profileApi from "@/apis/profileApi";
 import { useEffect, useState } from "react";
