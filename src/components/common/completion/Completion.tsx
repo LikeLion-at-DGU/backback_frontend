@@ -1,21 +1,26 @@
 import { UserInfoProps } from "../UserInfo";
 import Link from "../../../../node_modules/next/link";
+import RouterLink from "@/components/core/RouterLink";
 
 export interface CompletionProps extends UserInfoProps {
   id: string;
   image: string;
+  isPrivate: boolean;
+  writer: UserInfoProps;
 }
 
 const Completion: React.FC<CompletionProps> = ({ ...prop }) => {
   return (
-    <Link href="/completions/[id]" as={`/completions/${prop.id}`}>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-        }}
-      >
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      <RouterLink href={`/completion/${prop.id}`}>
         <img
           src={prop.image}
           style={{
@@ -23,8 +28,8 @@ const Completion: React.FC<CompletionProps> = ({ ...prop }) => {
             width: "100%",
           }}
         />
-      </div>
-    </Link>
+      </RouterLink>
+    </div>
   );
 };
 

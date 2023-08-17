@@ -1,8 +1,11 @@
 import React, { useState, ChangeEvent } from "react";
 import InputTitle from "@/components/write/InputTitle";
 import InputContent from "@/components/write/InputContent";
-import InputImage from "@/components/write/InputImage";
+import InputOneImage from "@/components/write/InputOneImage";
 import { ScrollContent } from "@/components/common/post/PostDetail";
+import RouterLink from "@/components/core/RouterLink";
+import completionApi from "@/apis/completionApi";
+import Link from "../../../../node_modules/next/link";
 
 export default function Home() {
   const [selectedImages, setSelectedImages] = useState<FileList | null>(null);
@@ -21,6 +24,19 @@ export default function Home() {
     setSelectedImages(files);
     setPreviewImageCount(files?.length || 0);
   };
+  const handleSubmit = () => {
+    if (selectedImages && title && content) {
+      completionApi()
+        .postCompletion({
+          title: title,
+          content: content,
+          image: selectedImages[0],
+        })
+        .then((window.location.href = `/completion`));
+    } else if (title && content) {
+      alert("사진을 첨부해주세요.");
+    }
+  };
   return (
     <ScrollContent>
       <div
@@ -35,7 +51,20 @@ export default function Home() {
           borderBottom: "1px solid #B7BBC8",
         }}
       >
-        기록
+        <button
+          style={{
+            border: "none",
+            backgroundColor: "transparent",
+            fontFamily: "MainFont",
+            fontSize: "16px",
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            handleSubmit();
+          }}
+        >
+          기록
+        </button>
       </div>
       <div
         style={{
@@ -68,7 +97,7 @@ export default function Home() {
               onContentChange={handleContentChange}
             />
           </div>
-          <InputImage
+          <InputOneImage
             onChange={handleImageChange}
             previewCount={previewImageCount}
           />

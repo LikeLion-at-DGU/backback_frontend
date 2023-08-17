@@ -23,13 +23,20 @@ const completionApi = () => {
       id: number | string,
       data: { title: string; content: string }
     ) => {
-      api.patch(`/completions/${id}`, data);
+      const formData = new FormData();
+      formData.append("title", data.title);
+      formData.append("content", data.content);
+      api.patch(`/completions/${id}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
     },
     deleteCompletion: (id: number | string) => api.delete(`/completions/${id}`),
     likeCompletion: (id: number | string) =>
       api.post(`/completions/${id}/like`, {}),
     reportCompletion: (id: number | string, data: { reason: string }) =>
       api.post(`/completions/${id}/report`, { reason: data.reason }),
+    privateCompletion: (id: number | string, data: { isPrivate: boolean }) =>
+      api.patch(`/completions/${id}/private`, { isPrivate: data.isPrivate }),
   };
 };
 
