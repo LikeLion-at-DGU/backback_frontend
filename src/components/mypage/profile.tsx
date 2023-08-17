@@ -88,8 +88,11 @@ export function Profile({ profile, is_mine }: ProfileProps) {
   };
 
   const confirmReportModal = () => {
-    // 동작 추가해야함~
-    setIsReportModalOpen(false);
+    profileApi()
+      .reportProfile(profile.id)
+      .then((res) => {
+        setIsReportModalOpen(false);
+      });
   };
 
   const [isExpertModalOpen, setIsExpertModalOpen] = useState(false);
