@@ -1,5 +1,5 @@
-import Post, { PostProps } from "../common/post/Post";
-import { ScrollContent } from "../common/post/PostDetail";
+import Post, { PostProps } from "../post/Post";
+import { ScrollContent } from "../post/PostDetail";
 import ImageSwiper from "../core/ImageSwiper";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -13,15 +13,15 @@ const Homepage: React.FC<HomeProps> = ({ ...prop }) => {
     <Post
       id={item.id}
       key={index.toString()}
-      nickname={item.nickname}
-      type={item.type}
-      profileimage={item.profileimage}
-      content={item.content}
-      comments_count={item.comments_count}
-      like_count={item.like_count}
+      writer={item.writer}
+      contentShort={item.contentShort}
+      commentsCnt={item.commentsCnt}
+      likesCnt={item.likesCnt}
       createdAt={item.createdAt}
       title={item.title}
       category={item.category}
+      updatedAt={item.updatedAt}
+      viewCnt={item.viewCnt}
     />
   ));
 
