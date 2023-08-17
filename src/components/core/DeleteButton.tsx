@@ -59,6 +59,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ ...prop }) => {
   };
 
   const Delete = async () => {
+    let redirectTo = "";
     try {
       if (prop.type === "comment") {
         await postApi().deleteComment(prop.id);
@@ -78,7 +79,13 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ ...prop }) => {
         alert("잠시 후 다시 시도해주세요.");
       }
     } finally {
-      window.location.reload();
+      if (prop.type === "comment") {
+        window.location.href = redirectTo;
+      } else if (prop.type === "post") {
+        window.location.href = `/post`;
+      } else if (prop.type === "completion") {
+        window.location.href = `/completion`;
+      }
     }
   };
   const Private = async () => {
