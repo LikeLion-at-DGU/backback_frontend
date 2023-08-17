@@ -16,9 +16,9 @@ export const purpose_options = [
   "기타",
 ];
 
-const PurposeChoice = () => {
+const PurposeChoice = ({ onPurposeSelect }: any) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(-1);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -27,6 +27,7 @@ const PurposeChoice = () => {
   const handleOptionClick = (option: any) => {
     setSelectedOption(option);
     setIsOpen(false);
+    onPurposeSelect(option);
   };
 
   return (
@@ -38,7 +39,7 @@ const PurposeChoice = () => {
           style={{ display: "flex", flexDirection: "row" }}
         >
           <div style={{ textAlign: "left", flex: "2" }}>
-            {selectedOption || "운동 목적"}
+            {purpose_options[selectedOption] || "운동 목적"}
           </div>
           <div
             style={{
@@ -61,7 +62,7 @@ const PurposeChoice = () => {
                 <li
                   className={styles.option}
                   key={index}
-                  onClick={() => handleOptionClick(option)}
+                  onClick={() => handleOptionClick(index)}
                 >
                   {option}
                 </li>

@@ -1,13 +1,21 @@
-import React, { useState, ChangeEvent, useCallback, useEffect } from "react";
-import PurposeChoice from "../../../components/write/PurposeChoice";
-import ExerciseChoice from "../../../components/write/ExerciseChoice";
+import { useRouter } from "next/router";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import InputTitle from "@/components/write/InputTitle";
 import InputContent from "@/components/write/InputContent";
-import InputImage from "@/components/write/InputImage";
-import { ScrollContent } from "@/components/common/post/PostDetail";
 import postApi from "@/apis/postApi";
+import { ScrollContent } from "@/components/common/post/PostDetail";
+import ExerciseChoice from "@/components/write/ExerciseChoice";
+import PurposeChoice from "@/components/write/PurposeChoice";
 
-export default function WritePost() {
+export async function getServerSideProps(context: any) {
+  const params = context.params;
+  const id = params.id;
+
+  return { props: { id } };
+}
+
+export default function EditPost(props: { id: string }) {
+  const router = useRouter();
   const [selectedImages, setSelectedImages] = useState<FileList | null>(null);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -15,7 +23,18 @@ export default function WritePost() {
   const [selectedPurpose, setSelectedPurpose] = useState(0);
   const [selectedExercise, setSelectedExercise] = useState(0);
 
-  const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    postApi()
+      .getPost(props.id)
+      .then((res: any) => {
+        setTitle(res.data.title);
+        setContent(res.data.content);
+        setPreviewImageCount(res.data.images.length);
+        setSelectedPurpose(res.data.purpose);
+        setSelectedExercise(res.data.exercise);
+      });
+  }, []);
+  const handleTitleChange = (event: any) => {
     setTitle(event.target.value);
   };
   const handleContentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -28,23 +47,19 @@ export default function WritePost() {
   const handlePurposeSelect = (purpose: number) => {
     setSelectedPurpose(purpose);
   };
-  const handleExerciseSelect = (exercise: any) => {
+  const handleExerciseSelect = (exercise: number) => {
     setSelectedExercise(exercise);
   };
   const handleSubmit = () => {
     if (title && content && selectedPurpose && selectedExercise) {
-      let imagesArray: File[] = [];
-      if (selectedImages) {
-        imagesArray = Array.from(selectedImages);
-      }
-      postApi().postPost({
+      const data = {
         title: title,
         content: content,
         purpose: selectedPurpose,
         exercise: selectedExercise,
-        images: imagesArray,
         type: "ORDINARY",
-      });
+      };
+      postApi().patchPost(props.id, data);
     }
   };
 
@@ -74,10 +89,9 @@ export default function WritePost() {
             cursor: "pointer",
           }}
         >
-          등록
+          수정
         </button>
       </div>
-
       <div
         style={{
           width: "100%",
@@ -126,10 +140,6 @@ export default function WritePost() {
                 onContentChange={handleContentChange}
               />
             </div>
-            <InputImage
-              onChange={handleImageChange}
-              previewCount={previewImageCount}
-            />
           </div>
         </div>
       </div>

@@ -1,24 +1,15 @@
 import React, { useState, ChangeEvent, useEffect } from "react";
 import InputTitle from "@/components/write/InputTitle";
 import InputContent from "@/components/write/InputContent";
-import { ScrollContent } from "@/components/common/post/PostDetail";
+import { ScrollContent } from "@/components/post/PostDetail";
 import RouterLink from "@/components/core/RouterLink";
 import completionApi from "@/apis/completionApi";
-import Link from "../../../../node_modules/next/link";
-import CompletionEdit from "@/components/write/CompletionEdit";
 
 export async function getServerSideProps(context: any) {
   const params = context.params;
   const id = params.id;
 
   return { props: { id } };
-}
-
-interface CompletionEditProps {
-  id: string;
-  title: string;
-  content: string;
-  image: string;
 }
 
 export default function Home(props: { id: string }) {

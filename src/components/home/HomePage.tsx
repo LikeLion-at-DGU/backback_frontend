@@ -13,15 +13,15 @@ const Homepage: React.FC<HomeProps> = ({ ...prop }) => {
     <Post
       id={item.id}
       key={index.toString()}
-      nickname={item.nickname}
-      type={item.type}
-      profileimage={item.profileimage}
-      content={item.content}
-      comments_count={item.comments_count}
-      like_count={item.like_count}
+      writer={item.writer}
+      contentShort={item.contentShort}
+      commentsCnt={item.commentsCnt}
+      likesCnt={item.likesCnt}
       createdAt={item.createdAt}
       title={item.title}
       category={item.category}
+      updatedAt={item.updatedAt}
+      viewCnt={item.viewCnt}
     />
   ));
 

@@ -18,6 +18,8 @@ export interface ProfileData {
 interface ProfileProps {
   profile: ProfileData;
   is_mine: boolean;
+  isFollow: boolean;
+  setIsFollow: (newValue: boolean) => void;
 }
 
 const copyIconStyle = {
@@ -41,7 +43,12 @@ const updateInputStyle = {
   borderRadius: "10px",
 };
 
-export function Profile({ profile, is_mine }: ProfileProps) {
+export function Profile({
+  profile,
+  is_mine,
+  isFollow,
+  setIsFollow,
+}: ProfileProps) {
   const imagePath = `/assets/images/Character${profile.level}.png`;
   const exportIconPath = "/assets/images/Expert_icon.png";
   const threeDotIconPath = "/assets/images/Three_Dots_icon.png";
@@ -63,9 +70,12 @@ export function Profile({ profile, is_mine }: ProfileProps) {
     setIsMyPageDropDownOpen(!isMyPageDropdownOpen);
   };
 
-  const [isFollow, setIsFollow] = useState(false);
   const follow = () => {
-    setIsFollow(!isFollow);
+    profileApi()
+      .followProfile(profile.id)
+      .then((res) => {
+        setIsFollow(!isFollow);
+      });
   };
 
   const [isReportDropdownOpen, setIsReportDropdownOpen] = useState(false);
@@ -84,8 +94,11 @@ export function Profile({ profile, is_mine }: ProfileProps) {
   };
 
   const confirmReportModal = () => {
-    // 동작 추가해야함~
-    setIsReportModalOpen(false);
+    profileApi()
+      .reportProfile(profile.id)
+      .then((res) => {
+        setIsReportModalOpen(false);
+      });
   };
 
   const [isExpertModalOpen, setIsExpertModalOpen] = useState(false);
@@ -113,7 +126,12 @@ export function Profile({ profile, is_mine }: ProfileProps) {
   };
 
   const confirmDeleteModal = () => {
-    setIsDeleteModalOpen(false);
+    profileApi()
+      .leaveProfile()
+      .then((res) => {
+        setIsDeleteModalOpen(false);
+        window.location.href = "/";
+      });
   };
 
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
@@ -124,6 +142,14 @@ export function Profile({ profile, is_mine }: ProfileProps) {
 
   const closeUpdateModal = () => {
     setIsUpdateModalOpen(false);
+  };
+
+  const handleLogoutItemClick = () => {
+    profileApi()
+      .logoutProfile()
+      .then((res) => {
+        window.location.href = "/";
+      });
   };
 
   const confirmUpdateModal = () => {
@@ -198,6 +224,7 @@ export function Profile({ profile, is_mine }: ProfileProps) {
               <MyPageDropDown
                 handleExpertItemClick={handleExpertItemClick}
                 handleDeleteItemClick={handleDeleteItemClick}
+                handleLogoutItemClick={handleLogoutItemClick}
                 handleUpdateItemClick={handelUpdateItemClick}
               />
             )}

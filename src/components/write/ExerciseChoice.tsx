@@ -16,9 +16,9 @@ export const exercise_options = [
   "기타",
 ];
 
-const ExerciseChoice = () => {
+const ExerciseChoice = ({ onExerciseSelect }: any) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(-1);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -27,8 +27,8 @@ const ExerciseChoice = () => {
   const handleOptionClick = (option: any) => {
     setSelectedOption(option);
     setIsOpen(false);
+    onExerciseSelect(option);
   };
-
   return (
     <div>
       <div className={styles.dropdown}>
@@ -38,7 +38,7 @@ const ExerciseChoice = () => {
           style={{ display: "flex", flexDirection: "row" }}
         >
           <div style={{ textAlign: "left", flex: "2" }}>
-            {selectedOption || "운동 종목"}
+            {exercise_options[selectedOption] || "운동 종목"}
           </div>
           <div
             style={{
@@ -61,7 +61,7 @@ const ExerciseChoice = () => {
                 <li
                   className={styles.option}
                   key={index}
-                  onClick={() => handleOptionClick(option)}
+                  onClick={() => handleOptionClick(index)}
                 >
                   {option}
                 </li>

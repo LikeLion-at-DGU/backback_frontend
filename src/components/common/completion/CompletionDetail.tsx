@@ -130,7 +130,7 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
             profileId={prop.writer?.profileId}
             level={prop.writer?.level}
           />
-          {cookies.uid == prop.writer.profileId ? (
+          {cookies.uid == prop.writer?.profileId ? (
             <DeleteButton id={prop.id} type={"completion"} />
           ) : (
             <ReportButton id={prop.id} type={"completion"} />
@@ -204,7 +204,6 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
             <RouterLink href={`/completion/edit/${prop.id}/`}>
               수정하기
             </RouterLink>
-            <button onClick={() => deleteCompletion(prop.id)}>삭제하기</button>
             <button onClick={changeprivate}>나만보기</button>
           </div>
         </div>

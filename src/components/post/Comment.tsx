@@ -3,6 +3,7 @@ import UserInfo, { UserInfoProps } from "../common/UserInfo";
 import ReportButton from "../core/ReportButton";
 import { useCookies } from "react-cookie";
 import DeleteButton from "../core/DeleteButton";
+import RouterLink from "../core/RouterLink";
 
 export interface CommentProps {
   id: string;
@@ -35,12 +36,20 @@ const Comment: React.FC<CommentProps> = ({ ...prop }) => {
           margin: "10px 0px 10px 0px",
         }}
       >
-        <UserInfo
-          nickname={prop.writer.nickname}
-          type={prop.writer.nickname}
-          profileId={prop.writer.nickname}
-          level={prop.writer.level}
-        />
+        <RouterLink
+          href={
+            cookies.uid == prop.writer.profileId
+              ? "/mypage"
+              : "/profile/" + prop.writer.profileId
+          }
+        >
+          <UserInfo
+            nickname={prop.writer.nickname}
+            type={prop.writer.nickname}
+            profileId={prop.writer.nickname}
+            level={prop.writer.level}
+          />
+        </RouterLink>
         {cookies.uid == prop.writer.profileId ? (
           <DeleteButton id={prop.id} type={"comment"} />
         ) : (
