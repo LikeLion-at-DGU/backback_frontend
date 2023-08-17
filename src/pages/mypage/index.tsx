@@ -44,24 +44,6 @@ export default function MyPage() {
       });
   }, []);
 
-  const postList = [
-    {
-      id: 1,
-      createdAt: "2023.08.05 14:29",
-      writer: {
-        profileId: 1,
-        nickname: "재니재니",
-        level: 3,
-        type: "TRAINER",
-      },
-      title: "복부비만 다이어트 식단 정리 공유",
-      content:
-        "안녕하세요! 오늘은 복부비만 체형을 가지신 분들을 위해 다이어트 식단을 공유해볼까 해요 :) 직접 겪으면서 만든 식단이라 꿀팁까지 적어놨으니까 유용하게 사용해주세요 ^^ 어쩌구 저쩌구,,,,",
-      likesCnt: 10,
-      commentsCnt: 100,
-    },
-  ];
-
   return (
     <ScrollContent>
       <div
@@ -86,12 +68,7 @@ export default function MyPage() {
           {profileData.type !== "COMMON" && (
             <ExpertInfo infoList={expertInfoData} />
           )}
-          <PostList
-            isMine={isMine}
-            currentPage={3}
-            totalPages={5}
-            postList={postList}
-          />
+          <PostList isMine={isMine} userId={userId} />
         </div>
       </div>
     </ScrollContent>

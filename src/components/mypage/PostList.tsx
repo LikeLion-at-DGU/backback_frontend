@@ -1,11 +1,11 @@
+import { useEffect, useState } from "react";
 import { Post } from "./Post";
 import { PostPage } from "./PostPage";
+import profileApi from "@/apis/profileApi";
 
 interface PostListProps {
   isMine: boolean;
-  currentPage: number;
-  totalPages: number;
-  postList: Post[];
+  userId: number;
 }
 
 const postListTitleTextstyle = {
@@ -14,23 +14,47 @@ const postListTitleTextstyle = {
   margin: "12px 0px 2px 26px",
 };
 
-export function PostList({
-  isMine,
-  currentPage,
-  totalPages,
-  postList,
-}: PostListProps) {
+export function PostList({ isMine, userId }: PostListProps) {
+  const [postList, setPostList] = useState<Post[]>([]);
+  const [isNext, setIsNext] = useState<boolean>(false);
+  const [isPrevious, setIsPrevious] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [total, setTotal] = useState<number>(0);
+  useEffect(() => {
+    profileApi()
+      .getProfilePosts(userId, { page })
+      .then((res) => {
+        setPostList(res.data.results);
+        setIsNext(res.data.next !== null);
+        setIsPrevious(res.data.previous !== null);
+        setTotal(res.data.count);
+      });
+  }, [page, userId]);
   return (
     <div>
       <p style={postListTitleTextstyle}>
         {isMine ? "내가 쓴 글" : "모든 게시물"}
       </p>
-      <div>
-        {postList.map((post: Post, index: number) => (
-          <Post post={post} />
-        ))}
-      </div>
-      <PostPage currentPage={currentPage} totalPages={totalPages} />
+      {total ? (
+        <>
+          <div>
+            {postList.map((post: Post, index: number) => (
+              <Post post={post} />
+            ))}
+          </div>
+          <PostPage
+            page={page}
+            isNext={isNext}
+            isPrevious={isPrevious}
+            setPage={setPage}
+            total={total}
+          />
+        </>
+      ) : (
+        <div style={{ textAlign: "center", padding: "1rem" }}>
+          아직 작성한 글이 없습니다.
+        </div>
+      )}
     </div>
   );
 }
