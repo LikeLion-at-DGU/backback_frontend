@@ -3,6 +3,8 @@ import InputTitle from "@/components/write/InputTitle";
 import InputContent from "@/components/write/InputContent";
 import InputImage from "@/components/write/InputImage";
 import { ScrollContent } from "@/components/post/PostDetail";
+import postApi from "@/apis/postApi";
+import RouterLink from "@/components/core/RouterLink";
 
 export default function Home() {
   const [selectedImages, setSelectedImages] = useState<FileList | null>(null);
@@ -13,13 +15,28 @@ export default function Home() {
   const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
-
   const handleContentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
   };
   const handleImageChange = (files: FileList | null) => {
     setSelectedImages(files);
     setPreviewImageCount(files?.length || 0);
+  };
+  const handleSubmit = () => {
+    if (title && content) {
+      let imagesArray: File[] = [];
+      if (selectedImages) {
+        imagesArray = Array.from(selectedImages);
+      }
+      postApi()
+        .postPost({
+          title: title,
+          content: content,
+          images: imagesArray,
+          type: "PRO",
+        })
+        .then(() => (window.location.href = `/column`));
+    }
   };
   return (
     <ScrollContent>
@@ -35,7 +52,21 @@ export default function Home() {
           borderBottom: "1px solid #B7BBC8",
         }}
       >
-        등록
+        <button
+          onClick={() => {
+            handleSubmit();
+          }}
+          style={{
+            border: "none",
+            backgroundColor: "transparent",
+            fontFamily: "MainFont",
+            fontSize: "16px",
+            cursor: "pointer",
+            marginRight: "10px",
+          }}
+        >
+          등록
+        </button>
       </div>
       <div
         style={{
