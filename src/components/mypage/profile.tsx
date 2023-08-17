@@ -186,10 +186,13 @@ export function Profile({ profile, is_mine }: ProfileProps) {
               marginRight: "12px",
               marginBottom: "15px",
             }}
-            onClick={myPageDropdown}
           >
             {is_mine && (
-              <img src={threeDotIconPath} style={{ width: "100%" }} />
+              <img
+                src={threeDotIconPath}
+                style={{ width: "100%" }}
+                onClick={myPageDropdown}
+              />
             )}
             {isMyPageDropdownOpen && (
               <MyPageDropDown
