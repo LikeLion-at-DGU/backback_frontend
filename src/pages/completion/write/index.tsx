@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent } from "react";
 import InputTitle from "@/components/write/InputTitle";
 import InputContent from "@/components/write/InputContent";
 import InputOneImage from "@/components/write/InputOneImage";
-import { ScrollContent } from "@/components/common/post/PostDetail";
+import { ScrollContent } from "@/components/post/PostDetail";
 import RouterLink from "@/components/core/RouterLink";
 import completionApi from "@/apis/completionApi";
 import Link from "../../../../node_modules/next/link";
