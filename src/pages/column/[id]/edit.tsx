@@ -1,18 +1,35 @@
-import React, { useState, ChangeEvent } from "react";
+import { useRouter } from "next/router";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import InputTitle from "@/components/write/InputTitle";
 import InputContent from "@/components/write/InputContent";
-import InputImage from "@/components/write/InputImage";
-import { ScrollContent } from "@/components/post/PostDetail";
 import postApi from "@/apis/postApi";
+import { ScrollContent } from "@/components/post/PostDetail";
 import RouterLink from "@/components/core/RouterLink";
 
-export default function Home() {
+export async function getServerSideProps(context: any) {
+  const params = context.params;
+  const id = params.id;
+
+  return { props: { id } };
+}
+
+export default function EditColumn(props: { id: string }) {
+  const router = useRouter();
   const [selectedImages, setSelectedImages] = useState<FileList | null>(null);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [previewImageCount, setPreviewImageCount] = useState(0);
 
-  const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    postApi()
+      .getPost(props.id)
+      .then((res: any) => {
+        setTitle(res.data.title);
+        setContent(res.data.content);
+        setPreviewImageCount(res.data.images.length);
+      });
+  }, []);
+  const handleTitleChange = (event: any) => {
     setTitle(event.target.value);
   };
   const handleContentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -22,22 +39,22 @@ export default function Home() {
     setSelectedImages(files);
     setPreviewImageCount(files?.length || 0);
   };
+
   const handleSubmit = () => {
     if (title && content) {
-      let imagesArray: File[] = [];
-      if (selectedImages) {
-        imagesArray = Array.from(selectedImages);
-      }
+      const data = {
+        title: title,
+        content: content,
+        purpose: 0,
+        exercise: 0,
+        type: "PRO",
+      };
       postApi()
-        .postPost({
-          title: title,
-          content: content,
-          images: imagesArray,
-          type: "PRO",
-        })
-        .then(() => (window.location.href = `/column`));
+        .patchPost(props.id, data)
+        .then(() => (window.location.href = `/column/${props.id}`));
     }
   };
+
   return (
     <ScrollContent>
       <div
@@ -65,7 +82,7 @@ export default function Home() {
             marginRight: "10px",
           }}
         >
-          등록
+          수정
         </button>
       </div>
       <div
@@ -80,30 +97,27 @@ export default function Home() {
           display: "flex",
         }}
       >
-        <div
-          style={{
-            width: "100%",
-            justifyContent: "center",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            flex: "1",
-            marginBottom: "110px",
-          }}
-        >
-          <div>
-            <InputTitle title={title} onTitleChange={handleTitleChange} />
+        <div style={{ flex: "1" }}>
+          <div
+            style={{
+              width: "100%",
+              justifyContent: "center",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              flex: "1",
+            }}
+          >
+            <div>
+              <InputTitle title={title} onTitleChange={handleTitleChange} />
+            </div>
+            <div style={{ marginTop: "20px" }}>
+              <InputContent
+                content={content}
+                onContentChange={handleContentChange}
+              />
+            </div>
           </div>
-          <div style={{ marginTop: "20px" }}>
-            <InputContent
-              content={content}
-              onContentChange={handleContentChange}
-            />
-          </div>
-          <InputImage
-            onChange={handleImageChange}
-            previewCount={previewImageCount}
-          />
         </div>
       </div>
     </ScrollContent>

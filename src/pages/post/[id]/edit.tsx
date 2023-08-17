@@ -59,7 +59,9 @@ export default function EditPost(props: { id: string }) {
         exercise: selectedExercise,
         type: "ORDINARY",
       };
-      postApi().patchPost(props.id, data);
+      postApi()
+        .patchPost(props.id, data)
+        .then(() => (window.location.href = `/post/${props.id}`));
     }
   };
 
