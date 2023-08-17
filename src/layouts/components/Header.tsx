@@ -25,7 +25,7 @@ const Header: React.FC = () => {
         <RouterLink href={"/find"}>
           <img
             src="../../../assets/images/find_icon.png"
-            style={{ height: "30px", cursor: "pointer" }}
+            style={{ height: "24px", cursor: "pointer" }}
           ></img>
         </RouterLink>
       </div>

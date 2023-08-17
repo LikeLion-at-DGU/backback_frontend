@@ -33,7 +33,8 @@ const Comment: React.FC<CommentProps> = ({ ...prop }) => {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          margin: "10px 0px 10px 0px",
+          margin: "10px 15px 10px 15px",
+          fontFamily: "MainFont",
         }}
       >
         <RouterLink
@@ -61,7 +62,7 @@ const Comment: React.FC<CommentProps> = ({ ...prop }) => {
         style={{
           flex: "1",
           width: "100%",
-          padding: "10px 40px 10px 40px",
+          padding: "0px 30px 10px 40px",
           wordWrap: "break-word",
           borderBottom: "1px solid #B7BBC8",
         }}

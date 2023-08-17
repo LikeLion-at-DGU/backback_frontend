@@ -26,6 +26,8 @@ const Completion: React.FC<CompletionProps> = ({ ...prop }) => {
           style={{
             height: "100%",
             width: "100%",
+            objectFit: "cover",
+            objectPositon: "center",
           }}
         />
       </RouterLink>
