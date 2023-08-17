@@ -1,16 +1,13 @@
 import React from "react";
-import UserInfo, { UserInfoProps } from "../UserInfo";
-import ReportButton from "../../core/ReportButton";
+import ReportButton from "../core/ReportButton";
 
-export interface CommentProps {
+export interface ReviewProps {
   id: string;
   content: string;
-  writer: UserInfoProps;
-  createdAt: string;
+  index?: number;
 }
 
-const Comment: React.FC<CommentProps> = ({ ...prop }) => {
-  console.log(prop.content);
+const Comment: React.FC<ReviewProps> = ({ ...prop }) => {
   return (
     <div
       style={{
@@ -32,20 +29,24 @@ const Comment: React.FC<CommentProps> = ({ ...prop }) => {
           margin: "10px 0px 10px 0px",
         }}
       >
-        <UserInfo
-          nickname={prop.writer.nickname}
-          type={prop.writer.nickname}
-          profileId={prop.writer.nickname}
-          level={prop.writer.level}
-        />
-        <ReportButton id={prop.id} type={"comment"} />
+        <div
+          style={{
+            whiteSpace: "nowrap",
+            fontSize: "16px",
+            height: "100%",
+            padding: "0px 15px 0px 15px",
+          }}
+        >
+          익명 {prop.index}
+        </div>
+        <ReportButton id={prop.id} type={"review"} />
       </div>
 
       <div
         style={{
           flex: "1",
           width: "100%",
-          padding: "10px 40px 10px 40px",
+          padding: "0px 15px 10px 15px",
           wordWrap: "break-word",
           borderBottom: "1px solid #B7BBC8",
         }}

@@ -1,7 +1,6 @@
 import completionApi from "@/apis/completionApi";
 import gymApi from "@/apis/gymApi";
 import postApi from "@/apis/postApi";
-import profileApi from "@/apis/profileApi";
 import { AxiosError, isAxiosError } from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
@@ -36,7 +35,6 @@ const ReportButton: React.FC<ReportButtonProps> = ({ ...prop }) => {
   const handleDropdownToggle = (e: any) => {
     setIsopen(!isopen);
 
-    // Calculate dropdown position based on the clicked Comment's position
     const rect = e.currentTarget.getBoundingClientRect();
     const top = rect.bottom + window.scrollY;
     const left = rect.left + window.scrollX;
@@ -93,7 +91,7 @@ const ReportButton: React.FC<ReportButtonProps> = ({ ...prop }) => {
           alert(axiosError.response.data.detail);
         }
       } else {
-        console.log("잠시 후 다시 시도해주세요.");
+        alert("잠시 후 다시 시도해주세요.");
       }
     } finally {
       window.location.reload();
@@ -116,7 +114,7 @@ const ReportButton: React.FC<ReportButtonProps> = ({ ...prop }) => {
           alert(axiosError.response.data.detail);
         }
       } else {
-        console.log("잠시 후 다시 시도해주세요.");
+        alert("잠시 후 다시 시도해주세요.");
       }
     } finally {
     }

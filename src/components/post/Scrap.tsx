@@ -1,21 +1,9 @@
 import React from "react";
-import UserInfo, { UserInfoProps } from "../UserInfo";
-import Link from "next/link";
+import UserInfo from "../common/UserInfo";
+import { ScrapPostProps } from "@/pages/post/scraps";
+import RouterLink from "../core/RouterLink";
 
-export interface PostProps {
-  id: string;
-  category: string[];
-  title: string;
-  createdAt: string;
-  updatedAt: string;
-  contentShort: string;
-  likesCnt: number;
-  commentsCnt: number;
-  writer: UserInfoProps;
-  viewCnt: number;
-}
-
-const Post: React.FC<PostProps> = ({ ...prop }) => {
+const ScrapPost: React.FC<ScrapPostProps> = ({ ...prop }) => {
   const date = prop.createdAt.split("T")[0].split("-").join(".");
   const time = prop.createdAt
     .split("T")[1]
@@ -25,7 +13,7 @@ const Post: React.FC<PostProps> = ({ ...prop }) => {
     .join(":");
   const createdAt = `${date} ${time}`;
   return (
-    <Link href="/post/[id]" as={`/post/${prop.id}`}>
+    <RouterLink href={`/post/${prop.id}`}>
       <div
         style={{
           width: "100%",
@@ -107,8 +95,8 @@ const Post: React.FC<PostProps> = ({ ...prop }) => {
           {prop.commentsCnt}
         </div>
       </div>
-    </Link>
+    </RouterLink>
   );
 };
 
-export default Post;
+export default ScrapPost;
