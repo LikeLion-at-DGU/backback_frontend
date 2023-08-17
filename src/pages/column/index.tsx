@@ -5,9 +5,18 @@ import { useCallback, useEffect, useState } from "react";
 import NavBar from "@/layouts/components/NavBar";
 import postApi from "@/apis/postApi";
 import RouterLink from "@/components/core/RouterLink";
+import profileApi from "@/apis/profileApi";
 
 export default function Home() {
   const [columns, setColumns] = useState<ColumnProps[]>([]);
+  const [userType, setUserType] = useState<string>("");
+  useEffect(() => {
+    profileApi()
+      .getMe()
+      .then((res) => {
+        setUserType(res.data.type);
+      });
+  }, [userType]);
   const getColumns = useCallback(() => {
     postApi()
       .getPosts({ type: "PRO" })
@@ -35,16 +44,18 @@ export default function Home() {
             borderBottom: "1px solid #B7BBC8",
           }}
         >
-          <div
-            style={{
-              fontFamily: "MainFont",
-              fontSize: "14px",
-              marginRight: "auto",
-              marginLeft: "12px",
-            }}
-          >
-            <RouterLink href="/column/write">칼럼 작성하기</RouterLink>
-          </div>
+          {userType !== "COMMON" && (
+            <div
+              style={{
+                fontFamily: "MainFont",
+                fontSize: "14px",
+                marginRight: "auto",
+                marginLeft: "12px",
+              }}
+            >
+              <RouterLink href="/column/write">칼럼 작성하기</RouterLink>
+            </div>
+          )}
         </div>
       </div>
       <ColumnList columns={...columns} />
