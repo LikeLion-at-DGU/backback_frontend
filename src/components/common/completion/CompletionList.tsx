@@ -1,8 +1,10 @@
 import Link from "../../../../node_modules/next/link";
 import Completion, { CompletionProps } from "./Completion";
-import { ScrollContent } from "../post/PostDetail";
+import { ScrollContent } from "../../post/PostDetail";
+import RouterLink from "@/components/core/RouterLink";
+import { UserInfoProps } from "../UserInfo";
 
-export interface CompletionListProps {
+export interface CompletionListProps extends UserInfoProps {
   completions: CompletionProps[];
 }
 
@@ -13,9 +15,12 @@ const CompletionList: React.FC<CompletionListProps> = ({ ...prop }) => {
         id={item.id}
         key={index.toString()}
         image={item.image}
+        writer={item.writer}
+        profileId={item.profileId}
         nickname={item.nickname}
         type={item.type}
-        profileimage={item.profileimage}
+        level={item.level}
+        isPrivate={item.isPrivate}
       />
     </div>
   ));
@@ -56,7 +61,7 @@ const CompletionList: React.FC<CompletionListProps> = ({ ...prop }) => {
             left: "calc(50% - 57.5px)",
           }}
         >
-          <Link href="/completions">
+          <RouterLink href="/completion/write">
             <div style={{ display: "flex", alignItems: "center" }}>
               <span style={{ fontSize: "13px", fontFamily: "MainFont" }}>
                 기록하기
@@ -66,7 +71,7 @@ const CompletionList: React.FC<CompletionListProps> = ({ ...prop }) => {
                 style={{ width: "14px", height: "14px", margin: "3px" }}
               />
             </div>
-          </Link>
+          </RouterLink>
         </div>
       </div>
     </ScrollContent>

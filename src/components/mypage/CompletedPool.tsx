@@ -1,9 +1,11 @@
+import { useCallback, useEffect, useState } from "react";
 import { DateDropdown } from "./DateDropdown";
 import { Pool } from "./pool";
+import profileApi from "@/apis/profileApi";
 
 interface CompletedPoolProps {
   joinDate: string;
-  completedList: number[];
+  userId: number;
 }
 
 const completedPoolTitleTextstyle = {
@@ -16,7 +18,43 @@ const comletedPoolDropdownStyle = {
   marginRight: "5px",
 };
 
-export function CompletedPool({ joinDate, completedList }: CompletedPoolProps) {
+export function CompletedPool({ joinDate, userId }: CompletedPoolProps) {
+  const [completedList, setCompletedList] = useState<number[]>([]);
+  const [selectedDate, setSelectedDate] = useState("1000-01");
+
+  const joinDateForm = new Date(joinDate);
+  const joinYear = joinDateForm.getFullYear();
+  const joinMonth = joinDateForm.getMonth() + 1;
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth() + 1;
+  const dateOptions = [];
+
+  for (let year = joinYear; year <= currentYear; year++) {
+    const startMonth = year === joinYear ? joinMonth : 1;
+    const endMonth = year === currentYear ? currentMonth : 12;
+
+    for (let month = startMonth; month <= endMonth; month++) {
+      dateOptions.push(`${year}년 ${month}월`);
+    }
+  }
+
+  const getDateFormat = useCallback(() => {
+    return `${currentYear}-${String(currentMonth).padStart(2, "0")}`;
+  }, []);
+
+  useEffect(() => {
+    setSelectedDate(getDateFormat);
+  }, []);
+
+  useEffect(() => {
+    profileApi()
+      .getProfileCompletions(userId, { range: selectedDate })
+      .then((res) => {
+        setCompletedList(res.data.postCounts);
+      });
+  }, [userId, selectedDate]);
+
   return (
     <div>
       <div
@@ -28,7 +66,11 @@ export function CompletedPool({ joinDate, completedList }: CompletedPoolProps) {
       >
         <p style={completedPoolTitleTextstyle}>오운완 POOL</p>
         <div style={comletedPoolDropdownStyle}>
-          <DateDropdown joinDate={joinDate} />
+          <DateDropdown
+            dateOptions={dateOptions}
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+          />
         </div>
       </div>
       <div

@@ -1,53 +1,52 @@
+import { ScrollContent } from "@/components/post/PostDetail";
 import ColumnList from "@/components/common/ColumnList";
+import { ColumnProps } from "@/components/common/Column";
+import { useCallback, useEffect, useState } from "react";
 import NavBar from "@/layouts/components/NavBar";
-import { Inter } from "next/font/google";
+import postApi from "@/apis/postApi";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export default function ExportColumn() {
+export default function Home() {
+  const [columns, setColumns] = useState<ColumnProps[]>([]);
+  const getColumns = useCallback(() => {
+    postApi()
+      .getPosts({ type: "PRO" })
+      .then((res) => {
+        setColumns(res.data.results);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [postApi, setColumns]);
+  useEffect(() => {
+    getColumns();
+  }, [getColumns]);
   return (
-    <>
+    <ScrollContent>
       <NavBar />
-      <ColumnList
-        columns={[
-          {
-            id: "1",
-            nickname: "요가마스터",
-            createdAt: "August 06 2023",
-            title: "쌩초보를 위한 아쉬탕가 요가의 시작",
-            type: "../../../assets/images/Expert_icon.png",
-            content:
-              "인도의 파탄잘리가 고안한 요가 수련의 8단계를 기초로 둔 8개의 자기라는 뜻의 요가로, 인도 마이소르에 있는 아쉬탕가의 어쩌구저쩌구",
-            views: 13048,
-            image: "../../../assets/images/Column_img.png",
-            profileId: "1",
-          },
-          {
-            id: "2",
-            nickname: "요가마스터",
-            createdAt: "August 06 2023",
-            title: "쌩초보를 위한 아쉬탕가 요가의 시작",
-            type: "../../../assets/images/Expert_icon.png",
-            content:
-              "인도의 파탄잘리가 고안한 요가 수련의 8단계를 기초로 둔 8개의 자기라는 뜻의 요가로, 인도 마이소르에 있는 아쉬탕가의 어쩌구저쩌구",
-            views: 13048,
-            image: "../../../assets/images/Column_img.png",
-            profileId: "2",
-          },
-          {
-            id: "3",
-            nickname: "요가마스터",
-            createdAt: "August 06 2023",
-            title: "쌩초보를 위한 아쉬탕가 요가의 시작",
-            type: "../../../assets/images/Expert_icon.png",
-            content:
-              "인도의 파탄잘리가 고안한 요가 수련의 8단계를 기초로 둔 8개의 자기라는 뜻의 요가로, 인도 마이소르에 있는 아쉬탕가의 어쩌구저쩌구",
-            views: 13048,
-            image: "../../../assets/images/Column_img.png",
-            profileId: "3",
-          },
-        ]}
-      />
-    </>
+      <div style={{ width: "100%", padding: "0px 15px 0px 15px" }}>
+        <div
+          style={{
+            width: "100%",
+            height: "45px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-around",
+            borderBottom: "1px solid #B7BBC8",
+          }}
+        >
+          <div
+            style={{
+              textAlign: "left",
+              flex: "1",
+              fontFamily: "MainFont",
+              fontSize: "14px",
+            }}
+          >
+            칼럼 작성하기
+          </div>
+        </div>
+      </div>
+      <ColumnList columns={...columns} />
+    </ScrollContent>
   );
 }

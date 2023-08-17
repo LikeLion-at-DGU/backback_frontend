@@ -1,6 +1,9 @@
 interface PostPageProps {
-  currentPage: number;
-  totalPages: number;
+  page: number;
+  isNext: boolean;
+  isPrevious: boolean;
+  total: number;
+  setPage: (newValue: number) => void;
 }
 
 const postPageIconStyle = {
@@ -14,7 +17,13 @@ const postPageTextStyle = {
   margin: "10px 13px",
 };
 
-export function PostPage({ currentPage, totalPages }: PostPageProps) {
+export function PostPage({
+  page,
+  isNext,
+  isPrevious,
+  setPage,
+  total,
+}: PostPageProps) {
   const categoryLeftIconPath = "/assets/images/Category_Left_icon.png";
   const categoryRightIconPath = "/assets/images/Category_right_icon.png";
 
@@ -26,11 +35,23 @@ export function PostPage({ currentPage, totalPages }: PostPageProps) {
         justifyContent: "center",
       }}
     >
-      <img src={categoryLeftIconPath} style={postPageIconStyle} />
+      {isPrevious && (
+        <img
+          src={categoryLeftIconPath}
+          style={postPageIconStyle}
+          onClick={() => setPage(page - 1)}
+        />
+      )}
       <p style={postPageTextStyle}>
-        {currentPage}/{totalPages}
+        {page}/{total}
       </p>
-      <img src={categoryRightIconPath} style={postPageIconStyle} />
+      {isNext && (
+        <img
+          src={categoryRightIconPath}
+          style={postPageIconStyle}
+          onClick={() => setPage(page + 1)}
+        />
+      )}
     </div>
   );
 }

@@ -69,7 +69,8 @@ const postApi = () => {
     reportPost: (id: number | string, data: { reason: string }) =>
       api.post(`/posts/${id}/report`, { reason: data.reason }),
     scrapPost: (id: number | string) => api.post(`/posts/${id}/clip`, {}),
-    screappedPost: () => api.get(`/posts/clips`),
+    scrapDelete: (id: number | string) => api.delete(`/posts/${id}/clip`),
+    scrappedPost: () => api.get(`/posts/clips`),
     likePost: (id: number | string) => api.post(`/posts/${id}/like`, {}),
     getPostComments: (id: number | string) => api.get(`/posts/${id}/comments`),
     postPostComment: (id: number | string, data: { content: string }) =>

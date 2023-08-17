@@ -1,6 +1,8 @@
 import React from "react";
-import UserInfo, { UserInfoProps } from "../UserInfo";
-import ReportButton from "../../core/ReportButton";
+import UserInfo, { UserInfoProps } from "../common/UserInfo";
+import ReportButton from "../core/ReportButton";
+import { useCookies } from "react-cookie";
+import DeleteButton from "../core/DeleteButton";
 
 export interface CommentProps {
   id: string;
@@ -10,7 +12,8 @@ export interface CommentProps {
 }
 
 const Comment: React.FC<CommentProps> = ({ ...prop }) => {
-  console.log(prop.content);
+  const [cookies] = useCookies(["uid"]);
+  console.log("uid", cookies.uid);
   return (
     <div
       style={{
@@ -38,7 +41,11 @@ const Comment: React.FC<CommentProps> = ({ ...prop }) => {
           profileId={prop.writer.nickname}
           level={prop.writer.level}
         />
-        <ReportButton />
+        {cookies.uid == prop.writer.profileId ? (
+          <DeleteButton id={prop.id} type={"comment"} />
+        ) : (
+          <ReportButton id={prop.id} type={"comment"} />
+        )}
       </div>
 
       <div

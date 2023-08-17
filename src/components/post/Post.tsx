@@ -1,16 +1,18 @@
 import React from "react";
-import UserInfo, { UserInfoProps } from "../UserInfo";
-import Link from "next/link";
+import UserInfo, { UserInfoProps } from "../common/UserInfo";
+import RouterLink from "../core/RouterLink";
 
 export interface PostProps {
   id: string;
   category: string[];
   title: string;
   createdAt: string;
-  content: string;
+  updatedAt: string;
+  contentShort: string;
   likesCnt: number;
   commentsCnt: number;
   writer: UserInfoProps;
+  viewCnt: number;
 }
 
 const Post: React.FC<PostProps> = ({ ...prop }) => {
@@ -23,7 +25,7 @@ const Post: React.FC<PostProps> = ({ ...prop }) => {
     .join(":");
   const createdAt = `${date} ${time}`;
   return (
-    <Link href="/post/[id]" as={`/post/${prop.id}`}>
+    <RouterLink href={`/post/${prop.id}`}>
       <div
         style={{
           width: "100%",
@@ -78,7 +80,7 @@ const Post: React.FC<PostProps> = ({ ...prop }) => {
             fontSize: "12px",
           }}
         >
-          {prop.content}
+          {prop.contentShort}
         </div>
         <div
           style={{
@@ -105,7 +107,7 @@ const Post: React.FC<PostProps> = ({ ...prop }) => {
           {prop.commentsCnt}
         </div>
       </div>
-    </Link>
+    </RouterLink>
   );
 };
 

@@ -1,13 +1,15 @@
 import styled from "styled-components";
 import CommentList, { CommentListProps } from "./CommentList";
-import UserInfo, { UserInfoProps } from "../UserInfo";
-import ReportButton from "../../core/ReportButton";
-import ImageCarousel from "../../core/ImageCarousel";
+import UserInfo, { UserInfoProps } from "../common/UserInfo";
+import ReportButton from "../core/ReportButton";
+import ImageCarousel from "../core/ImageCarousel";
 import { exercise_options } from "@/components/write/ExerciseChoice";
 import { purpose_options } from "@/components/write/PurposeChoice";
 import { useRef } from "react";
 import postApi from "@/apis/postApi";
-import { AxiosError, isAxiosError } from "axios";
+import { isAxiosError } from "axios";
+import { useCookies } from "react-cookie";
+import DeleteButton from "../core/DeleteButton";
 
 export interface PostDetailProps extends CommentListProps {
   id: string;
@@ -21,7 +23,7 @@ export interface PostDetailProps extends CommentListProps {
   commentsCnt: number;
   writer: UserInfoProps;
   isLiked: boolean;
-  isCliped: boolean;
+  isClipped: boolean;
   viewCnt: number;
   type: string;
 }
@@ -38,6 +40,15 @@ export const ScrollContent = styled.div`
   }
 `;
 export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
+  const [cookies] = useCookies(["uid"]);
+  const date = prop.createdAt.split("T")[0].split("-").join(".");
+  const time = prop.createdAt
+    .split("T")[1]
+    .split(".")[0]
+    .split(":")
+    .slice(0, 2)
+    .join(":");
+  const createdAt = `${date} ${time}`;
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
   const category =
     exercise_options[prop.exercise - 1] +
@@ -67,13 +78,18 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
   };
   const postScrap = async () => {
     try {
-      await postApi().scrapPost(prop.id);
+      if (!prop.isClipped) {
+        await postApi().scrapPost(prop.id);
+        alert("스크랩 되었습니다.");
+      } else {
+        await postApi().scrapDelete(prop.id);
+        alert("스크랩이 삭제되었습니다.");
+      }
     } catch (error) {
       if (isAxiosError(error)) {
         alert(error.response?.data);
       }
     } finally {
-      alert("스크랩 되었습니다.");
       window.location.reload();
     }
   };
@@ -127,7 +143,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
             fontSize: "12px",
           }}
         >
-          {prop.createdAt}
+          {createdAt}
         </div>
         <div
           style={{
@@ -145,7 +161,11 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
             profileId={prop.writer.profileId}
             level={prop.writer.level}
           />
-          <ReportButton />
+          {cookies.uid == prop.writer.profileId ? (
+            <DeleteButton id={prop.id} type={"post"} />
+          ) : (
+            <ReportButton id={prop.id} type={"post"} />
+          )}
         </div>
         <div
           style={{
@@ -213,7 +233,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
             <div style={{ margin: "5px" }}>댓글 {prop.commentsCnt}</div>
           </div>
           <div style={{ cursor: "pointer", placeItems: "center" }}>
-            {!prop.isCliped ? (
+            {!prop.isClipped ? (
               <img
                 src="../../../assets/images/noscrap.svg"
                 style={{ height: "25px" }}
@@ -221,7 +241,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
               ></img>
             ) : (
               <img
-                src="../../../assets/images/Click_Scrap.png"
+                src="../../../assets/images/Click_Scrap_icon.png"
                 style={{ height: "25px" }}
                 onClick={postScrap}
               ></img>
@@ -229,15 +249,12 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
           </div>
         </div>
         <CommentList comments={[...prop.comments]} />
-      </div>
-      <div style={{ width: "100%", padding: "0px 15px 0px 15px" }}>
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             padding: "10px 0px 10px 0px",
             height: "auto",
-            borderTop: "1px solid #B7BBC8",
           }}
         >
           <div
@@ -264,11 +281,6 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
                 marginTop: "10px",
               }}
               ref={inputRef}
-              onKeyUp={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
             />
           </div>
           <div
