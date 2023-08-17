@@ -113,7 +113,7 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
             >
               {prop.name}
             </div>
-            <ReportButton />
+            <ReportButton id={prop.id} type={"gym"} />
           </div>
           <div style={{ width: "100%", fontSize: "16px", marginBottom: "5px" }}>
             {prop.address}

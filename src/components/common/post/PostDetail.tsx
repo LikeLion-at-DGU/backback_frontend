@@ -21,7 +21,7 @@ export interface PostDetailProps extends CommentListProps {
   commentsCnt: number;
   writer: UserInfoProps;
   isLiked: boolean;
-  isCliped: boolean;
+  isClipped: boolean;
   viewCnt: number;
   type: string;
 }
@@ -38,6 +38,7 @@ export const ScrollContent = styled.div`
   }
 `;
 export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
+  console.log(prop);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
   const category =
     exercise_options[prop.exercise - 1] +
@@ -67,13 +68,18 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
   };
   const postScrap = async () => {
     try {
-      await postApi().scrapPost(prop.id);
+      if (!prop.isClipped) {
+        await postApi().scrapPost(prop.id);
+        alert("스크랩 되었습니다.");
+      } else {
+        await postApi().scrapDelete(prop.id);
+        alert("스크랩이 삭제되었습니다.");
+      }
     } catch (error) {
       if (isAxiosError(error)) {
         alert(error.response?.data);
       }
     } finally {
-      alert("스크랩 되었습니다.");
       window.location.reload();
     }
   };
@@ -145,7 +151,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
             profileId={prop.writer.profileId}
             level={prop.writer.level}
           />
-          <ReportButton />
+          <ReportButton id={prop.id} type={"post"} />
         </div>
         <div
           style={{
@@ -213,7 +219,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
             <div style={{ margin: "5px" }}>댓글 {prop.commentsCnt}</div>
           </div>
           <div style={{ cursor: "pointer", placeItems: "center" }}>
-            {!prop.isCliped ? (
+            {!prop.isClipped ? (
               <img
                 src="../../../assets/images/noscrap.svg"
                 style={{ height: "25px" }}
@@ -221,7 +227,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
               ></img>
             ) : (
               <img
-                src="../../../assets/images/Click_Scrap.png"
+                src="../../../assets/images/Click_Scrap_icon.png"
                 style={{ height: "25px" }}
                 onClick={postScrap}
               ></img>

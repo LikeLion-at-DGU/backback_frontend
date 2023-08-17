@@ -39,7 +39,7 @@ const Comment: React.FC<ReviewProps> = ({ ...prop }) => {
         >
           익명 {prop.index}
         </div>
-        <ReportButton />
+        <ReportButton id={prop.id} type={"review"} />
       </div>
 
       <div

@@ -38,7 +38,7 @@ const Comment: React.FC<CommentProps> = ({ ...prop }) => {
           profileId={prop.writer.nickname}
           level={prop.writer.level}
         />
-        <ReportButton />
+        <ReportButton id={prop.id} type={"comment"} />
       </div>
 
       <div

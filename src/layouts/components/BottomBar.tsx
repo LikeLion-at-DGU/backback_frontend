@@ -54,7 +54,7 @@ const Header: React.FC = () => {
           style={{ height: "20px" }}
         ></img>
       </RouterLink>
-      <RouterLink href="/testing">
+      <RouterLink href="/post/scraps">
         <img
           src="../../../assets/images/Scrap_icon.png"
           style={{ height: "20px" }}

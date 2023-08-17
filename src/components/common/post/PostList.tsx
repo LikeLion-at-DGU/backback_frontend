@@ -14,12 +14,14 @@ const PostList: React.FC<PostListProps> = ({ ...prop }) => {
       id={item.id}
       key={index.toString()}
       writer={item.writer}
-      content={item.content}
+      contentShort={item.contentShort}
       commentsCnt={item.commentsCnt}
       likesCnt={item.likesCnt}
       createdAt={item.createdAt}
       title={item.title}
       category={item.category}
+      viewCnt={item.viewCnt}
+      updatedAt={item.updatedAt}
     />
   ));
 
