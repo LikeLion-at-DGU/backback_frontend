@@ -14,7 +14,6 @@ export interface CommentProps {
 
 const Comment: React.FC<CommentProps> = ({ ...prop }) => {
   const [cookies] = useCookies(["uid"]);
-  console.log("uid", cookies.uid);
   return (
     <div
       style={{

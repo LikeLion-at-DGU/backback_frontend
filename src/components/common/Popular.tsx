@@ -59,26 +59,6 @@ const PopularPostList: React.FC<PostListProps> = ({ ...prop }) => {
       >
         {postlistItems}
       </div>
-      <div
-        style={{
-          display: "flex",
-          width: "100%",
-          height: "54px",
-          padding: "0px 0px 0px 11px",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <div
-          style={{
-            fontFamily: "BoldFont",
-            fontSize: "18px",
-          }}
-        >
-          HOT 칼럼
-        </div>
-        <RouterLink href="/column">더보기</RouterLink>
-      </div>
     </div>
   );
 };
@@ -102,32 +82,53 @@ const PopularColumnList: React.FC<ColumnListProps> = ({ ...prop }) => {
     />
   ));
   return (
-    <div
-      style={{
-        width: "100%",
-        padding: "0px 15px 62px 15px",
-      }}
-    >
+    <div style={{ width: "100%", padding: "0px 15px" }}>
       <div
         style={{
+          display: "flex",
           width: "100%",
-          height: "100%",
-          justifyContent: "center",
+          height: "54px",
+          padding: "0px 0px 0px 11px",
           alignItems: "center",
-          padding: "1px 0px",
-          overflow: "auto",
+          justifyContent: "space-between",
         }}
       >
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
-            width: "146px",
-            height: "100%",
-            boxShadow: "0px 10px 2px rgba(0, 0, 0, 0.25)",
+            fontFamily: "BoldFont",
+            fontSize: "18px",
           }}
         >
-          {columnlistItems}
+          HOT 칼럼
+        </div>
+        <RouterLink href="/column">더보기</RouterLink>
+      </div>
+      <div
+        style={{
+          width: "100%",
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "1px 0px",
+            overflow: "auto",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              width: "146px",
+              height: "100%",
+              boxShadow: "0px 10px 2px rgba(0, 0, 0, 0.25)",
+            }}
+          >
+            {columnlistItems}
+          </div>
         </div>
       </div>
     </div>

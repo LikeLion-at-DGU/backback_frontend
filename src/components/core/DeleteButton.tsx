@@ -68,17 +68,6 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ ...prop }) => {
       } else if (prop.type === "completion") {
         await completionApi().deleteCompletion(prop.id);
       }
-      alert("삭제가 완료되었습니다.");
-    } catch (error) {
-      if (isAxiosError(error)) {
-        const axiosError = error as AxiosError;
-        if (axiosError.response?.data?.detail) {
-          alert(axiosError.response.data.detail);
-        }
-      } else {
-        alert("잠시 후 다시 시도해주세요.");
-      }
-    } finally {
       if (prop.type === "comment") {
         window.location.href = redirectTo;
       } else if (prop.type === "post") {
@@ -86,24 +75,17 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ ...prop }) => {
       } else if (prop.type === "completion") {
         window.location.href = `/completion`;
       }
-    }
+    } catch (error) {}
   };
   const Private = async () => {
     try {
-      await completionApi().privateCompletion(prop.id, { isPrivate: true });
-      alert("비공개가 완료되었습니다.");
-    } catch (error) {
-      if (isAxiosError(error)) {
-        const axiosError = error as AxiosError;
-        if (axiosError.response?.data?.detail) {
-          alert(axiosError.response.data.detail);
-        }
-      } else {
-        alert("잠시 후 다시 시도해주세요.");
-      }
-    } finally {
-      window.location.reload();
-    }
+      await completionApi()
+        .privateCompletion(prop.id, { isPrivate: true })
+        .then(() => {
+          alert("비공개 처리가 완료되었습니다.");
+          window.location.reload();
+        });
+    } catch (error) {}
   };
   return (
     <div style={{ placeItems: "center", fontSize: "14px" }}>

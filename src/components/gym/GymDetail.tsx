@@ -6,6 +6,7 @@ import ReviewList, { ReviewListProps } from "./ReviewList";
 import React, { useRef } from "react";
 import gymApi from "@/apis/gymApi";
 import { AxiosError, isAxiosError } from "axios";
+import { useCookies } from "react-cookie";
 
 interface ContentProps {
   content: string;
@@ -39,6 +40,7 @@ export const ContainerBox = styled.div`
 `;
 
 const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
+  const [cookies] = useCookies(["uid"]);
   const exercises = prop.info.exercises.join(" / ");
   const certifications = prop.info.certifications?.join("\n");
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
@@ -46,19 +48,10 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
 
   const postReviews = async ({ content, key }: ContentProps) => {
     try {
-      await gymApi().postGymReview(prop.id, { content: content, key: key });
-    } catch (error) {
-      if (isAxiosError(error)) {
-        const axiosError = error as AxiosError;
-        if (axiosError.response?.data?.detail) {
-          alert(axiosError.response.data.detail);
-        }
-      } else {
-        alert("잠시 후 다시 시도해주세요.");
-      }
-    } finally {
-      window.location.reload();
-    }
+      await gymApi()
+        .postGymReview(prop.id, { content: content, key: key })
+        .then(() => window.location.reload());
+    } catch (error) {}
   };
   const handleSubmit = () => {
     const inputValue = inputRef.current?.value;
@@ -112,7 +105,7 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
             >
               {prop.name}
             </div>
-            <ReportButton id={prop.id} type={"gym"} />
+            {cookies.uid && <ReportButton id={prop.id} type={"gym"} />}
           </div>
           <div style={{ width: "100%", fontSize: "16px", marginBottom: "5px" }}>
             {prop.address}

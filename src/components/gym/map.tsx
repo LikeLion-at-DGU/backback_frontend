@@ -15,12 +15,10 @@ export interface KakaoMapProps {
 
 const KakaoMap: React.FC<KakaoMapProps> = ({ ...prop }) => {
   useEffect(() => {
-    console.log("map", prop);
     const script = document.createElement("script");
     script.async = true;
     script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=33ccb9ed924f4f71c3407b8f585df918&autoload=false`;
     document.head.appendChild(script);
-    console.log("gyms", prop.gyms);
     script.addEventListener("load", () => {
       window.kakao.maps.load(() => {
         if (prop.gyms) {

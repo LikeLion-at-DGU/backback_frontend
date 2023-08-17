@@ -16,10 +16,12 @@ const Header: React.FC = () => {
     >
       <div style={{ flex: "1", textAlign: "center" }}></div>
       <div style={{ flex: "7", textAlign: "center" }}>
-        <img
-          src="../../../assets/images/Logo.png"
-          style={{ height: "30px" }}
-        ></img>
+        <RouterLink href="/">
+          <img
+            src="../../../assets/images/Logo.png"
+            style={{ height: "30px" }}
+          ></img>
+        </RouterLink>
       </div>
       <div style={{ flex: "1", textAlign: "center" }}>
         <RouterLink href={"/find"}>

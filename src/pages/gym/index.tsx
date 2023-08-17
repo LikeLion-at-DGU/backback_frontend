@@ -43,7 +43,6 @@ export default function Home() {
     gymApi()
       .getGyms({ search: address })
       .then((res) => {
-        console.log(res);
         setGyms(res.data.results);
         setGymlocation(res.data.results);
         let x = 0,
@@ -136,9 +135,12 @@ export default function Home() {
                 marginRight: "5px",
                 fontFamily: "MainFont",
                 fontSize: "14px",
-                border: "none",         // 사각형 모양 제거
-                borderBottom: "1px solid black",  // 밑줄 스타일 적용
+                border: "none", // 사각형 모양 제거
+                borderBottom: "1px solid black", // 밑줄 스타일 적용
                 outline: "none",
+              }}
+              onKeyDown={(e) => {
+                e.key === "Enter" && handleSearch();
               }}
               ref={inputRef}
             ></input>

@@ -3,6 +3,7 @@ import TagButtonList from "./TagButtonList";
 import HotColumn, { HotColumnProps } from "./HotColumn";
 import RouterLink from "../core/RouterLink";
 import { ScrollContent } from "../post/PostDetail";
+import { useRouter } from "next/router";
 
 export interface FindProps {
   columns: HotColumnProps[];
@@ -21,8 +22,8 @@ function getRandomElementsFromArray(arr: any[], count: number): any[] {
 }
 
 const Find: React.FC<FindProps> = ({ ...props }) => {
+  const router = useRouter();
   const [searchQ, setSearchQ] = useState<string>("");
-
   const [selectedItems, setSelectedItems] = useState<HotColumnProps[]>([]);
   useEffect(() => {
     setSelectedItems(getRandomElementsFromArray(props.columns, 2));
@@ -79,6 +80,9 @@ const Find: React.FC<FindProps> = ({ ...props }) => {
                 width: "100%",
               }}
               onChange={(e) => setSearchQ(e.target.value)}
+              onKeyDown={(e) => {
+                e.key === "Enter" && router.push(`/find/${searchQ}`);
+              }}
             />
             <RouterLink href={`/find/${searchQ}`}>
               <div

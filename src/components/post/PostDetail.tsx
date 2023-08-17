@@ -52,48 +52,45 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
     .join(":");
   const createdAt = `${date} ${time}`;
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
-  const category =
-    exercise_options[prop.exercise - 1] +
-    " / " +
-    purpose_options[prop.purpose - 1];
+  // const category =
+  //   exercise_options[prop.exercise - 1] +
+  //   " / " +
+  //   purpose_options[prop.purpose - 1];
+  const [category, setCateogry] = useState<string>("");
+  useEffect(() => {
+    if (prop.exercise && prop.purpose) {
+      const category =
+        exercise_options[prop.exercise - 1] +
+        " / " +
+        purpose_options[prop.purpose - 1];
+      setCateogry(category);
+    } else {
+      setCateogry("전문가 / 칼럼");
+    }
+  }, [category, prop.exercise]);
   const postComment = async (content: string) => {
     try {
-      await postApi().postPostComment(prop.id, { content: content });
-    } catch (error) {
-      if (isAxiosError(error)) {
-        alert(error.response?.data);
-      }
-    } finally {
-      window.location.reload();
-    }
+      await postApi()
+        .postPostComment(prop.id, { content: content })
+        .then(() => window.location.reload());
+    } catch (error) {}
   };
   const postLike = async () => {
     try {
-      await postApi().likePost(prop.id);
-    } catch (error) {
-      if (isAxiosError(error)) {
-        alert(error.response?.data);
-      }
-    } finally {
-      window.location.reload();
-    }
+      await postApi()
+        .likePost(prop.id)
+        .then(() => window.location.reload());
+    } catch (error) {}
   };
   const postScrap = async () => {
     try {
       if (!prop.isClipped) {
         await postApi().scrapPost(prop.id);
-        alert("스크랩 되었습니다.");
       } else {
         await postApi().scrapDelete(prop.id);
-        alert("스크랩이 삭제되었습니다.");
       }
-    } catch (error) {
-      if (isAxiosError(error)) {
-        alert(error.response?.data);
-      }
-    } finally {
       window.location.reload();
-    }
+    } catch (error) {}
   };
   const handleSubmit = () => {
     const inputValue = inputRef.current?.value;
@@ -103,12 +100,13 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
   };
   const [userNickname, setUserNickname] = useState<string>("");
   useEffect(() => {
+    if (cookies.uid === undefined) return;
     profileApi()
       .getMe()
       .then((res: any) => {
         setUserNickname(res.data.nickname);
       });
-  }, [userNickname]);
+  }, [userNickname, cookies.uid]);
 
   return (
     <ScrollContent>
@@ -182,11 +180,12 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
               level={prop.writer.level}
             />
           </RouterLink>
-          {cookies.uid == prop.writer.profileId ? (
-            <DeleteButton id={prop.id} type={"post"} />
-          ) : (
-            <ReportButton id={prop.id} type={"post"} />
-          )}
+          {cookies.uid &&
+            (cookies.uid == prop.writer.profileId ? (
+              <DeleteButton id={prop.id} type={"post"} />
+            ) : (
+              <ReportButton id={prop.id} type={"post"} />
+            ))}
         </div>
         <div
           style={{
@@ -334,21 +333,43 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
                 paddingTop: "10px",
               }}
             >
-              <button
-                style={{
-                  border: "none",
-                  borderRadius: "10px",
-                  backgroundColor: "#B7BBC8",
-                  width: "38px",
-                  height: "30px",
-                  fontSize: "14px",
-                  cursor: "pointer",
-                  fontFamily: "MainFont",
-                }}
-                onClick={handleSubmit}
-              >
-                등록
-              </button>
+              {cookies.uid ? (
+                <button
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    backgroundColor: "#B7BBC8",
+                    width: "38px",
+                    height: "30px",
+                    fontSize: "14px",
+                    cursor: "pointer",
+                    fontFamily: "MainFont",
+                  }}
+                  onClick={handleSubmit}
+                >
+                  등록
+                </button>
+              ) : (
+                <RouterLink href="/login">
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      border: "none",
+                      borderRadius: "10px",
+                      backgroundColor: "#B7BBC8",
+                      height: "30px",
+                      fontSize: "14px",
+                      cursor: "pointer",
+                      fontFamily: "MainFont",
+                      padding: "10px",
+                    }}
+                  >
+                    로그인 후 이용 가능
+                  </div>
+                </RouterLink>
+              )}
             </div>
           </div>
         </div>

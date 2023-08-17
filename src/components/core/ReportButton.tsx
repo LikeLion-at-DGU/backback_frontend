@@ -80,18 +80,8 @@ const ReportButton: React.FC<ReportButtonProps> = ({ ...prop }) => {
         });
       }
       alert("신고가 완료되었습니다.");
-    } catch (error) {
-      if (isAxiosError(error)) {
-        const axiosError = error as AxiosError;
-        if (axiosError.response?.data?.detail) {
-          alert(axiosError.response.data.detail);
-        }
-      } else {
-        alert("잠시 후 다시 시도해주세요.");
-      }
-    } finally {
       window.location.reload();
-    }
+    } catch (error) {}
   };
 
   return (

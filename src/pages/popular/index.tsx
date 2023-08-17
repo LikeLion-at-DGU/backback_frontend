@@ -3,6 +3,7 @@ import {
   PopularColumnList,
   PopularPostList,
 } from "@/components/common/Popular";
+import { ScrollContent } from "@/components/post/PostDetail";
 import NavBar from "@/layouts/components/NavBar";
 import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
@@ -28,9 +29,18 @@ export default function Home() {
   return (
     <>
       <NavBar />
-      <PopularPostList posts={...posts} />
-
-      <PopularColumnList columns={...columns} />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          flex: 1,
+          justifyContent: "start",
+        }}
+      >
+        <PopularPostList posts={...posts} />
+        <div style={{ padding: "10px" }} />
+        <PopularColumnList columns={...columns} />
+      </div>
     </>
   );
 }

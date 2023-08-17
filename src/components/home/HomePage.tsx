@@ -2,6 +2,8 @@ import Post, { PostProps } from "../post/Post";
 import { ScrollContent } from "../post/PostDetail";
 import ImageSwiper from "../core/ImageSwiper";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { useCookies } from "react-cookie";
+import RouterLink from "../core/RouterLink";
 
 export interface HomeProps {
   posts: PostProps[];
@@ -9,6 +11,7 @@ export interface HomeProps {
 }
 
 const Homepage: React.FC<HomeProps> = ({ ...prop }) => {
+  const [cookies] = useCookies(["uid"]);
   const listItems = prop.posts.map((item, index) => (
     <Post
       id={item.id}
@@ -51,7 +54,49 @@ const Homepage: React.FC<HomeProps> = ({ ...prop }) => {
         >
           내 팔로워 게시물
         </div>
-        {listItems}
+        {cookies.uid !== undefined ? (
+          prop.posts.length ? (
+            listItems
+          ) : (
+            <div style={{ textAlign: "center", marginTop: "50px" }}>
+              팔로우한 사람이 없거나, <br />
+              팔로워가 올린 게시글이 없습니다.
+            </div>
+          )
+        ) : (
+          <div
+            style={{
+              textAlign: "center",
+              marginTop: "50px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            로그인하고 팔로우한 사람의 <br />
+            게시글을 받아보세요!
+            <div style={{ padding: "10px" }}></div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                width: "50%",
+                alignItems: "center",
+                border: "none",
+                borderRadius: "10px",
+                backgroundColor: "lightpink",
+                height: "30px",
+                fontSize: "14px",
+                cursor: "pointer",
+                fontFamily: "MainFont",
+                padding: "20px",
+              }}
+            >
+              <RouterLink href="/login">간편 로그인하러가기</RouterLink>
+            </div>
+          </div>
+        )}
       </div>
     </ScrollContent>
   );

@@ -5,6 +5,7 @@ import ReportButton from "@/components/core/ReportButton";
 import completionApi from "@/apis/completionApi";
 import { isAxiosError } from "../../../../node_modules/axios/index";
 import { useCookies } from "react-cookie";
+import RouterLink from "@/components/core/RouterLink";
 
 export interface CompletionDetailProps extends UserInfoProps {
   id: string;
@@ -21,7 +22,6 @@ export interface CompletionDetailProps extends UserInfoProps {
 export const CompletionDetail: React.FC<CompletionDetailProps> = ({
   ...prop
 }) => {
-  console.log(prop);
   const date = prop.createdAt?.split("T")[0].split("-").join(".");
   const time = prop.createdAt
     ?.split("T")[1]
@@ -34,13 +34,10 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
     try {
       await completionApi()
         .likeCompletion(prop.id)
-        .then((res: any) => console.log(res.data));
+        .then(() => window.location.reload());
     } catch (error) {
       if (isAxiosError(error)) {
-        alert(error.response?.data);
       }
-    } finally {
-      window.location.reload();
     }
   };
 
@@ -117,11 +114,12 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
             profileId={prop.writer?.profileId}
             level={prop.writer?.level}
           />
-          {cookies.uid == prop.writer?.profileId ? (
-            <DeleteButton id={prop.id} type={"completion"} />
-          ) : (
-            <ReportButton id={prop.id} type={"completion"} />
-          )}
+          {cookies.uid &&
+            (cookies.uid == prop.writer?.profileId ? (
+              <DeleteButton id={prop.id} type={"completion"} />
+            ) : (
+              <ReportButton id={prop.id} type={"completion"} />
+            ))}
         </div>
         <div
           style={{
@@ -193,21 +191,6 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
             >
               좋아요 {prop.likesCnt}
             </div>
-            <RouterLink href={`/completion/edit/${prop.id}/`}>
-              수정하기
-            </RouterLink>
-            <button
-              onClick={changeprivate}
-              style={{
-                border: "none",
-                fontFamily: "mainFont",
-                marginLeft: "10px",
-                fontSize: "15px",
-                padding: "3px",
-              }}
-            >
-              나만보기
-            </button>
           </div>
         </div>
       </div>
