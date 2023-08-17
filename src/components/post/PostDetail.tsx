@@ -5,12 +5,13 @@ import ReportButton from "../core/ReportButton";
 import ImageCarousel from "../core/ImageCarousel";
 import { exercise_options } from "@/components/write/ExerciseChoice";
 import { purpose_options } from "@/components/write/PurposeChoice";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import postApi from "@/apis/postApi";
 import { isAxiosError } from "axios";
 import { useCookies } from "react-cookie";
 import DeleteButton from "../core/DeleteButton";
 import RouterLink from "../core/RouterLink";
+import profileApi from "@/apis/profileApi";
 
 export interface PostDetailProps extends CommentListProps {
   id: string;
@@ -100,6 +101,14 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
       postComment(inputValue);
     }
   };
+  const [userNickname, setUserNickname] = useState<string>("");
+  useEffect(() => {
+    profileApi()
+      .getMe()
+      .then((res) => {
+        setUserNickname(res.data.nickname);
+      });
+  }, [userNickname]);
 
   return (
     <ScrollContent>
@@ -277,7 +286,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
               height: "auto",
             }}
           >
-            조민우
+            {userNickname}
             <textarea
               placeholder="댓글을 남겨보세요"
               style={{
