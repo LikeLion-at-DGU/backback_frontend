@@ -28,6 +28,7 @@ export default function MyPage(props: { id: number }) {
   const [expertInfoData, setExportInfo] = useState<string[]>([]);
   const [joinDate, setJoinDate] = useState<string>("");
   const [userId, setUserId] = useState<number>(0);
+  const [isFollow, setIsFollow] = useState(false);
   const processProfileData = (data: any) => {
     setProfileData({
       id: data.id,
@@ -48,8 +49,9 @@ export default function MyPage(props: { id: number }) {
         setExportInfo(Object.values(res.data.info));
         setJoinDate(res.data.joinedAt);
         setUserId(res.data.userId);
+        setIsFollow(res.data.isFollwed);
       });
-  }, []);
+  }, [isFollow]);
 
   return (
     <ScrollContent>
@@ -65,7 +67,12 @@ export default function MyPage(props: { id: number }) {
         }}
       >
         <div>
-          <Profile profile={profileData} is_mine={isMine} />
+          <Profile
+            profile={profileData}
+            is_mine={isMine}
+            isFollow={isFollow}
+            setIsFollow={setIsFollow}
+          />
           <hr
             style={{
               margin: "0 15px",

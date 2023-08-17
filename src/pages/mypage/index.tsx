@@ -21,6 +21,7 @@ export default function MyPage() {
   const [expertInfoData, setExportInfo] = useState<string[]>([]);
   const [joinDate, setJoinDate] = useState<string>("");
   const [userId, setUserId] = useState<number>(0);
+  const [isFollow, setIsFollow] = useState(false);
   const processProfileData = (data: any) => {
     setProfileData({
       id: data.id,
@@ -58,7 +59,12 @@ export default function MyPage() {
         }}
       >
         <div>
-          <Profile profile={profileData} is_mine={isMine} />
+          <Profile
+            profile={profileData}
+            is_mine={isMine}
+            isFollow={isFollow}
+            setIsFollow={setIsFollow}
+          />
           <hr
             style={{
               margin: "0 15px",

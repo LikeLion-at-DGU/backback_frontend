@@ -18,6 +18,8 @@ export interface ProfileData {
 interface ProfileProps {
   profile: ProfileData;
   is_mine: boolean;
+  isFollow: boolean;
+  setIsFollow: (newValue: boolean) => void;
 }
 
 const copyIconStyle = {
@@ -41,7 +43,12 @@ const updateInputStyle = {
   borderRadius: "10px",
 };
 
-export function Profile({ profile, is_mine }: ProfileProps) {
+export function Profile({
+  profile,
+  is_mine,
+  isFollow,
+  setIsFollow,
+}: ProfileProps) {
   const imagePath = `/assets/images/Character${profile.level}.png`;
   const exportIconPath = "/assets/images/Expert_icon.png";
   const threeDotIconPath = "/assets/images/Three_Dots_icon.png";
@@ -63,7 +70,6 @@ export function Profile({ profile, is_mine }: ProfileProps) {
     setIsMyPageDropDownOpen(!isMyPageDropdownOpen);
   };
 
-  const [isFollow, setIsFollow] = useState(false);
   const follow = () => {
     profileApi()
       .followProfile(profile.id)
