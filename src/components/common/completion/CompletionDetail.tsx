@@ -17,22 +17,23 @@ export interface CompletionDetailProps extends UserInfoProps {
   writer: UserInfoProps;
   image: string;
   content: string;
-  likeCnt: number;
+  likesCnt: number;
   isLiked: boolean;
   isPrivate: boolean;
 }
 
-const deleteCompletion = (id: string) => {
-  completionApi()
-    .deleteCompletion(id)
-    .then(() => {
-      window.location.href = `/completion`;
-    });
-};
-
 export const CompletionDetail: React.FC<CompletionDetailProps> = ({
   ...prop
 }) => {
+  console.log(prop);
+  const date = prop.createdAt?.split("T")[0].split("-").join(".");
+  const time = prop.createdAt
+    .split("T")[1]
+    .split(".")[0]
+    .split(":")
+    .slice(0, 2)
+    .join(":");
+  const createdAt = `${date} ${time}`;
   const completionLike = async () => {
     try {
       await completionApi()
@@ -112,7 +113,7 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
             fontSize: "12px",
           }}
         >
-          {prop.createdAt}
+          {createdAt}
         </div>
         <div
           style={{
@@ -199,12 +200,8 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
             </div>
             <div style={{ margin: "8px" }}>
               좋아요
-              {prop.likeCnt}
+              {prop.likesCnt}
             </div>
-            <RouterLink href={`/completion/edit/${prop.id}/`}>
-              수정하기
-            </RouterLink>
-            <button onClick={changeprivate}>나만보기</button>
           </div>
         </div>
       </div>
