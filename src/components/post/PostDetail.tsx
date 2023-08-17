@@ -297,6 +297,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
                 minHeight: "60px",
                 scrollBehavior: "smooth",
                 marginTop: "10px",
+                fontFamily: "MainFont",
               }}
               ref={inputRef}
             />

@@ -129,8 +129,9 @@ export default function Home() {
               style={{
                 height: "20px",
                 flex: "1",
-                padding: "3px",
+                padding: "5px",
                 marginRight: "5px",
+                fontFamily: "MainFont",
               }}
               onKeyUp={(e) => {
                 if (e.key === "Enter") {
@@ -142,7 +143,7 @@ export default function Home() {
             <img
               src="../../../../assets/images/find_icon.png"
               alt="find_icon"
-              style={{ height: "25px", cursor: "pointer" }}
+              style={{ height: "25px", cursor: "pointer", marginTop: "5px" }}
               onClick={handleSearch}
             ></img>
           </div>
@@ -158,7 +159,7 @@ export default function Home() {
             <img
               src="../../../../assets/images/Question_icon.png"
               alt="filter_icon"
-              style={{ height: "20px" }}
+              style={{ height: "20px", cursor: "pointer" }}
               onClick={openFilter}
             ></img>
             {isopen && (

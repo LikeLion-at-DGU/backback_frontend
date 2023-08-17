@@ -23,6 +23,7 @@ const InputContent: React.FC<InputContentProps> = ({
           color: "#B3B3B3",
           resize: "none",
           fontFamily: "MainFont",
+          padding: "7px",
         }}
       />
     </div>

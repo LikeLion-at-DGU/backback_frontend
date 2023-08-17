@@ -116,9 +116,10 @@ export default function Home() {
               width: "22px",
               marginBottom: "50px",
               marginRight: "10px",
+              marginTop: "10px",
             }}
           />
-          <div style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "center", marginTop: "10px" }}>
             오운완 기록은 사진 한 장이 필수입니다.
             <br />
             운동을 완료한 사진을 첨부해주세요.
@@ -130,6 +131,7 @@ export default function Home() {
               width: "22px",
               marginBottom: "50px",
               marginLeft: "10px",
+              marginTop: "10px",
             }}
           />
         </div>

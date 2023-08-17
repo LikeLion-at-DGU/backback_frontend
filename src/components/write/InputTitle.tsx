@@ -12,7 +12,7 @@ const InputTitle: React.FC<InputTitleProps> = ({ title, onTitleChange }) => {
         type="text"
         value={title}
         onChange={onTitleChange}
-        placeholder="   제목"
+        placeholder="제목"
         style={{
           borderTop: "none",
           borderLeft: "none",
@@ -25,6 +25,7 @@ const InputTitle: React.FC<InputTitleProps> = ({ title, onTitleChange }) => {
           fontSize: "18px",
           color: "#B3B3B3",
           fontFamily: "MainFont",
+          padding: "0px 0px 0px 15px",
         }}
       />
     </div>
