@@ -1,6 +1,7 @@
 interface MyPageDropDownProps {
   handleExpertItemClick: any;
   handleDeleteItemClick: any;
+  handleLogoutItemClick: any;
   handleUpdateItemClick: any;
 }
 
@@ -37,6 +38,7 @@ export { listItemStyle, listItemTextStyle, listItemProfileStyle };
 export function MyPageDropDown({
   handleExpertItemClick: handleExpertItemClick,
   handleDeleteItemClick: handleDeleteItemClick,
+  handleLogoutItemClick: handleLogoutItemClick,
   handleUpdateItemClick: handelUpdateItemClick,
 }: MyPageDropDownProps) {
   const updateIconPath = "/assets/images/Update_icon.png";
@@ -74,6 +76,7 @@ export function MyPageDropDown({
             ...listItemStyle,
             borderBottom: "none",
           }}
+          onClick={handleLogoutItemClick}
         >
           <p style={listItemTextStyle}>로그아웃</p>
           <img src={logoutIconPath} style={listItemProfileStyle} />

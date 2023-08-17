@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Post } from "./Post";
 import { PostPage } from "./PostPage";
 import profileApi from "@/apis/profileApi";
+import Post, { PostProps } from "../post/Post";
 
 interface PostListProps {
   isMine: boolean;
@@ -15,7 +15,7 @@ const postListTitleTextstyle = {
 };
 
 export function PostList({ isMine, userId }: PostListProps) {
-  const [postList, setPostList] = useState<Post[]>([]);
+  const [postList, setPostList] = useState<PostProps[]>([]);
   const [isNext, setIsNext] = useState<boolean>(false);
   const [isPrevious, setIsPrevious] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
@@ -27,7 +27,7 @@ export function PostList({ isMine, userId }: PostListProps) {
         setPostList(res.data.results);
         setIsNext(res.data.next !== null);
         setIsPrevious(res.data.previous !== null);
-        setTotal(res.data.count);
+        setTotal(Math.ceil(res.data.count / 10));
       });
   }, [page, userId]);
   return (
@@ -37,9 +37,9 @@ export function PostList({ isMine, userId }: PostListProps) {
       </p>
       {total ? (
         <>
-          <div>
-            {postList.map((post: Post, index: number) => (
-              <Post post={post} />
+          <div style={{ width: "90%", margin: "0 auto" }}>
+            {postList.map((post: PostProps, index: number) => (
+              <Post {...post} />
             ))}
           </div>
           <PostPage

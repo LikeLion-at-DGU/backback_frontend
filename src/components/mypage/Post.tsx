@@ -1,3 +1,5 @@
+import RouterLink from "../core/RouterLink";
+
 interface Writer {
   profileId: number;
   nickname: string;
@@ -62,70 +64,72 @@ export function Post({ post }: PostProps) {
   const messageIconPath = "/assets/images/Message_icon.png";
 
   return (
-    <div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          margin: "10px 37px 9px 26px",
-        }}
-      >
-        <img src={profileImagePath} style={postProfileImageStyle} />
-        <p style={postProfileNicknameStyle}>{post.writer.nickname}</p>
-        {post.writer.type != "COMMON" && (
+    <RouterLink href={`/post/${post.id}`}>
+      <div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            margin: "10px 37px 9px 26px",
+          }}
+        >
+          <img src={profileImagePath} style={postProfileImageStyle} />
+          <p style={postProfileNicknameStyle}>{post.writer.nickname}</p>
+          {post.writer.type != "COMMON" && (
+            <img
+              src={exportIconPath}
+              style={{
+                width: "16px",
+                height: "16px",
+                marginLeft: "3px",
+              }}
+            />
+          )}
+          <p style={postProfileDateStyle}>{post.createdAt}</p>
+        </div>
+        <div style={postDetailStyle}>
+          <p style={postDetailTitleStyle}>{post.title}</p>
+          <p style={postSubTextStyle}>{post.content}</p>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            margin: "2px 22px 6px 35px",
+          }}
+        >
           <img
-            src={exportIconPath}
+            src={likeIconPath}
             style={{
               width: "16px",
               height: "16px",
-              marginLeft: "3px",
+              marginRight: "4px",
             }}
           />
-        )}
-        <p style={postProfileDateStyle}>{post.createdAt}</p>
-      </div>
-      <div style={postDetailStyle}>
-        <p style={postDetailTitleStyle}>{post.title}</p>
-        <p style={postSubTextStyle}>{post.content}</p>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          margin: "2px 22px 6px 35px",
-        }}
-      >
-        <img
-          src={likeIconPath}
+          <p
+            style={{
+              ...postSubTextStyle,
+              marginRight: "4px",
+            }}
+          >
+            {post.likesCnt}
+          </p>
+          <img
+            src={messageIconPath}
+            style={{
+              width: "10px",
+              height: "11px",
+              marginRight: "4px",
+            }}
+          />
+          <p style={postSubTextStyle}>{post.commentsCnt}</p>
+        </div>
+        <hr
           style={{
-            width: "16px",
-            height: "16px",
-            marginRight: "4px",
+            margin: "0 15px",
           }}
-        />
-        <p
-          style={{
-            ...postSubTextStyle,
-            marginRight: "4px",
-          }}
-        >
-          {post.likesCnt}
-        </p>
-        <img
-          src={messageIconPath}
-          style={{
-            width: "10px",
-            height: "11px",
-            marginRight: "4px",
-          }}
-        />
-        <p style={postSubTextStyle}>{post.commentsCnt}</p>
+        ></hr>
       </div>
-      <hr
-        style={{
-          margin: "0 15px",
-        }}
-      ></hr>
-    </div>
+    </RouterLink>
   );
 }

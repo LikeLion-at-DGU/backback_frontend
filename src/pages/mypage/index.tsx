@@ -1,10 +1,10 @@
 import { ExpertInfo } from "@/components/mypage/ExpertInfo";
 import { PostList } from "@/components/mypage/PostList";
 import { Profile, ProfileData } from "@/components/mypage/profile";
-import { ScrollContent } from "@/components/common/post/PostDetail";
 import { CompletedPool } from "@/components/mypage/CompletedPool";
 import profileApi from "@/apis/profileApi";
 import { useEffect, useState } from "react";
+import { ScrollContent } from "@/components/post/PostDetail";
 
 export default function MyPage() {
   const isMine: boolean = true;
@@ -21,12 +21,13 @@ export default function MyPage() {
   const [expertInfoData, setExportInfo] = useState<string[]>([]);
   const [joinDate, setJoinDate] = useState<string>("");
   const [userId, setUserId] = useState<number>(0);
+  const [isFollow, setIsFollow] = useState(false);
   const processProfileData = (data: any) => {
     setProfileData({
       id: data.id,
       nickname: data.nickname,
       intro: data.intro,
-      level: 3,
+      level: data.level,
       following_cnt: data.followingCnt,
       follower_cnt: data.followerCnt,
       type: data.type,
@@ -41,6 +42,7 @@ export default function MyPage() {
         setExportInfo(Object.values(res.data.info));
         setJoinDate(res.data.joinedAt);
         setUserId(res.data.userId);
+        setIsFollow(res.data.isFollowed);
       });
   }, []);
 
@@ -58,7 +60,12 @@ export default function MyPage() {
         }}
       >
         <div>
-          <Profile profile={profileData} is_mine={isMine} />
+          <Profile
+            profile={profileData}
+            is_mine={isMine}
+            isFollow={isFollow}
+            setIsFollow={setIsFollow}
+          />
           <hr
             style={{
               margin: "0 15px",

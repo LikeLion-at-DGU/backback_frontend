@@ -11,8 +11,9 @@ const profileApi = () => {
     getProfileCompletions: (id: number, query: { range: string }) =>
       api.get(`/profiles/${id}/completions`, { params: query }),
     followProfile: (id: number) => api.post(`/profiles/${id}/follow`, {}),
-    reportProfile: (id: number, data: { reason: string }) =>
-      api.post(`/profiles/${id}/report`, { reason: data.reason }),
+    reportProfile: (id: number) => api.post(`/profiles/${id}/report`),
+    logoutProfile: () => api.post("/logout"),
+    leaveProfile: () => api.delete("/leave"),
   };
 };
 
