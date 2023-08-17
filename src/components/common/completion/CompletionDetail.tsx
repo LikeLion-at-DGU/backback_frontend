@@ -27,7 +27,7 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
 }) => {
   console.log(prop);
   const date = prop.createdAt?.split("T")[0].split("-").join(".");
-  const time = prop.createdAt
+  const time = prop.createdAt?
     .split("T")[1]
     .split(".")[0]
     .split(":")
