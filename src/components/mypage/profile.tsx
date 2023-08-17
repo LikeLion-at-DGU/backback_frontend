@@ -126,7 +126,12 @@ export function Profile({
   };
 
   const confirmDeleteModal = () => {
-    setIsDeleteModalOpen(false);
+    profileApi()
+      .leaveProfile()
+      .then((res) => {
+        setIsDeleteModalOpen(false);
+        window.location.href = "/";
+      });
   };
 
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);

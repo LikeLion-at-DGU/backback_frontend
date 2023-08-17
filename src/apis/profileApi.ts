@@ -12,6 +12,8 @@ const profileApi = () => {
       api.get(`/profiles/${id}/completions`, { params: query }),
     followProfile: (id: number) => api.post(`/profiles/${id}/follow`, {}),
     reportProfile: (id: number) => api.post(`/profiles/${id}/report`),
+    logoutProfile: () => api.post("/logout"),
+    leaveProfile: () => api.delete("/leave"),
   };
 };
 
