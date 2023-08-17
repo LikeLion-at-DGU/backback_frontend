@@ -34,7 +34,7 @@ export default function MyPage(props: { id: number }) {
       id: data.id,
       nickname: data.nickname,
       intro: data.intro,
-      level: 3,
+      level: data.level,
       following_cnt: data.followingCnt,
       follower_cnt: data.followerCnt,
       type: data.type,
