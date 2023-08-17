@@ -3,10 +3,15 @@ import { ReactNode, useState } from "react";
 interface CategoryBoxProps {
   onClick: () => void;
   children: ReactNode;
+  find: boolean;
 }
 
-const CategoryBox: React.FC<CategoryBoxProps> = ({ children, onClick }) => {
-  const [isopen, setIsopen] = useState(false);
+const CategoryBox: React.FC<CategoryBoxProps> = ({
+  children,
+  onClick,
+  find,
+}) => {
+  const [isopen, setIsopen] = useState(find);
   const handleopen = () => {
     setIsopen(!isopen);
     onClick();

@@ -2,17 +2,26 @@ import React from "react";
 import UserInfo, { UserInfoProps } from "../UserInfo";
 import Link from "next/link";
 
-export interface PostProps extends UserInfoProps {
+export interface PostProps {
   id: string;
   category: string[];
   title: string;
   createdAt: string;
   content: string;
-  like_count: number;
-  comments_count: number;
+  likesCnt: number;
+  commentsCnt: number;
+  writer: UserInfoProps;
 }
 
 const Post: React.FC<PostProps> = ({ ...prop }) => {
+  const date = prop.createdAt.split("T")[0].split("-").join(".");
+  const time = prop.createdAt
+    .split("T")[1]
+    .split(".")[0]
+    .split(":")
+    .slice(0, 2)
+    .join(":");
+  const createdAt = `${date} ${time}`;
   return (
     <Link href="/post/[id]" as={`/post/${prop.id}`}>
       <div
@@ -37,16 +46,17 @@ const Post: React.FC<PostProps> = ({ ...prop }) => {
           }}
         >
           <UserInfo
-            nickname={prop.nickname}
-            type={prop.type}
-            profileimage={prop.profileimage}
+            nickname={prop.writer.nickname}
+            type={prop.writer.type}
+            profileId={prop.writer.profileId}
+            level={prop.writer.level}
           />
           <div
             style={{
               fontSize: "12px",
             }}
           >
-            {prop.createdAt}
+            {createdAt}
           </div>
         </div>
         <div
@@ -81,18 +91,18 @@ const Post: React.FC<PostProps> = ({ ...prop }) => {
           }}
         >
           <img
-            src="../../../assets/images/Like_icon.png"
+            src="../../../assets/images/like_icon.png"
             style={{
               height: "16px",
               marginRight: "5px",
             }}
           ></img>
-          {prop.like_count}
+          {prop.likesCnt}
           <img
             src="../../../assets/images/Message_icon.png"
             style={{ height: "16px", marginLeft: "5px", marginRight: "5px" }}
           ></img>
-          {prop.comments_count}
+          {prop.commentsCnt}
         </div>
       </div>
     </Link>

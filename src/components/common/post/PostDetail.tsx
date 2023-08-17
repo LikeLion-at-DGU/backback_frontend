@@ -3,16 +3,27 @@ import CommentList, { CommentListProps } from "./CommentList";
 import UserInfo, { UserInfoProps } from "../UserInfo";
 import ReportButton from "../../core/ReportButton";
 import ImageCarousel from "../../core/ImageCarousel";
+import { exercise_options } from "@/components/write/ExerciseChoice";
+import { purpose_options } from "@/components/write/PurposeChoice";
+import { useRef } from "react";
+import postApi from "@/apis/postApi";
+import { AxiosError, isAxiosError } from "axios";
 
-export interface PostDetailProps extends UserInfoProps, CommentListProps {
+export interface PostDetailProps extends CommentListProps {
   id: string;
-  category: string[];
+  purpose: number;
+  exercise: number;
   title: string;
   createdAt: string;
   images: string[];
   content: string;
-  like_count: number;
-  comments_count: number;
+  likesCnt: number;
+  commentsCnt: number;
+  writer: UserInfoProps;
+  isLiked: boolean;
+  isCliped: boolean;
+  viewCnt: number;
+  type: string;
 }
 
 export const ScrollContent = styled.div`
@@ -26,9 +37,53 @@ export const ScrollContent = styled.div`
     display: none;
   }
 `;
-
 export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
-  const category = prop.category.join(" / ");
+  const inputRef = useRef<HTMLTextAreaElement | null>(null);
+  const category =
+    exercise_options[prop.exercise - 1] +
+    " / " +
+    purpose_options[prop.purpose - 1];
+  const postComment = async (content: string) => {
+    try {
+      await postApi().postPostComment(prop.id, { content: content });
+    } catch (error) {
+      if (isAxiosError(error)) {
+        alert(error.response?.data);
+      }
+    } finally {
+      window.location.reload();
+    }
+  };
+  const postLike = async () => {
+    try {
+      await postApi().likePost(prop.id);
+    } catch (error) {
+      if (isAxiosError(error)) {
+        alert(error.response?.data);
+      }
+    } finally {
+      window.location.reload();
+    }
+  };
+  const postScrap = async () => {
+    try {
+      await postApi().scrapPost(prop.id);
+    } catch (error) {
+      if (isAxiosError(error)) {
+        alert(error.response?.data);
+      }
+    } finally {
+      alert("스크랩 되었습니다.");
+      window.location.reload();
+    }
+  };
+  const handleSubmit = () => {
+    const inputValue = inputRef.current?.value;
+    if (inputValue !== undefined) {
+      postComment(inputValue);
+    }
+  };
+
   return (
     <ScrollContent>
       <div
@@ -85,9 +140,10 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
           }}
         >
           <UserInfo
-            nickname={prop.nickname}
-            type={prop.type}
-            profileimage={prop.profileimage}
+            nickname={prop.writer.nickname}
+            type={prop.writer.type}
+            profileId={prop.writer.profileId}
+            level={prop.writer.level}
           />
           <ReportButton />
         </div>
@@ -135,23 +191,41 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
                 placeItems: "center",
               }}
             >
-              <img
-                src="../../../assets/images/Like_icon.png"
-                style={{ height: "25px" }}
-              ></img>
+              {!prop.isLiked ? (
+                <img
+                  src="../../../assets/images/like_icon.png"
+                  style={{ height: "25px" }}
+                  onClick={postLike}
+                ></img>
+              ) : (
+                <img
+                  src="../../../assets/images/Click_Like_icon.png"
+                  style={{ height: "25px" }}
+                  onClick={postLike}
+                ></img>
+              )}
             </div>
-            <div style={{ margin: "5px" }}>좋아요 {prop.like_count}</div>
+            <div style={{ margin: "5px" }}>좋아요 {prop.likesCnt}</div>
             <img
               src="../../../assets/images/Message_icon.png"
-              style={{ height: "25px" }}
+              style={{ height: "21px", width: "23px" }}
             ></img>
-            <div style={{ margin: "5px" }}>댓글 {prop.comments_count}</div>
+            <div style={{ margin: "5px" }}>댓글 {prop.commentsCnt}</div>
           </div>
           <div style={{ cursor: "pointer", placeItems: "center" }}>
-            <img
-              src="../../../assets/images/noscrap.svg"
-              style={{ height: "25px" }}
-            ></img>
+            {!prop.isCliped ? (
+              <img
+                src="../../../assets/images/noscrap.svg"
+                style={{ height: "25px" }}
+                onClick={postScrap}
+              ></img>
+            ) : (
+              <img
+                src="../../../assets/images/Click_Scrap.png"
+                style={{ height: "25px" }}
+                onClick={postScrap}
+              ></img>
+            )}
           </div>
         </div>
         <CommentList comments={[...prop.comments]} />
@@ -177,7 +251,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
               height: "auto",
             }}
           >
-            {prop.nickname}
+            조민우
             <textarea
               placeholder="댓글을 남겨보세요"
               style={{
@@ -188,6 +262,12 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
                 minHeight: "60px",
                 scrollBehavior: "smooth",
                 marginTop: "10px",
+              }}
+              ref={inputRef}
+              onKeyUp={(e) => {
+                if (e.key === "Enter") {
+                  handleSubmit();
+                }
               }}
             />
           </div>
@@ -209,6 +289,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
                 fontSize: "14px",
                 cursor: "pointer",
               }}
+              onClick={handleSubmit}
             >
               등록
             </button>
