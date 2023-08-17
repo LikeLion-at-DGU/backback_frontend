@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "../../styles/CategoryChoice.module.css";
 
-const exercise_options = [
+export const exercise_options = [
   "헬스",
   "필라테스",
   "요가",

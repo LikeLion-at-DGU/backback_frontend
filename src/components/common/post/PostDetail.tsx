@@ -3,16 +3,19 @@ import CommentList, { CommentListProps } from "./CommentList";
 import UserInfo, { UserInfoProps } from "../UserInfo";
 import ReportButton from "../../core/ReportButton";
 import ImageCarousel from "../../core/ImageCarousel";
+import { exercise_options } from "@/components/write/ExerciseChoice";
+import { purpose_options } from "@/components/write/PurposeChoice";
 
 export interface PostDetailProps extends UserInfoProps, CommentListProps {
   id: string;
-  category: string[];
+  purpose: number;
+  exercise: number;
   title: string;
   createdAt: string;
   images: string[];
   content: string;
-  like_count: number;
-  comments_count: number;
+  likesCnt: number;
+  commentsCnt: number;
 }
 
 export const ScrollContent = styled.div`
@@ -28,7 +31,10 @@ export const ScrollContent = styled.div`
 `;
 
 export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
-  const category = prop.category.join(" / ");
+  const category =
+    exercise_options[prop.exercise - 1] +
+    " / " +
+    purpose_options[prop.purpose - 1];
   return (
     <ScrollContent>
       <div
@@ -87,7 +93,8 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
           <UserInfo
             nickname={prop.nickname}
             type={prop.type}
-            profileimage={prop.profileimage}
+            profileId={prop.profileId}
+            level={prop.level}
           />
           <ReportButton />
         </div>
@@ -136,16 +143,16 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
               }}
             >
               <img
-                src="../../../assets/images/Like_icon.png"
+                src="../../../assets/images/likes_icon.png"
                 style={{ height: "25px" }}
               ></img>
             </div>
-            <div style={{ margin: "5px" }}>좋아요 {prop.like_count}</div>
+            <div style={{ margin: "5px" }}>좋아요 {prop.likesCnt}</div>
             <img
               src="../../../assets/images/Message_icon.png"
               style={{ height: "25px" }}
             ></img>
-            <div style={{ margin: "5px" }}>댓글 {prop.comments_count}</div>
+            <div style={{ margin: "5px" }}>댓글 {prop.commentsCnt}</div>
           </div>
           <div style={{ cursor: "pointer", placeItems: "center" }}>
             <img

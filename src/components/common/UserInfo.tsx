@@ -1,16 +1,26 @@
 import React from "react";
 
 export interface UserInfoProps {
+  profileId: string;
   nickname: string;
   type: string;
-  profileimage?: string;
+  level?: number;
 }
 
 const UserInfo: React.FC<UserInfoProps> = ({
+  profileId,
   nickname,
   type,
-  profileimage,
+  level,
 }) => {
+  let profileimage = "";
+  if (level) {
+    profileimage = `../../../assets/images/Character${level}.png`;
+  }
+  let typeimage = "";
+  if (type !== "COMMON") {
+    typeimage = "../../../assets/images/Expert_icon.png";
+  }
   return (
     <div
       style={{
@@ -28,7 +38,7 @@ const UserInfo: React.FC<UserInfoProps> = ({
             height: "100%",
             borderRadius: "50%",
             flex: "1",
-            marginRight: "10px",
+            marginRight: "7px",
           }}
         ></img>
       )}
@@ -41,16 +51,17 @@ const UserInfo: React.FC<UserInfoProps> = ({
       >
         {nickname}
       </div>
-      <img
-        src={type}
-        alt="profile"
-        style={{
-          height: "14px",
-          borderRadius: "50%",
-          flex: "1",
-          marginLeft: "10px",
-        }}
-      ></img>
+      {typeimage && (
+        <img
+          src={typeimage}
+          alt="profile"
+          style={{
+            height: "14px",
+            flex: "1",
+            marginLeft: "3px",
+          }}
+        ></img>
+      )}
     </div>
   );
 };

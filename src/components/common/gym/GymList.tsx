@@ -28,13 +28,8 @@ const GymList: React.FC<GymListProps> = ({ ...prop }) => {
           style={{
             width: "100%",
             flex: "1",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
           }}
-        >
-          검색 결과가 없습니다.
-        </div>
+        ></div>
       ) : (
         <div
           style={{

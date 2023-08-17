@@ -34,7 +34,7 @@ const Find: React.FC<FindProps> = ({ ...prop }) => {
       title={item.title}
       image={item.image}
       views={item.views}
-      profileimage={""}
+      profileId={item.profileId}
       index={index}
     />
   ));

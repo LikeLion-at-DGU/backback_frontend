@@ -79,9 +79,10 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
           }}
         >
           <UserInfo
+            profileId={prop.profileId}
             nickname={prop.nickname}
             type={prop.type}
-            profileimage={prop.profileimage}
+            level={prop.level}
           />
           <ReportButton />
         </div>

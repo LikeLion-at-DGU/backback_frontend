@@ -17,7 +17,8 @@ export default function Home() {
         is_liked={true}
         nickname={"이창준"}
         type={"../../../assets/icons/icon-48x48.png"}
-        profileimage={"../../../assets/icons/icon-48x48.png"}
+        profileId="1"
+        level={1}
       />
     </>
   );
