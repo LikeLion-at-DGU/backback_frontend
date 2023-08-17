@@ -10,8 +10,8 @@ interface PostsQueryParams {
 
 interface Post {
   title: string;
-  purpose: number;
-  exercise: number;
+  purpose?: number;
+  exercise?: number;
   content: string;
   type?: "ORDINARY" | "PRO";
   images?: File[]; // 아마 파일일텐데
@@ -45,13 +45,13 @@ const postApi = () => {
     postPost: (data: Post) => {
       const formData = new FormData();
       formData.append("title", data.title);
-      formData.append("purpose", data.purpose.toString());
-      formData.append("exercise", data.exercise.toString());
+      if (data.purpose) formData.append("purpose", data.purpose.toString());
+      if (data.exercise) formData.append("exercise", data.exercise.toString());
       formData.append("content", data.content);
       formData.append("type", data.type ? data.type : "ORDINARY");
       if (data.images && data.images.length > 0) {
         data.images.forEach((image, index) => {
-          formData.append(`images[${index}]`, image);
+          formData.append(`images`, image);
         });
       }
       return api.post("/posts", formData, {
@@ -62,8 +62,8 @@ const postApi = () => {
     patchPost: (id: number | string, data: Post) => {
       const formData = new FormData();
       formData.append("title", data.title);
-      formData.append("purpose", data.purpose.toString());
-      formData.append("exercise", data.exercise.toString());
+      if (data.purpose) formData.append("purpose", data.purpose.toString());
+      if (data.exercise) formData.append("exercise", data.exercise.toString());
       formData.append("content", data.content);
       return api.patch(`/posts/${id}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
