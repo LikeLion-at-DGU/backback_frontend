@@ -24,7 +24,6 @@ const HotColumn: React.FC<HotColumnProps> = ({ ...prop }) => {
       return str;
     }
   }
-  console.log(prop);
   const date = prop.createdAt.split("T")[0].split("-").join(".");
   const time = prop.createdAt
     .split("T")[1]
