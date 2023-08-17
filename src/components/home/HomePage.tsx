@@ -1,5 +1,5 @@
-import Post, { PostProps } from "../common/post/Post";
-import { ScrollContent } from "../common/post/PostDetail";
+import Post, { PostProps } from "../post/Post";
+import { ScrollContent } from "../post/PostDetail";
 import ImageSwiper from "../core/ImageSwiper";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 

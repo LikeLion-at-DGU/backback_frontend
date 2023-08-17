@@ -23,21 +23,16 @@ export default function Home(props: { id: string }) {
       .then((res) => {
         setPost(res.data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, [setPost, postApi]);
 
   const getComments = useCallback(() => {
     postApi()
       .getPostComments(props.id)
       .then((res) => {
-        console.log(res.data);
         setcomments(res.data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, [setcomments, postApi]);
   useEffect(() => {
     getPost();

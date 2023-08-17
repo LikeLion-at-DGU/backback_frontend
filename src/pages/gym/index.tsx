@@ -19,15 +19,13 @@ export default function Home() {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const handleSearch = () => {
     const inputValue = inputRef.current?.value; // 옵셔널 체이닝 연산자 사용
-    if (inputValue !== undefined) {
+    if (inputValue) {
       setAddress(inputValue);
       setMapopen(true);
     } else {
+      setAddress("");
       setMapopen(false);
     }
-  };
-  const handlemapopen = () => {
-    setMapopen(!mapopen);
   };
   const openFilter = () => {
     setIsopen(!isopen);
@@ -47,6 +45,17 @@ export default function Home() {
       .then((res) => {
         console.log(res);
         setGyms(res.data.results);
+        setGymlocation(res.data.results);
+        let x = 0,
+          y = 0,
+          index = 0;
+        res.data.results.forEach((gym: GymProps) => {
+          x += parseFloat(String(gym.latitude));
+          y += parseFloat(String(gym.longitude));
+          index += 1;
+        });
+        setLat(x / index);
+        setLng(y / index);
       })
       .catch((err) => {});
   }, [setGyms, address, gymApi]);
@@ -61,7 +70,6 @@ export default function Home() {
   }, [setGymlocation, lat, lng, gymApi]);
 
   useEffect(() => {
-    // 클라이언트에서 위치 정보를 얻는 코드
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -76,24 +84,18 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (!address) {
-      getGyms();
-      getGymByLocation();
-    } else {
-      getGymsByAddress();
-      setGymlocation(gyms);
-      let x = 0,
-        y = 0,
-        index = 0;
-      gyms.map((gym) => {
-        x += parseFloat(String(gym.latitude));
-        y += parseFloat(String(gym.longitude));
-        index += 1;
-      });
-      setLat(x / index);
-      setLng(y / index);
-    }
-  }, [getGyms, getGymsByAddress, getGymByLocation]);
+    const fetchData = () => {
+      if (!address) {
+        getGymByLocation();
+        getGyms();
+      } else {
+        getGymsByAddress();
+      }
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, [getGyms, getGymsByAddress, getGymByLocation, setAddress]);
 
   return (
     <ScrollContent>
@@ -131,11 +133,6 @@ export default function Home() {
                 flex: "1",
                 padding: "3px",
                 marginRight: "5px",
-              }}
-              onKeyUp={(e) => {
-                if (e.key === "Enter") {
-                  handleSearch();
-                }
               }}
               ref={inputRef}
             ></input>

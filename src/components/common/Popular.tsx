@@ -1,4 +1,4 @@
-import Post, { PostProps } from "./post/Post";
+import Post, { PostProps } from "../post/Post";
 import HotColumn, { HotColumnProps } from "./HotColumn";
 import Link from "../../../node_modules/next/link";
 
