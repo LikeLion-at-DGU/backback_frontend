@@ -204,7 +204,18 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
             <RouterLink href={`/completion/edit/${prop.id}/`}>
               수정하기
             </RouterLink>
-            <button onClick={changeprivate}>나만보기</button>
+            <button
+              onClick={changeprivate}
+              style={{
+                border: "none",
+                fontFamily: "mainFont",
+                marginLeft: "10px",
+                fontSize: "15px",
+                padding: "3px",
+              }}
+            >
+              나만보기
+            </button>
           </div>
         </div>
       </div>

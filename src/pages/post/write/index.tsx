@@ -37,14 +37,16 @@ export default function WritePost() {
       if (selectedImages) {
         imagesArray = Array.from(selectedImages);
       }
-      postApi().postPost({
-        title: title,
-        content: content,
-        purpose: selectedPurpose,
-        exercise: selectedExercise,
-        images: imagesArray,
-        type: "ORDINARY",
-      });
+      postApi()
+        .postPost({
+          title: title,
+          content: content,
+          purpose: selectedPurpose,
+          exercise: selectedExercise,
+          images: imagesArray,
+          type: "ORDINARY",
+        })
+        .then(() => (window.location.href = `/post`));
     }
   };
 
@@ -72,6 +74,7 @@ export default function WritePost() {
             fontFamily: "MainFont",
             fontSize: "16px",
             cursor: "pointer",
+            marginRight: "10px",
           }}
         >
           등록
