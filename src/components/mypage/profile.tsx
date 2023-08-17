@@ -3,7 +3,7 @@ import { MyPageDropDown } from "./mypagedropdown";
 import { ReportDropDown } from "./reportdropdown";
 import Modal from "./Modal";
 
-interface Profile {
+export interface ProfileData {
   id: number;
   nickname: string;
   intro: string;
@@ -15,7 +15,7 @@ interface Profile {
 }
 
 interface ProfileProps {
-  profile: Profile;
+  profile: ProfileData;
   is_mine: boolean;
 }
 

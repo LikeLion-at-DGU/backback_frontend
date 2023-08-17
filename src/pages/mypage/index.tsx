@@ -1,6 +1,6 @@
 import { ExpertInfo } from "@/components/mypage/ExpertInfo";
 import { PostList } from "@/components/mypage/PostList";
-import { Profile } from "@/components/mypage/profile";
+import { Profile, ProfileData } from "@/components/mypage/profile";
 import { ScrollContent } from "@/components/common/post/PostDetail";
 import { CompletedPool } from "@/components/mypage/CompletedPool";
 import profileApi from "@/apis/profileApi";
@@ -8,7 +8,17 @@ import { useEffect, useState } from "react";
 
 export default function MyPage() {
   const isMine: boolean = true;
-  const [profileData, setProfileData] = useState({});
+  const [profileData, setProfileData] = useState<ProfileData>({
+    id: 0,
+    nickname: "",
+    intro: "",
+    level: 0,
+    following_cnt: 0,
+    follower_cnt: 0,
+    type: "",
+    user_id: 0,
+  });
+  const [expertInfoData, setExportInfo] = useState<string[]>([]);
   const processProfileData = (data: any) => {
     setProfileData({
       id: data.id,
@@ -27,16 +37,9 @@ export default function MyPage() {
       .getMe()
       .then((res) => {
         processProfileData(res.data);
+        setExportInfo(Object.values(res.data.info));
       });
   }, []);
-  console.log("테스트" + JSON.stringify(profileData, null, 2));
-
-  const expertInfo = [
-    "생활스포츠지도사 2급",
-    "EPCI 필라테스 지도자 자격증 LV.1",
-    "경희대학교 스포츠의학과 졸업",
-    "나의근육사용설명서 근막스트레칭 마스터",
-  ];
 
   const postList = [
     {
@@ -112,7 +115,9 @@ export default function MyPage() {
             }}
           ></hr>
           <CompletedPool joinDate="2022-07" completedList={completedList} />
-          <ExpertInfo infoList={expertInfo} />
+          {profileData.type !== "COMMON" && (
+            <ExpertInfo infoList={expertInfoData} />
+          )}
           <PostList
             isMine={isMine}
             currentPage={3}
