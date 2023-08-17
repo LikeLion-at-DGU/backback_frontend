@@ -235,15 +235,12 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
           </div>
         </div>
         <CommentList comments={[...prop.comments]} />
-      </div>
-      <div style={{ width: "100%", padding: "0px 15px 0px 15px" }}>
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             padding: "10px 0px 10px 0px",
             height: "auto",
-            borderTop: "1px solid #B7BBC8",
           }}
         >
           <div
