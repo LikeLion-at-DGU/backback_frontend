@@ -27,7 +27,7 @@ export function PostList({ isMine, userId }: PostListProps) {
         setPostList(res.data.results);
         setIsNext(res.data.next !== null);
         setIsPrevious(res.data.previous !== null);
-        setTotal(res.data.count);
+        setTotal(Math.ceil(res.data.count / 10));
       });
   }, [page, userId]);
   return (
