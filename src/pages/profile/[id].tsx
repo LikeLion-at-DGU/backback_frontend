@@ -49,7 +49,7 @@ export default function MyPage(props: { id: number }) {
         setExportInfo(Object.values(res.data.info));
         setJoinDate(res.data.joinedAt);
         setUserId(res.data.userId);
-        setIsFollow(res.data.isFollwed);
+        setIsFollow(res.data.isFollowed);
       });
   }, [isFollow]);
 

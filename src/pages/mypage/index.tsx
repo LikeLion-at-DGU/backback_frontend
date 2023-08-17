@@ -42,6 +42,7 @@ export default function MyPage() {
         setExportInfo(Object.values(res.data.info));
         setJoinDate(res.data.joinedAt);
         setUserId(res.data.userId);
+        setIsFollow(res.data.isFollowed);
       });
   }, []);
 
