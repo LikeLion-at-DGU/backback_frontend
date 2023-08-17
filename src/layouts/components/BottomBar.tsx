@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import RouterLink from "../../components/core/RouterLink";
 import styled from "styled-components";
+import { useCookies } from "react-cookie";
 
 const Menu = styled.div`
   height: 100%;
@@ -16,6 +17,7 @@ const Menu = styled.div`
 `;
 
 const Header: React.FC = () => {
+  const [cookies] = useCookies(["uid"]);
   const router = useRouter();
   const handleGoBack = () => {
     router.back();
@@ -60,7 +62,7 @@ const Header: React.FC = () => {
           style={{ height: "20px" }}
         ></img>
       </RouterLink>
-      <RouterLink href="/testing2">
+      <RouterLink href={cookies.uid ? "/mypage" : "/login"}>
         <img
           src="../../../assets/images/Mypage_icon.png"
           style={{ height: "20px" }}
