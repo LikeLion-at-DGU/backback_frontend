@@ -110,6 +110,7 @@ export default function Home() {
                   textAlign: "left",
                   flex: "1",
                   fontSize: "14px",
+                  fontFamily: "MainFont",
                 }}
               >
                 글쓰기

@@ -3,7 +3,7 @@ import React, { useState, useEffect, ChangeEvent } from "react";
 import InputTitle from "@/components/write/InputTitle";
 import InputContent from "@/components/write/InputContent";
 import postApi from "@/apis/postApi";
-import { ScrollContent } from "@/components/common/post/PostDetail";
+import { ScrollContent } from "@/components/post/PostDetail";
 import ExerciseChoice from "@/components/write/ExerciseChoice";
 import PurposeChoice from "@/components/write/PurposeChoice";
 

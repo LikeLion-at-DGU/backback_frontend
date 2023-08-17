@@ -4,6 +4,7 @@ import { ColumnProps } from "@/components/common/Column";
 import { useCallback, useEffect, useState } from "react";
 import NavBar from "@/layouts/components/NavBar";
 import postApi from "@/apis/postApi";
+import RouterLink from "@/components/core/RouterLink";
 
 export default function Home() {
   const [columns, setColumns] = useState<ColumnProps[]>([]);
@@ -36,13 +37,13 @@ export default function Home() {
         >
           <div
             style={{
-              textAlign: "left",
-              flex: "1",
               fontFamily: "MainFont",
               fontSize: "14px",
+              marginRight: "auto",
+              marginLeft: "12px",
             }}
           >
-            칼럼 작성하기
+            <RouterLink href="/column/write">칼럼 작성하기</RouterLink>
           </div>
         </div>
       </div>

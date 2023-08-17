@@ -4,7 +4,7 @@ import ExerciseChoice from "../../../components/write/ExerciseChoice";
 import InputTitle from "@/components/write/InputTitle";
 import InputContent from "@/components/write/InputContent";
 import InputImage from "@/components/write/InputImage";
-import { ScrollContent } from "@/components/common/post/PostDetail";
+import { ScrollContent } from "@/components/post/PostDetail";
 import postApi from "@/apis/postApi";
 
 export default function WritePost() {

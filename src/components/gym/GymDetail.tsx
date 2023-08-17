@@ -173,9 +173,15 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
         >
           <img
             src="../../../assets/images/Message_icon.png"
-            style={{ height: "21px", width: "23px" }}
+            style={{ height: "21px", width: "21px" }}
           ></img>
-          <div style={{ marginLeft: "5px", fontSize: "16px" }}>
+          <div
+            style={{
+              marginLeft: "5px",
+              fontSize: "16px",
+              fontFamily: "MainFont",
+            }}
+          >
             리뷰 {prop.reviewCnt}
           </div>
         </div>
@@ -200,7 +206,7 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
               height: "auto",
             }}
           >
-            조민우
+            익명
             <textarea
               placeholder="헬스장 코드를 통해 리뷰를 남겨보세요"
               style={{
@@ -211,6 +217,7 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
                 minHeight: "60px",
                 scrollBehavior: "smooth",
                 marginTop: "5px",
+                fontFamily: "MainFont",
               }}
               ref={inputRef}
             />
@@ -231,7 +238,8 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
                 width: "150px",
                 marginRight: "5px",
                 border: "1px solid #B7BBC8",
-                padding: "5px",
+                padding: "12px",
+                fontFamily: "MainFont",
               }}
               ref={keyRef}
             ></input>
@@ -244,6 +252,7 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
                 height: "30px",
                 fontSize: "14px",
                 cursor: "pointer",
+                fontFamily: "MainFont",
               }}
               onClick={handleSubmit}
             >

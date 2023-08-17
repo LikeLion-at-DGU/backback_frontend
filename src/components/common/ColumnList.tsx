@@ -1,5 +1,4 @@
 import Column, { ColumnProps } from "./Column";
-import { ScrollContent } from "../post/PostDetail";
 
 export interface ColumnListProps {
   columns: ColumnProps[];
