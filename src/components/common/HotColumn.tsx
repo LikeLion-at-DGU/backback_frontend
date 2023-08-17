@@ -1,21 +1,41 @@
 import React from "react";
 import UserInfo, { UserInfoProps } from "./UserInfo";
 import Link from "next/link";
+import RouterLink from "../core/RouterLink";
 
 export interface HotColumnProps extends UserInfoProps {
-  createdAt: string;
-  image: string;
-  title: string;
-  content: string;
   id: string;
-  views: number;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+  contentShort: string;
+  writer: UserInfoProps;
+  viewCnt: number;
   index?: number;
+  image?: string;
   isHot?: boolean;
 }
 
 const HotColumn: React.FC<HotColumnProps> = ({ ...prop }) => {
+  function truncateString(str: string, maxLength: number) {
+    if (str.length > maxLength) {
+      return str.substring(0, maxLength - 3) + "...";
+    } else {
+      return str;
+    }
+  }
+  console.log(prop);
+  const date = prop.createdAt.split("T")[0].split("-").join(".");
+  const time = prop.createdAt
+    .split("T")[1]
+    .split(".")[0]
+    .split(":")
+    .slice(0, 2)
+    .join(":");
+  const createdAt = `${date} ${time}`;
+  const title = truncateString(prop.title, 25);
   return (
-    <Link href="/column/[id]" as={`/column/${prop.id}`}>
+    <RouterLink href={`/column/${prop.id}`}>
       <div
         style={{
           height: "242px",
@@ -50,7 +70,7 @@ const HotColumn: React.FC<HotColumnProps> = ({ ...prop }) => {
             fontFamily: "MainFont",
           }}
         >
-          {prop.createdAt}
+          {createdAt}
         </div>
         <div
           style={{
@@ -60,7 +80,7 @@ const HotColumn: React.FC<HotColumnProps> = ({ ...prop }) => {
             padding: "0px 9.45px 0px 9.45px",
           }}
         >
-          {prop.title}
+          {title}
         </div>
         <div
           style={{
@@ -85,11 +105,7 @@ const HotColumn: React.FC<HotColumnProps> = ({ ...prop }) => {
               fontFamily: "MainFont",
             }}
           >
-            <UserInfo
-              nickname={prop.nickname}
-              type={prop.type}
-              profileId={prop.profileId}
-            />
+            <UserInfo nickname={prop.writer.nickname} type={prop.writer.type} />
           </div>
         </div>
         <div
@@ -106,7 +122,7 @@ const HotColumn: React.FC<HotColumnProps> = ({ ...prop }) => {
             fontFamily: "MainFont",
           }}
         >
-          {prop.content}
+          {prop.contentShort}
         </div>
         <div
           style={{
@@ -125,11 +141,11 @@ const HotColumn: React.FC<HotColumnProps> = ({ ...prop }) => {
           />
           <p style={{ marginLeft: "6.01px" }}>더 알아보기</p>
           <p style={{ marginLeft: "auto", marginRight: "7.81px" }}>
-            {prop.views}
+            {prop.viewCnt}
           </p>
         </div>
       </div>
-    </Link>
+    </RouterLink>
   );
 };
 

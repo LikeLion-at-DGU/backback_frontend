@@ -1,6 +1,7 @@
-import Post, { PostProps } from "./post/Post";
+import Post, { PostProps } from "../post/Post";
 import HotColumn, { HotColumnProps } from "./HotColumn";
 import Link from "../../../node_modules/next/link";
+import RouterLink from "../core/RouterLink";
 
 export interface PostListProps {
   posts: PostProps[];
@@ -16,12 +17,14 @@ const PopularPostList: React.FC<PostListProps> = ({ ...prop }) => {
       id={item.id}
       key={index.toString()}
       writer={item.writer}
-      content={item.content}
-      comments_count={item.comments_count}
-      like_count={item.like_count}
+      contentShort={item.contentShort}
+      commentsCnt={item.commentsCnt}
+      likesCnt={item.likesCnt}
       createdAt={item.createdAt}
       title={item.title}
       category={item.category}
+      updatedAt={item.updatedAt}
+      viewCnt={item.viewCnt}
     />
   ));
   return (
@@ -44,14 +47,7 @@ const PopularPostList: React.FC<PostListProps> = ({ ...prop }) => {
         >
           HOT 게시물
         </div>
-        <Link
-          href="/post"
-          style={{
-            fontSize: "14px",
-          }}
-        >
-          더보기
-        </Link>
+        <RouterLink href="/post">더보기</RouterLink>
       </div>
       <div
         style={{
@@ -82,14 +78,7 @@ const PopularPostList: React.FC<PostListProps> = ({ ...prop }) => {
         >
           HOT 칼럼
         </div>
-        <Link
-          href="/column"
-          style={{
-            fontSize: "14px",
-          }}
-        >
-          더보기
-        </Link>
+        <RouterLink href="/column">더보기</RouterLink>
       </div>
     </div>
   );
@@ -99,18 +88,18 @@ const PopularColumnList: React.FC<ColumnListProps> = ({ ...prop }) => {
   const columnlistItems = prop.columns.map((item, index) => (
     <HotColumn
       id={item.id}
-      key={index}
-      nickname={item.nickname}
-      type={item.type}
-      content={item.content}
+      writer={item.writer}
+      contentShort={item.contentShort}
       createdAt={item.createdAt}
+      updatedAt={item.updatedAt}
       title={item.title}
       image={item.image}
-      views={item.views}
-      profileId={item.profileId}
-      level={item.level}
+      viewCnt={item.viewCnt}
       index={index}
       isHot={true}
+      type={item.type}
+      profileId={item.profileId}
+      nickname={item.nickname}
     />
   ));
   return (
