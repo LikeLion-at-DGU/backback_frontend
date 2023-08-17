@@ -105,7 +105,11 @@ const HotColumn: React.FC<HotColumnProps> = ({ ...prop }) => {
               fontFamily: "MainFont",
             }}
           >
-            <UserInfo nickname={prop.writer.nickname} type={prop.writer.type} />
+            <UserInfo
+              profileId={prop.writer.profileId}
+              nickname={prop.writer.nickname}
+              type={prop.writer.type}
+            />
           </div>
         </div>
         <div
