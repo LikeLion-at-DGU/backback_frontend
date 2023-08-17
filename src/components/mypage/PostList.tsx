@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { PostPage } from "./PostPage";
 import profileApi from "@/apis/profileApi";
-import Post, { PostProps } from "../common/post/Post";
+import Post, { PostProps } from "../post/Post";
 
 interface PostListProps {
   isMine: boolean;

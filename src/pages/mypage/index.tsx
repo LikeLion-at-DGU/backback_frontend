@@ -1,10 +1,10 @@
 import { ExpertInfo } from "@/components/mypage/ExpertInfo";
 import { PostList } from "@/components/mypage/PostList";
 import { Profile, ProfileData } from "@/components/mypage/profile";
-import { ScrollContent } from "@/components/common/post/PostDetail";
 import { CompletedPool } from "@/components/mypage/CompletedPool";
 import profileApi from "@/apis/profileApi";
 import { useEffect, useState } from "react";
+import { ScrollContent } from "@/components/post/PostDetail";
 
 export default function MyPage() {
   const isMine: boolean = true;
