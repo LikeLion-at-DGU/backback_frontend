@@ -20,7 +20,7 @@ export default function Home() {
   const getColumns = useCallback(() => {
     postApi()
       .getPosts({ type: "PRO" })
-      .then((res) => {
+      .then((res: any) => {
         setColumns(res.data.results);
       })
       .catch((err) => {

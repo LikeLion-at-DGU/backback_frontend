@@ -34,7 +34,7 @@ export default function Home() {
   const getPosts = useCallback(async () => {
     await postApi()
       .scrappedPost()
-      .then((res) => {
+      .then((res: any) => {
         setPosts(res.data.results);
       })
       .catch((err) => {});

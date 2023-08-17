@@ -1,5 +1,4 @@
 import { UserInfoProps } from "../UserInfo";
-import Link from "../../../../node_modules/next/link";
 import RouterLink from "@/components/core/RouterLink";
 
 export interface CompletionProps extends UserInfoProps {

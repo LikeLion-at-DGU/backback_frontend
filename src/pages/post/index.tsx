@@ -35,7 +35,7 @@ export default function Home() {
   const getPosts = useCallback(async () => {
     await postApi()
       .getPosts({ type: "ORDINARY" })
-      .then((res) => {
+      .then((res: any) => {
         setPosts(res.data.results);
       })
       .catch((err) => {});

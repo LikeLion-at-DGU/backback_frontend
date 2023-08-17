@@ -35,7 +35,7 @@ export default function Home(props: { id: string }) {
   const getGym = useCallback(() => {
     gymApi()
       .getGym(props.id)
-      .then((res) => {
+      .then((res: any) => {
         setGym(res.data);
       })
       .catch((err) => {});
@@ -43,7 +43,7 @@ export default function Home(props: { id: string }) {
   const getReviews = useCallback(() => {
     gymApi()
       .getGymReviews(props.id)
-      .then((res) => {
+      .then((res: any) => {
         setReviews(res.data);
       })
       .catch((err) => {});
