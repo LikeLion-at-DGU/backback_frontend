@@ -198,7 +198,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ ...prop }) => {
                   padding: "0px 5px 0px 5px",
                 }}
               >
-                <RouterLink href={`${prop.type}/${prop.id}/edit`}>
+                <RouterLink href={`/${prop.type}/${prop.id}/edit`}>
                   <div
                     style={{
                       display: "flex",

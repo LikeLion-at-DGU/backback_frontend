@@ -1,6 +1,5 @@
 import React from "react";
 import UserInfo, { UserInfoProps } from "./UserInfo";
-import Link from "next/link";
 import RouterLink from "../core/RouterLink";
 
 export interface HotColumnProps extends UserInfoProps {

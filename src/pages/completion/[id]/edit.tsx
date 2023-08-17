@@ -2,7 +2,6 @@ import React, { useState, ChangeEvent, useEffect } from "react";
 import InputTitle from "@/components/write/InputTitle";
 import InputContent from "@/components/write/InputContent";
 import { ScrollContent } from "@/components/post/PostDetail";
-import RouterLink from "@/components/core/RouterLink";
 import completionApi from "@/apis/completionApi";
 
 export async function getServerSideProps(context: any) {

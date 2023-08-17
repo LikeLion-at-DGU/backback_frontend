@@ -1,6 +1,5 @@
 import Post, { PostProps } from "../post/Post";
 import HotColumn, { HotColumnProps } from "./HotColumn";
-import Link from "../../../node_modules/next/link";
 import RouterLink from "../core/RouterLink";
 
 export interface PostListProps {

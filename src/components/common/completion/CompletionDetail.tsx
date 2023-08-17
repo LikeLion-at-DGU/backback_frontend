@@ -2,12 +2,8 @@ import { ScrollContent } from "../../post/PostDetail";
 import UserInfo, { UserInfoProps } from "@/components/common/UserInfo";
 import DeleteButton from "@/components/core/DeleteButton";
 import ReportButton from "@/components/core/ReportButton";
-import RouterLink from "@/components/core/RouterLink";
 import completionApi from "@/apis/completionApi";
-import { useState } from "react";
-import ImageSwiper from "@/components/core/ImageSwiper";
 import { isAxiosError } from "../../../../node_modules/axios/index";
-import { cookies } from "next/dist/client/components/headers";
 import { useCookies } from "react-cookie";
 
 export interface CompletionDetailProps extends UserInfoProps {
@@ -27,8 +23,8 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
 }) => {
   console.log(prop);
   const date = prop.createdAt?.split("T")[0].split("-").join(".");
-  const time = prop.createdAt?
-    .split("T")[1]
+  const time = prop.createdAt
+    ?.split("T")[1]
     .split(".")[0]
     .split(":")
     .slice(0, 2)
@@ -38,21 +34,7 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
     try {
       await completionApi()
         .likeCompletion(prop.id)
-        .then((res) => console.log(res.data));
-    } catch (error) {
-      if (isAxiosError(error)) {
-        alert(error.response?.data);
-      }
-    } finally {
-      window.location.reload();
-    }
-  };
-
-  const changeprivate = async () => {
-    try {
-      await completionApi()
-        .privateCompletion(prop.id, { isPrivate: prop.isPrivate })
-        .then((res) => console.log(res.data));
+        .then((res: any) => console.log(res.data));
     } catch (error) {
       if (isAxiosError(error)) {
         alert(error.response?.data);
@@ -126,7 +108,7 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
             borderBottom: "1px solid #B7BBC8",
             padding: "10px 0px 10px 0px",
             fontFamily: "MainFont",
-            fontSize: "16px"
+            fontSize: "16px",
           }}
         >
           <UserInfo
@@ -202,9 +184,14 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
                 ></img>
               )}
             </div>
-            <div style={{ margin: "8px", fontSize: "16px", fontFamily: "MainFont" }}>
-              좋아요{" "}
-              {prop.likesCnt}
+            <div
+              style={{
+                margin: "8px",
+                fontSize: "16px",
+                fontFamily: "MainFont",
+              }}
+            >
+              좋아요 {prop.likesCnt}
             </div>
           </div>
         </div>

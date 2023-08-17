@@ -1,4 +1,4 @@
-import { ScrapProps } from "@/pages/post/scraps";
+import { ScrapProps } from "@/pages/post/scraps/index";
 import ScrapPost from "./Scrap";
 
 export interface ScrapListProps {

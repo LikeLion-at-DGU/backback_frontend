@@ -105,7 +105,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
   useEffect(() => {
     profileApi()
       .getMe()
-      .then((res) => {
+      .then((res: any) => {
         setUserNickname(res.data.nickname);
       });
   }, [userNickname]);
@@ -134,9 +134,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
         >
           <img
             src="../../../assets/images/Category_right_icon.png"
-            style={{ height: "11px",
-                      width: "7px",
-                      marginRight: "7px", }}
+            style={{ height: "11px", width: "7px", marginRight: "7px" }}
           ></img>
           {category}
         </div>
@@ -248,12 +246,28 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
                 ></img>
               )}
             </div>
-            <div style={{ margin: "8px", fontSize: "16px", fontFamily: "MainFont" }}>좋아요 {prop.likesCnt}</div>
+            <div
+              style={{
+                margin: "8px",
+                fontSize: "16px",
+                fontFamily: "MainFont",
+              }}
+            >
+              좋아요 {prop.likesCnt}
+            </div>
             <img
               src="../../../assets/images/Message_icon.png"
               style={{ height: "23px", width: "21px" }}
             ></img>
-            <div style={{ margin: "8px", fontSize: "16px", fontFamily: "MainFont" }}>댓글 {prop.commentsCnt}</div>
+            <div
+              style={{
+                margin: "8px",
+                fontSize: "16px",
+                fontFamily: "MainFont",
+              }}
+            >
+              댓글 {prop.commentsCnt}
+            </div>
           </div>
           <div style={{ cursor: "pointer", placeItems: "center" }}>
             {!prop.isClipped ? (
@@ -273,68 +287,68 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
         </div>
         <CommentList comments={[...prop.comments]} />
         <div style={{ width: "100%", padding: "0px 15px 0px 15px" }}>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            padding: "10px 0px 10px 0px",
-            height: "auto",
-            borderTop: "1px solid #B7BBC8",
-          }}
-        >
           <div
             style={{
               display: "flex",
               flexDirection: "column",
-              width: "100%",
-              padding: "15px 20px 15px 20px",
-              border: "1px solid #B7BBC8",
-              borderRadius: "10px",
+              padding: "10px 0px 10px 0px",
               height: "auto",
-              fontSize: "16px",
-              fontFamily: "BoldFont"
+              borderTop: "1px solid #B7BBC8",
             }}
           >
-            {userNickname}
-            <textarea
-              placeholder="댓글을 남겨보세요"
+            <div
               style={{
-                border: "none",
-                resize: "none",
-                overflow: "hidden",
-                outline: "none",
-                minHeight: "60px",
-                scrollBehavior: "smooth",
-                marginTop: "10px",
-                fontSize: "14px",
-                fontFamily: "MainFont",
-              }}
-              ref={inputRef}
-            />
-          </div>
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "flex-end",
-              paddingTop: "10px",
-            }}
-          >
-            <button
-              style={{
-                border: "none",
+                display: "flex",
+                flexDirection: "column",
+                width: "100%",
+                padding: "15px 20px 15px 20px",
+                border: "1px solid #B7BBC8",
                 borderRadius: "10px",
-                backgroundColor: "#B7BBC8",
-                width: "38px",
-                height: "30px",
-                fontSize: "14px",
-                cursor: "pointer",
-                fontFamily: "MainFont"
+                height: "auto",
+                fontSize: "16px",
+                fontFamily: "BoldFont",
               }}
-              onClick={handleSubmit}
             >
-              등록
-            </button>
+              {userNickname}
+              <textarea
+                placeholder="댓글을 남겨보세요"
+                style={{
+                  border: "none",
+                  resize: "none",
+                  overflow: "hidden",
+                  outline: "none",
+                  minHeight: "60px",
+                  scrollBehavior: "smooth",
+                  marginTop: "10px",
+                  fontSize: "14px",
+                  fontFamily: "MainFont",
+                }}
+                ref={inputRef}
+              />
+            </div>
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "flex-end",
+                paddingTop: "10px",
+              }}
+            >
+              <button
+                style={{
+                  border: "none",
+                  borderRadius: "10px",
+                  backgroundColor: "#B7BBC8",
+                  width: "38px",
+                  height: "30px",
+                  fontSize: "14px",
+                  cursor: "pointer",
+                  fontFamily: "MainFont",
+                }}
+                onClick={handleSubmit}
+              >
+                등록
+              </button>
             </div>
           </div>
         </div>

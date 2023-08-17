@@ -32,7 +32,7 @@ export default function Home() {
           content: content,
           image: selectedImages[0],
         })
-        .then((window.location.href = `/completion`));
+        .then(() => (window.location.href = `/completion`));
     } else if (title && content) {
       alert("사진을 첨부해주세요.");
     }

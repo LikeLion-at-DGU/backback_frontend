@@ -20,7 +20,7 @@ export default function Home(props: { id: string }) {
   const getPost = useCallback(() => {
     postApi()
       .getPost(props.id)
-      .then((res) => {
+      .then((res: any) => {
         setPost(res.data);
       })
       .catch((err) => {
@@ -31,7 +31,7 @@ export default function Home(props: { id: string }) {
   const getComments = useCallback(() => {
     postApi()
       .getPostComments(props.id)
-      .then((res) => {
+      .then((res: any) => {
         console.log(res.data);
         setcomments(res.data);
       })

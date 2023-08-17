@@ -73,7 +73,7 @@ export function Profile({
   const follow = () => {
     profileApi()
       .followProfile(profile.id)
-      .then((res) => {
+      .then((res: any) => {
         setIsFollow(!isFollow);
       });
   };
@@ -96,7 +96,7 @@ export function Profile({
   const confirmReportModal = () => {
     profileApi()
       .reportProfile(profile.id)
-      .then((res) => {
+      .then((res: any) => {
         setIsReportModalOpen(false);
       });
   };
@@ -128,7 +128,7 @@ export function Profile({
   const confirmDeleteModal = () => {
     profileApi()
       .leaveProfile()
-      .then((res) => {
+      .then((res: any) => {
         setIsDeleteModalOpen(false);
         window.location.href = "/";
       });
@@ -147,7 +147,7 @@ export function Profile({
   const handleLogoutItemClick = () => {
     profileApi()
       .logoutProfile()
-      .then((res) => {
+      .then((res: any) => {
         window.location.href = "/";
       });
   };
@@ -158,7 +158,7 @@ export function Profile({
         nickname: nickname,
         intro: intro,
       })
-      .then((res) => {
+      .then((res: any) => {
         window.location.reload();
       });
   };
