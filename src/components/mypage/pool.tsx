@@ -1,3 +1,5 @@
+import RouterLink from "../core/RouterLink";
+
 interface PoolProps {
   completedList: number[];
 }
@@ -44,7 +46,9 @@ export function Pool({ completedList }: PoolProps) {
         {completedList.map((completed: number, index: number) => (
           <div style={waterFallStyle}>
             {completed != 0 && (
-              <img src={waterDropIconPath} style={waterFallImageStyle} />
+              <RouterLink href={`/completion/${completed}`}>
+                <img src={waterDropIconPath} style={waterFallImageStyle} />
+              </RouterLink>
             )}
           </div>
         ))}
