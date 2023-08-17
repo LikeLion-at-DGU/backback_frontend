@@ -1,3 +1,8 @@
+import completionApi from "@/apis/completionApi";
+import gymApi from "@/apis/gymApi";
+import postApi from "@/apis/postApi";
+import profileApi from "@/apis/profileApi";
+import { AxiosError, isAxiosError } from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
 
@@ -16,10 +21,16 @@ export const ReportBox = styled.div`
   }
 `;
 
-const ReportButton = ({}) => {
+interface ReportButtonProps {
+  type: "comment" | "post" | "gym" | "review" | "completion";
+  id: string;
+}
+
+const ReportButton: React.FC<ReportButtonProps> = ({ ...prop }) => {
   const [isopen, setIsopen] = useState(false);
   const [report, setReport] = useState(false);
   const [reportReason, setReportReason] = useState("");
+  const [reportType, setReportType] = useState("");
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
 
   const handleDropdownToggle = (e: any) => {
@@ -37,6 +48,17 @@ const ReportButton = ({}) => {
     setIsopen(!isopen);
   };
   const handleReport = () => {
+    if (prop.type === "comment") {
+      setReportType("댓글");
+    } else if (prop.type === "post") {
+      setReportType("게시글");
+    } else if (prop.type === "gym") {
+      setReportType("헬스장");
+    } else if (prop.type === "review") {
+      setReportType("리뷰");
+    } else if (prop.type === "completion") {
+      setReportType("게시글");
+    }
     setReport(!report);
     setIsopen(!isopen);
   };
@@ -46,6 +68,58 @@ const ReportButton = ({}) => {
   };
   const handleReportCancel = () => {
     setReportReason("");
+  };
+
+  const Report = async () => {
+    try {
+      if (prop.type === "comment") {
+        await postApi().reportComment(prop.id, { reason: reportReason });
+      } else if (prop.type === "post") {
+        await postApi().reportPost(prop.id, { reason: reportReason });
+      } else if (prop.type === "gym") {
+        await gymApi().reportGym(prop.id, { reason: reportReason });
+      } else if (prop.type === "review") {
+        await gymApi().reportReview(prop.id, { reason: reportReason });
+      } else if (prop.type === "completion") {
+        await completionApi().reportCompletion(prop.id, {
+          reason: reportReason,
+        });
+      }
+      alert("신고가 완료되었습니다.");
+    } catch (error) {
+      if (isAxiosError(error)) {
+        const axiosError = error as AxiosError;
+        if (axiosError.response?.data?.detail) {
+          alert(axiosError.response.data.detail);
+        }
+      } else {
+        console.log("잠시 후 다시 시도해주세요.");
+      }
+    } finally {
+      window.location.reload();
+    }
+  };
+  const Delete = async () => {
+    try {
+      if (prop.type === "comment") {
+        await postApi().deleteComment(prop.id);
+      } else if (prop.type === "post") {
+        await postApi().deletePost(prop.id);
+      } else if (prop.type === "completion") {
+        await completionApi().deleteCompletion(prop.id);
+      }
+      alert("삭제가 완료되었습니다.");
+    } catch (error) {
+      if (isAxiosError(error)) {
+        const axiosError = error as AxiosError;
+        if (axiosError.response?.data?.detail) {
+          alert(axiosError.response.data.detail);
+        }
+      } else {
+        console.log("잠시 후 다시 시도해주세요.");
+      }
+    } finally {
+    }
   };
   return (
     <div style={{ placeItems: "center", fontSize: "14px" }}>
@@ -207,8 +281,8 @@ const ReportButton = ({}) => {
           style={{
             display: "flex",
             flexDirection: "column",
-            width: "235px",
-            height: "210px",
+            width: "210px",
+            height: "140px",
             position: "absolute",
             top: "50%",
             left: "50%",
@@ -228,38 +302,51 @@ const ReportButton = ({}) => {
               borderRadius: "10px 10px 0px 0px",
             }}
           >
-            {reportReason}
+            {reportType} 신고
           </div>
-          <div
-            style={{
-              width: "100%",
-              flex: "1",
-              backgroundColor: "white",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              fontSize: "10px",
-              textAlign: "center",
-              border: "1px solid #B7BBC8",
-            }}
-          >
-            게시물의 주제가 게시판의 성격에 크게 벗어나,
-            <br />
-            다른 이용자에게 불편을 끼칠 수 있는 게시물입니다.
-            <br />
-            <br />
-            신고는 반대 의견을 나타내는 기능이 아닙니다.
-            <br />
-            신고 사유에 맞지 않는 신고를 했을 경우,
-            <br />
-            해당 신고는 처리되지 않습니다.
-          </div>
+          {reportType === "리뷰" ? (
+            <div
+              style={{
+                width: "100%",
+                flex: "1",
+                backgroundColor: "white",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                fontSize: "12px",
+                textAlign: "center",
+                border: "1px solid #B7BBC8",
+              }}
+            >
+              해당 신고는 익명으로 처리됩니다.
+              <br />
+              해당 {reportType}를 신고하시겠습니까?
+            </div>
+          ) : (
+            <div
+              style={{
+                width: "100%",
+                flex: "1",
+                backgroundColor: "white",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                fontSize: "12px",
+                textAlign: "center",
+                border: "1px solid #B7BBC8",
+              }}
+            >
+              해당 신고는 익명으로 처리됩니다.
+              <br />
+              해당 {reportType}을 신고하시겠습니까?
+            </div>
+          )}
           <div
             style={{
               display: "flex",
               flexDirection: "row",
               width: "100%",
-              height: "40px",
+              height: "35px",
               fontSize: "12px",
               backgroundColor: "white",
             }}
@@ -290,7 +377,7 @@ const ReportButton = ({}) => {
                 border: "1px solid #B7BBC8",
                 borderRadius: "0px 0px 10px 0px",
               }}
-              onClick={handleReportCancel}
+              onClick={() => Report()}
             >
               확인
             </div>
