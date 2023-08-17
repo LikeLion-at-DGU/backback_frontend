@@ -60,7 +60,7 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
         console.log("잠시 후 다시 시도해주세요.");
       }
     } finally {
-      // window.location.reload();
+      window.location.reload();
     }
   };
   const handleSubmit = () => {

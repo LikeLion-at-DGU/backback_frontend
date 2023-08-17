@@ -8,10 +8,9 @@ const CommentList: React.FC<CommentListProps> = ({ ...prop }) => {
   const listItems = prop.comments.map((item, index) => (
     <Comment
       key={index.toString()}
-      nickname={item.nickname}
-      type={item.type}
-      profileimage={item.profileimage}
-      comment={item.comment}
+      content={item.content}
+      writer={item.writer}
+      createdAt={item.createdAt}
       id={item.id}
     />
   ));

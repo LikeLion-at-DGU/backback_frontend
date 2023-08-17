@@ -8,31 +8,33 @@ import { purpose_options } from "@/components/write/PurposeChoice";
 import NavBar from "@/layouts/components/NavBar";
 import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
-import React, { use, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useCallback, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const router = useRouter();
-  const choose: number[] = [];
+  const [choose, setChoose] = useState<number[]>([]); // choose 배열을 상태로 선언
+  const [find, setFind] = React.useState<number[]>([]);
   const [posts, setPosts] = React.useState<PostProps[]>([]);
-
   const [open, setOpen] = useState(false);
 
   const handlechoose = (e: number) => {
     if (choose.includes(e)) {
-      choose.splice(choose.indexOf(e), 1);
+      // setChoose를 통해 choose 배열을 업데이트
+      setChoose(choose.filter((item) => item !== e));
     } else {
-      choose.push(e);
+      setChoose([...choose, e]);
     }
     console.log(choose);
   };
+
   const handleopen = () => {
     setOpen(!open);
   };
-  const getPosts = useCallback(() => {
-    postApi()
+  const getPosts = useCallback(async () => {
+    await postApi()
       .getPosts({ type: "ORDINARY" })
       .then((res) => {
         console.log(res.data.results);
@@ -42,12 +44,53 @@ export default function Home() {
         console.log(err);
       });
   }, [setPosts, postApi]);
+
+  const getPostsByCategory = useCallback(
+    async (choose: string) => {
+      try {
+        const res = await postApi().getPosts({
+          type: "ORDINARY",
+          purpose: choose,
+        });
+        return res.data.results;
+      } catch (error) {
+        console.log(error);
+        return [];
+      }
+    },
+    [postApi]
+  );
+
   useEffect(() => {
-    getPosts();
-  }, [getPosts]);
+    if (!find.length) {
+      getPosts();
+    } else {
+      const fetchData = async () => {
+        const newSearch: PostProps[] = [];
+        for (const item of find) {
+          const categoryPosts = await getPostsByCategory(purpose_options[item]);
+          newSearch.push(...categoryPosts);
+        }
+        setPosts(newSearch);
+      };
+      fetchData();
+    }
+  }, [getPosts, getPostsByCategory, setPosts, find]);
+
+  const handlesearch = async () => {
+    if (choose.length) {
+      setFind(choose);
+    } else {
+      getPosts();
+    }
+  };
 
   const categorylist = purpose_options.map((item, index) => (
-    <CategoryBox key={index.toString()} onClick={() => handlechoose(index)}>
+    <CategoryBox
+      key={index.toString()}
+      onClick={() => handlechoose(index)}
+      find={choose.includes(index)}
+    >
       {item}
     </CategoryBox>
   ));
@@ -114,7 +157,7 @@ export default function Home() {
                 <div
                   style={{
                     position: "absolute",
-                    top: "135px",
+                    top: "157px",
                     left: "260px",
                     display: "flex",
                     flexDirection: "column",
@@ -152,6 +195,7 @@ export default function Home() {
                         fontSize: "12px",
                         cursor: "pointer",
                       }}
+                      onClick={handlesearch}
                     >
                       선택완료
                     </div>

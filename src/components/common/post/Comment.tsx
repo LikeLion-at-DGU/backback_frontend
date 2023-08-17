@@ -2,12 +2,15 @@ import React from "react";
 import UserInfo, { UserInfoProps } from "../UserInfo";
 import ReportButton from "../../core/ReportButton";
 
-export interface CommentProps extends UserInfoProps {
+export interface CommentProps {
   id: string;
-  comment: string;
+  content: string;
+  writer: UserInfoProps;
+  createdAt: string;
 }
 
 const Comment: React.FC<CommentProps> = ({ ...prop }) => {
+  console.log(prop.content);
   return (
     <div
       style={{
@@ -30,10 +33,10 @@ const Comment: React.FC<CommentProps> = ({ ...prop }) => {
         }}
       >
         <UserInfo
-          nickname={prop.nickname}
-          type={prop.type}
-          profileId={prop.profileId}
-          level={prop.level}
+          nickname={prop.writer.nickname}
+          type={prop.writer.nickname}
+          profileId={prop.writer.nickname}
+          level={prop.writer.level}
         />
         <ReportButton />
       </div>
@@ -47,7 +50,7 @@ const Comment: React.FC<CommentProps> = ({ ...prop }) => {
           borderBottom: "1px solid #B7BBC8",
         }}
       >
-        {prop.comment}
+        {prop.content}
       </div>
     </div>
   );
