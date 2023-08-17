@@ -44,7 +44,7 @@ export default function MyPage(props: { id: number }) {
   useEffect(() => {
     profileApi()
       .getProfile(props.id)
-      .then((res) => {
+      .then((res: any) => {
         processProfileData(res.data);
         setExportInfo(Object.values(res.data.info));
         setJoinDate(res.data.joinedAt);

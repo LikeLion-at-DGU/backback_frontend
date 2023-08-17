@@ -50,7 +50,7 @@ export function CompletedPool({ joinDate, userId }: CompletedPoolProps) {
   useEffect(() => {
     profileApi()
       .getProfileCompletions(userId, { range: selectedDate })
-      .then((res) => {
+      .then((res: any) => {
         setCompletedList(res.data.postCounts);
       });
   }, [userId, selectedDate]);

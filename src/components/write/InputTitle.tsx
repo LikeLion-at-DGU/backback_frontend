@@ -23,9 +23,9 @@ const InputTitle: React.FC<InputTitleProps> = ({ title, onTitleChange }) => {
           display: "inline-block",
           cursor: "pointer",
           fontSize: "18px",
-          color: "#B3B3B3",
+          color: "#000000",
           fontFamily: "MainFont",
-          padding: "0px 0px 0px 15px",
+          padding: "0px 0px 0px 10px",
         }}
       />
     </div>

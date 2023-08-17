@@ -1,4 +1,3 @@
-import Link from "../../../../node_modules/next/link";
 import Completion, { CompletionProps } from "./Completion";
 import { ScrollContent } from "../../post/PostDetail";
 import RouterLink from "@/components/core/RouterLink";
@@ -53,12 +52,14 @@ const CompletionList: React.FC<CompletionListProps> = ({ ...prop }) => {
             display: "inline-block",
             position: "absolute",
             height: "35px",
-            width: "106px",
+            width: "110px",
             backgroundColor: "white",
             padding: "7px 20px 6px 20px",
             borderRadius: "20px",
             bottom: "70px",
             left: "calc(50% - 57.5px)",
+            boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.1)",
+            border: "0.5px solid #ccc",
           }}
         >
           <RouterLink href="/completion/write">

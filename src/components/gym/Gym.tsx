@@ -53,6 +53,8 @@ const Gym: React.FC<GymProps> = ({ ...prop }) => {
               style={{
                 width: "100%",
                 borderRadius: "20px 20px 0px 0px",
+                objectFit: "cover",
+                objectPositon: "center",
               }}
             ></img>
           </div>
@@ -68,7 +70,7 @@ const Gym: React.FC<GymProps> = ({ ...prop }) => {
             <div
               style={{
                 fontSize: "16px",
-                fontWeight: "700",
+                fontFamily: "BoldFont",
                 width: "100%",
                 height: "25px",
                 overflow: "hidden",
@@ -79,6 +81,7 @@ const Gym: React.FC<GymProps> = ({ ...prop }) => {
             <div
               style={{
                 fontSize: "12px",
+                fontFamily: "MainFont",
                 width: "100%",
                 height: "18px",
                 marginBottom: "5px",
@@ -90,6 +93,7 @@ const Gym: React.FC<GymProps> = ({ ...prop }) => {
             <div
               style={{
                 fontSize: "14px",
+                fontFamily: "MainFont",
                 width: "100%",
                 height: "22px",
                 overflow: "hidden",

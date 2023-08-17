@@ -1,6 +1,5 @@
 import React from "react";
 import UserInfo, { UserInfoProps } from "./UserInfo";
-import Link from "next/link";
 import RouterLink from "../core/RouterLink";
 
 export interface HotColumnProps extends UserInfoProps {
@@ -24,7 +23,6 @@ const HotColumn: React.FC<HotColumnProps> = ({ ...prop }) => {
       return str;
     }
   }
-  console.log(prop);
   const date = prop.createdAt.split("T")[0].split("-").join(".");
   const time = prop.createdAt
     .split("T")[1]
@@ -105,7 +103,11 @@ const HotColumn: React.FC<HotColumnProps> = ({ ...prop }) => {
               fontFamily: "MainFont",
             }}
           >
-            <UserInfo nickname={prop.writer.nickname} type={prop.writer.type} />
+            <UserInfo
+              profileId={prop.writer.profileId}
+              nickname={prop.writer.nickname}
+              type={prop.writer.type}
+            />
           </div>
         </div>
         <div

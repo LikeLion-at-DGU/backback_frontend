@@ -14,16 +14,16 @@ const InputContent: React.FC<InputContentProps> = ({
       <textarea
         value={content}
         onChange={onContentChange}
-        placeholder="  내용을 입력하세요."
+        placeholder="내용을 입력하세요."
         style={{
           border: "1px solid #B7BBC8",
           width: "360px",
           height: "430px",
           fontSize: "18px",
-          color: "#B3B3B3",
+          color: "#000000",
           resize: "none",
           fontFamily: "MainFont",
-          padding: "7px",
+          padding: "23px 0px 0px 21px",
         }}
       />
     </div>

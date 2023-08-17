@@ -46,20 +46,20 @@ const Header: React.FC = () => {
         >
           <img
             src="../../../assets/images/Back_icon.png"
-            style={{ height: "20px" }}
+            style={{ height: "20px", width: "20px" }}
           ></img>
         </span>
       </div>
       <RouterLink href="/">
         <img
           src="../../../assets/images/Home_icon.png"
-          style={{ height: "20px" }}
+          style={{ height: "20px", width: "23px" }}
         ></img>
       </RouterLink>
       <RouterLink href="/post/scraps">
         <img
           src="../../../assets/images/Scrap_icon.png"
-          style={{ height: "20px" }}
+          style={{ height: "20px", width: "17px" }}
         ></img>
       </RouterLink>
       <RouterLink href={cookies.uid ? "/mypage" : "/login"}>

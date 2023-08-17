@@ -1,6 +1,6 @@
 import React from "react";
 import UserInfo from "../common/UserInfo";
-import { ScrapPostProps } from "@/pages/post/scraps";
+import { ScrapPostProps } from "@/pages/post/scraps/index";
 import RouterLink from "../core/RouterLink";
 
 const ScrapPost: React.FC<ScrapPostProps> = ({ ...prop }) => {

@@ -90,7 +90,7 @@ export default function WritePost() {
           flex: "1",
           overflow: "auto",
           scrollBehavior: "smooth",
-          display: "flex",
+          display: "block",
         }}
       >
         <div style={{ flex: "1" }}>
@@ -114,7 +114,7 @@ export default function WritePost() {
             style={{
               width: "100%",
               justifyContent: "center",
-              display: "flex",
+              display: "block",
               flexDirection: "column",
               alignItems: "center",
               flex: "1",

@@ -1,5 +1,4 @@
 import { UserInfoProps } from "../UserInfo";
-import Link from "../../../../node_modules/next/link";
 import RouterLink from "@/components/core/RouterLink";
 
 export interface CompletionProps extends UserInfoProps {
@@ -17,7 +16,7 @@ const Completion: React.FC<CompletionProps> = ({ ...prop }) => {
         flexDirection: "row",
         flexWrap: "wrap",
         width: "100%",
-        height: "100%",
+        height: "120px",
       }}
     >
       <RouterLink href={`/completion/${prop.id}`}>
@@ -26,6 +25,8 @@ const Completion: React.FC<CompletionProps> = ({ ...prop }) => {
           style={{
             height: "100%",
             width: "100%",
+            objectFit: "cover",
+            objectPositon: "center",
           }}
         />
       </RouterLink>

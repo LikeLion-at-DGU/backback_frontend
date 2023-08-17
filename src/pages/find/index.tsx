@@ -1,6 +1,18 @@
+import postApi from "@/apis/postApi";
 import Find from "@/components/common/Find";
+import { HotColumnProps } from "@/components/common/HotColumn";
+import { PostProps } from "@/components/post/Post";
+import { useEffect, useState } from "react";
 
 export default function ExportFind() {
+  const [hotColumns, setHotColumns] = useState<HotColumnProps[]>([]);
+  useEffect(() => {
+    postApi()
+      .getHotProPosts()
+      .then((res) => {
+        setHotColumns(res.data);
+      });
+  }, []);
   return (
     <>
       <div
@@ -9,46 +21,7 @@ export default function ExportFind() {
           height: "50px",
         }}
       ></div>
-      <Find
-        columns={[
-          {
-            id: "1",
-            nickname: "요가마스터",
-            createdAt: "August 06 2023",
-            title: "쌩초보를 위한 아쉬탕가 요가의 시작",
-            type: "../../../assets/images/Expert_icon.png",
-            content:
-              "인도의 파탄잘리가 고안한 요가 수련의 8단계를 기초로 둔 8개의 자기라는 뜻의 요가로, 인도 마이소르에 있는 아쉬탕가의 어쩌구저쩌구",
-            views: 13048,
-            image: "../../../assets/images/Column_img.png",
-            profileId: "2",
-          },
-          {
-            id: "2",
-            nickname: "요가마스터",
-            createdAt: "August 06 2023",
-            title: "쌩초보를 위한 아쉬탕가 요가의 시작",
-            type: "../../../assets/images/Expert_icon.png",
-            content:
-              "인도의 파탄잘리가 고안한 요가 수련의 8단계를 기초로 둔 8개의 자기라는 뜻의 요가로, 인도 마이소르에 있는 아쉬탕가의 어쩌구저쩌구",
-            views: 13048,
-            image: "../../../assets/images/Column_img.png",
-            profileId: "2",
-          },
-          {
-            id: "3",
-            nickname: "요가마스터",
-            createdAt: "August 06 2023",
-            title: "쌩초보를 위한 아쉬탕가 요가의 시작",
-            type: "../../../assets/images/Expert_icon.png",
-            content:
-              "인도의 파탄잘리가 고안한 요가 수련의 8단계를 기초로 둔 8개의 자기라는 뜻의 요가로, 인도 마이소르에 있는 아쉬탕가의 어쩌구저쩌구",
-            views: 13048,
-            image: "../../../assets/images/Column_img.png",
-            profileId: "2",
-          },
-        ]}
-      />
+      {hotColumns && <Find columns={hotColumns} />}
     </>
   );
 }

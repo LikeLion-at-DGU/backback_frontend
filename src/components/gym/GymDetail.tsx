@@ -87,6 +87,8 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
           style={{
             width: "100%",
             height: "240px",
+            objectFit: "cover",
+            objectPositon: "center",
           }}
         />
         <ContainerBox>
@@ -104,7 +106,7 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
               style={{
                 width: "100%",
                 fontSize: "22px",
-                fontWeight: "700",
+                fontFamily: "BoldFont",
                 marginBottom: "5px",
               }}
             >
@@ -123,8 +125,8 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
           <div
             style={{
               width: "100%",
-              fontSize: "22px",
-              fontWeight: "700",
+              fontSize: "18px",
+              fontFamily: "BoldFont",
               marginBottom: "5px",
             }}
           >
@@ -138,8 +140,8 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
           <div
             style={{
               width: "100%",
-              fontSize: "22px",
-              fontWeight: "700",
+              fontSize: "18px",
+              fontFamily: "BoldFont",
               marginBottom: "5px",
             }}
           >

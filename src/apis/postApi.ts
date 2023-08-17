@@ -5,6 +5,7 @@ interface PostsQueryParams {
   purpose?: string;
   exercise?: string;
   type?: "ORDINARY" | "PRO";
+  search?: string;
 }
 
 interface Post {
@@ -31,6 +32,9 @@ const postApi = () => {
       }
       if (query.type) {
         queryParams.type = query.type;
+      }
+      if (query.search) {
+        queryParams.search = query.search;
       }
       return api.get("/posts", { params: queryParams });
     },

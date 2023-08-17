@@ -1,48 +1,25 @@
 import postApi from "@/apis/postApi";
-import { UserInfoProps } from "@/components/common/UserInfo";
 import { ScrollContent } from "@/components/post/PostDetail";
-import ScrapList from "@/components/post/ScrapList";
-import { Inter } from "next/font/google";
-import { useRouter } from "next/router";
+import FindList, { FindPostProps } from "@/components/post/FindList";
 import React, { useEffect } from "react";
-import { useCallback } from "react";
 
-const inter = Inter({ subsets: ["latin"] });
+export async function getServerSideProps(context: any) {
+  const params = context.params;
+  const q = params.q;
 
-export interface ScrapPostProps {
-  id: string;
-  createdAt: string;
-  updatedAt: string;
-  writer: UserInfoProps;
-  title: string;
-  contentShort: string;
-  commentsCnt: number;
-  viewCnt: number;
-  likesCnt: number;
+  return { props: { q } };
 }
-export interface ScrapProps {
-  id: string;
-  post: ScrapPostProps;
-  createdAt: string;
-  updatedAt: string;
-  user: string;
-}
-export default function Home() {
-  const router = useRouter();
-  const [posts, setPosts] = React.useState<ScrapProps[]>([]);
 
-  const getPosts = useCallback(async () => {
-    await postApi()
-      .scrappedPost()
-      .then((res: any) => {
-        setPosts(res.data.results);
-      })
-      .catch((err) => {});
-  }, [setPosts, postApi]);
+export default function Home(props: { q: string }) {
+  const [posts, setPosts] = React.useState<FindPostProps[]>([]);
 
   useEffect(() => {
-    getPosts();
-  }, [getPosts]);
+    postApi()
+      .getPosts({ search: props.q })
+      .then((res) => {
+        setPosts(res.data.results);
+      });
+  }, [props.q]);
 
   return (
     <>
@@ -66,7 +43,7 @@ export default function Home() {
               borderBottom: "1px solid #B7BBC8",
             }}
           >
-            스크랩한 글
+            "{props.q}" 검색 결과
           </div>
         </div>
         <div
@@ -81,7 +58,7 @@ export default function Home() {
             scrollBehavior: "smooth",
           }}
         >
-          <ScrapList posts={...posts} />
+          <FindList posts={...posts} />
         </div>
       </ScrollContent>
     </>

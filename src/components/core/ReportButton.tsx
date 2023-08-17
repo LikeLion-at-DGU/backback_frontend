@@ -107,7 +107,7 @@ const ReportButton: React.FC<ReportButtonProps> = ({ ...prop }) => {
             width: "110px",
             height: "30px",
             display: "flex",
-            padding: "0px 5px 0px 5px",
+            padding: "0px 15px 0px 5px",
             backgroundColor: "white",
           }}
           onClick={handleReport}

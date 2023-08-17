@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "next/link";
+import RouterLink from "../core/RouterLink";
 
 export interface TagButtonProps {
   content: string;
@@ -29,9 +29,9 @@ const TagButton: React.FC<TagButtonProps> = ({ ...prop }) => {
   };
 
   return (
-    <Link href="/find/[id]" as={`/find/${prop.id}`}>
+    <RouterLink href={`/find/${prop.content}`}>
       <button style={buttonStyle}>#{prop.content}</button>
-    </Link>
+    </RouterLink>
   );
 };
 
