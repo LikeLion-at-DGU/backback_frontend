@@ -29,7 +29,7 @@ const TagButton: React.FC<TagButtonProps> = ({ ...prop }) => {
   };
 
   return (
-    <RouterLink href={`/find/${prop.id}`}>
+    <RouterLink href={`/find/${prop.content}`}>
       <button style={buttonStyle}>#{prop.content}</button>
     </RouterLink>
   );
