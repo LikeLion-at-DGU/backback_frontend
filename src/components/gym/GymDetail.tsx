@@ -5,9 +5,9 @@ import KakaoMap from "./map";
 import ReviewList, { ReviewListProps } from "./ReviewList";
 import React, { useRef } from "react";
 import gymApi from "@/apis/gymApi";
-import { AxiosError, isAxiosError } from "axios";
 import { useCookies } from "react-cookie";
 import { useState, useEffect } from "react";
+import MustLogin from "../core/LoginModal";
 
 interface ContentProps {
   content: string;
@@ -41,8 +41,12 @@ export const ContainerBox = styled.div`
 `;
 
 const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
+  const [likepopen, setLikeopen] = useState(false);
   const [cookies] = useCookies(["uid"]);
   const [isLogin, setIsLogin] = useState<boolean>(false);
+  const likeOpen = () => {
+    setLikeopen(!likepopen);
+  };
   useEffect(() => {
     if (cookies.uid) setIsLogin(true);
     else setIsLogin(false);
@@ -254,11 +258,13 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
                 fontSize: "14px",
                 cursor: "pointer",
                 fontFamily: "MainFont",
+                boxShadow: "0px 4px 5px rgba(0, 0, 0, 0.4)",
               }}
-              onClick={handleSubmit}
+              onClick={isLogin ? handleSubmit : () => setLikeopen(true)}
             >
               등록
             </button>
+            {likepopen && <MustLogin onClick={likeOpen} />}
           </div>
         </div>
       </div>
