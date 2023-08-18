@@ -54,7 +54,7 @@ const Gym: React.FC<GymProps> = ({ ...prop }) => {
                 width: "100%",
                 borderRadius: "20px 20px 0px 0px",
                 objectFit: "cover",
-                objectPositon: "center",
+                objectPosition: "center",
               }}
             ></img>
           </div>

@@ -9,7 +9,7 @@ export interface CompletionListProps extends UserInfoProps {
 
 const CompletionList: React.FC<CompletionListProps> = ({ ...prop }) => {
   const listItems = prop.completions.map((item, index) => (
-    <div style={{ width: "33.3%" }}>
+    <div style={{ minWidth: "33.3%" }}>
       <Completion
         id={item.id}
         key={index.toString()}

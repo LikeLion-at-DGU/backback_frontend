@@ -23,7 +23,7 @@ export const DeleteBox = styled.div`
 `;
 
 interface DeleteButtonProps {
-  type: "comment" | "post" | "completion";
+  type: "comment" | "post" | "completion" | "column";
   id: string;
 }
 
@@ -49,9 +49,11 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ ...prop }) => {
   const handleDelete = () => {
     if (prop.type === "comment") {
       setDeleteType("댓글");
-    } else if (prop.type === "post") {
-      setDeleteType("게시글");
-    } else if (prop.type === "completion") {
+    } else if (
+      prop.type === "post" ||
+      prop.type === "column" ||
+      prop.typ === "completion"
+    ) {
       setDeleteType("게시글");
     }
     setIsDelete(!isdelete);
@@ -63,7 +65,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ ...prop }) => {
     try {
       if (prop.type === "comment") {
         await postApi().deleteComment(prop.id);
-      } else if (prop.type === "post") {
+      } else if (prop.type === "post" || prop.type === "column") {
         await postApi().deletePost(prop.id);
       } else if (prop.type === "completion") {
         await completionApi().deleteCompletion(prop.id);
@@ -74,6 +76,8 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ ...prop }) => {
         window.location.href = `/post`;
       } else if (prop.type === "completion") {
         window.location.href = `/completion`;
+      } else if (prop.type === "column") {
+        window.location.href = `/column`;
       }
     } catch (error) {}
   };
