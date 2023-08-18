@@ -85,77 +85,80 @@ const ReportButton: React.FC<ReportButtonProps> = ({ ...prop }) => {
   };
 
   return (
-    <div style={{ placeItems: "center", fontSize: "14px" }}>
-      {isopen && (
-        <div
-          style={{
-            position: "absolute",
-            top: dropdownPosition.top,
-            left: dropdownPosition.left,
-            transform: "translate(-70%, 0)",
-            zIndex: "10",
-            width: "110px",
-            height: "30px",
-            display: "flex",
-            padding: "0px 15px 0px 5px",
-            backgroundColor: "white",
-          }}
-          onClick={handleReport}
-        >
+    <>
+      <div
+        style={{ placeItems: "center", fontSize: "14px", position: "relative" }}
+      >
+        {isopen && (
           <div
             style={{
-              border: "0.5px solid black",
-              width: "100px",
-              height: "100%",
-              fontSize: "14px",
-              cursor: "pointer",
+              position: "absolute",
+              top: "0",
+              left: "0",
+              transform: "translate(-70%, 70%)",
+              zIndex: "10",
+              width: "110px",
+              height: "30px",
               display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "row",
-              padding: "0px 5px 0px 5px",
+              backgroundColor: "white",
             }}
+            onClick={handleReport}
           >
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-start",
+                border: "0.5px solid black",
+                width: "100px",
                 height: "100%",
-                flex: "2",
                 fontSize: "14px",
-              }}
-            >
-              신고하기
-            </div>
-            <div
-              style={{
+                cursor: "pointer",
                 display: "flex",
-                height: "100%",
-                flex: "1",
                 alignItems: "center",
-                justifyContent: "flex-end",
+                justifyContent: "center",
+                flexDirection: "row",
+                padding: "0px 5px 0px 5px",
               }}
             >
-              <img
-                src="../../../assets/images/Report_icon.png"
-                style={{ height: "14px" }}
-              ></img>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                  height: "100%",
+                  flex: "2",
+                  fontSize: "14px",
+                }}
+              >
+                신고하기
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  height: "100%",
+                  flex: "1",
+                  alignItems: "center",
+                  justifyContent: "flex-end",
+                }}
+              >
+                <img
+                  src="../../../assets/images/Report_icon.png"
+                  style={{ height: "14px" }}
+                ></img>
+              </div>
             </div>
           </div>
+        )}
+        <div
+          style={{
+            cursor: "pointer",
+            placeItems: "center",
+          }}
+          onClick={handleDropdownToggle}
+        >
+          <img
+            src="../../../assets/images/Three_Dots_icon.png"
+            style={{ height: "17px" }}
+          ></img>
         </div>
-      )}
-      <div
-        style={{
-          cursor: "pointer",
-          placeItems: "center",
-        }}
-        onClick={handleDropdownToggle}
-      >
-        <img
-          src="../../../assets/images/Three_Dots_icon.png"
-          style={{ height: "17px" }}
-        ></img>
       </div>
       {report && (
         <div
@@ -347,7 +350,7 @@ const ReportButton: React.FC<ReportButtonProps> = ({ ...prop }) => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

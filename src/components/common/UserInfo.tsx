@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 export interface UserInfoProps {
   profileId: string;
@@ -13,14 +13,17 @@ const UserInfo: React.FC<UserInfoProps> = ({
   type,
   level,
 }) => {
+  const [isCommon, setIsCommon] = React.useState(true);
   let profileimage = "";
   if (level) {
     profileimage = `../../../assets/images/Character${level}.png`;
   }
-  let typeimage = "";
-  if (type !== "COMMON") {
-    typeimage = "../../../assets/images/Expert_icon.png";
-  }
+  useEffect(() => {
+    if (type !== "COMMON") {
+      setIsCommon(false);
+    }
+  }, []);
+
   return (
     <div
       style={{
@@ -51,9 +54,9 @@ const UserInfo: React.FC<UserInfoProps> = ({
       >
         {nickname}
       </div>
-      {typeimage && (
+      {!isCommon && (
         <img
-          src={typeimage}
+          src="../../../assets/images/Expert_icon.png"
           alt="profile"
           style={{
             height: "14px",
