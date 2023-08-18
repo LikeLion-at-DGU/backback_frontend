@@ -112,12 +112,20 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
             fontSize: "16px",
           }}
         >
-          <UserInfo
-            nickname={prop.writer?.nickname}
-            type={prop.writer?.type}
-            profileId={prop.writer?.profileId}
-            level={prop.writer?.level}
-          />
+          <RouterLink
+            href={
+              isLogin && cookies.uid == prop.writer.profileId
+                ? "/mypage"
+                : "/profile/" + prop.writer.profileId
+            }
+          >
+            <UserInfo
+              nickname={prop.writer?.nickname}
+              type={prop.writer?.type}
+              profileId={prop.writer?.profileId}
+              level={prop.writer?.level}
+            />
+          </RouterLink>
           {isLogin &&
             (cookies.uid == prop.writer?.profileId ? (
               <DeleteButton id={prop.id} type={"completion"} />
