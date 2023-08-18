@@ -2,10 +2,11 @@ import api from "@/api";
 
 const gymApi = () => {
   return {
-    getGyms: (query: { search?: string }) => {
+    getGyms: (query: { search?: string; page?: number }) => {
       //완료
-      const queryParams: { search?: string } = {};
+      const queryParams: { search?: string; page?: number } = {};
       if (query.search) queryParams.search = query.search;
+      if (query.page) queryParams.page = query.page;
       return api.get("/gyms", { params: queryParams });
     },
     getGymsBylocation: (

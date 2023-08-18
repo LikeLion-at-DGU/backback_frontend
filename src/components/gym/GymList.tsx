@@ -1,7 +1,10 @@
+import { PostPageProps } from "../mypage/PostPage";
 import Gym, { GymProps } from "./Gym";
+import { PostPage } from "../mypage/PostPage";
 
 interface GymListProps {
   gyms: GymProps[];
+  postPageProps: PostPageProps;
 }
 
 const GymList: React.FC<GymListProps> = ({ ...prop }) => {
@@ -34,6 +37,13 @@ const GymList: React.FC<GymListProps> = ({ ...prop }) => {
       }}
     >
       {listItems}
+      <PostPage
+        page={prop.postPageProps.page}
+        isNext={prop.postPageProps.isNext}
+        isPrevious={prop.postPageProps.isPrevious}
+        setPage={prop.postPageProps.setPage}
+        total={prop.postPageProps.total}
+      />
     </div>
   );
 };

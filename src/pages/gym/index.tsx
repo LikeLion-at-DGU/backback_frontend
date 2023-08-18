@@ -15,6 +15,10 @@ export default function Home() {
   const [ishave, setIshave] = useState(false);
   const [address, setAddress] = useState("");
   const [gyms, setGyms] = useState<GymProps[]>([]);
+  const [isNext, setIsNext] = useState<boolean>(false);
+  const [isPrevious, setIsPrevious] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [total, setTotal] = useState<number>(0);
   const [gymlocation, setGymlocation] = useState<GymProps[]>([]);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const handleSearch = () => {
@@ -33,13 +37,16 @@ export default function Home() {
 
   const getGyms = useCallback(() => {
     gymApi()
-      .getGyms({ search: "" })
+      .getGyms({ search: "", page: page })
       .then((res) => {
         setGyms(res.data.results);
         setGymlocation([]);
+        setIsNext(res.data.next !== null);
+        setIsPrevious(res.data.previous !== null);
+        setTotal(Math.ceil(res.data.count / 20));
       })
       .catch((err) => {});
-  }, [setGyms, address, gymApi]);
+  }, [setGyms, address, gymApi, page]);
   const getGymsByAddress = useCallback(() => {
     gymApi()
       .getGyms({ search: address })
@@ -207,7 +214,18 @@ export default function Home() {
               </div>
             ))}
         </div>
-        {gyms && <GymList gyms={...gyms}></GymList>}
+        {gyms && (
+          <GymList
+            gyms={...gyms}
+            postPageProps={{
+              page: page,
+              isNext: isNext,
+              isPrevious: isPrevious,
+              total: total,
+              setPage: setPage,
+            }}
+          ></GymList>
+        )}
       </ScrollContent>
     </>
   );
