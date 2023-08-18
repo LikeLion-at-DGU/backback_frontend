@@ -12,8 +12,8 @@ export default function WritePost() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [previewImageCount, setPreviewImageCount] = useState(0);
-  const [selectedPurpose, setSelectedPurpose] = useState(0);
-  const [selectedExercise, setSelectedExercise] = useState(0);
+  const [selectedPurpose, setSelectedPurpose] = useState(-1);
+  const [selectedExercise, setSelectedExercise] = useState(-1);
 
   const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -32,7 +32,7 @@ export default function WritePost() {
     setSelectedExercise(exercise);
   };
   const handleSubmit = () => {
-    if (title && content && selectedPurpose && selectedExercise) {
+    if (title && content && selectedPurpose + 1 && selectedExercise + 1) {
       let imagesArray: File[] = [];
       if (selectedImages) {
         imagesArray = Array.from(selectedImages);
@@ -41,8 +41,8 @@ export default function WritePost() {
         .postPost({
           title: title,
           content: content,
-          purpose: selectedPurpose,
-          exercise: selectedExercise,
+          purpose: selectedPurpose + 1,
+          exercise: selectedExercise + 1,
           images: imagesArray,
           type: "ORDINARY",
         })
