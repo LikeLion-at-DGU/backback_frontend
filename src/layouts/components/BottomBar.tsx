@@ -3,6 +3,7 @@ import React from "react";
 import RouterLink from "../../components/core/RouterLink";
 import styled from "styled-components";
 import { useCookies } from "react-cookie";
+import { useState, useEffect } from "react";
 
 const Menu = styled.div`
   height: 100%;
@@ -18,6 +19,11 @@ const Menu = styled.div`
 
 const Header: React.FC = () => {
   const [cookies] = useCookies(["uid"]);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+  useEffect(() => {
+    if (cookies.uid) setIsLogin(true);
+    else setIsLogin(false);
+  }, [cookies]);
   const router = useRouter();
   const handleGoBack = () => {
     router.back();
@@ -62,12 +68,14 @@ const Header: React.FC = () => {
           style={{ height: "20px", width: "17px" }}
         ></img>
       </RouterLink>
-      <RouterLink href={cookies.uid ? "/mypage" : "/login"}>
-        <img
-          src="../../../assets/images/Mypage_icon.png"
-          style={{ height: "20px" }}
-        ></img>
-      </RouterLink>
+      {isLogin && (
+        <RouterLink href={cookies.uid ? "/mypage" : "/login"}>
+          <img
+            src="../../../assets/images/Mypage_icon.png"
+            style={{ height: "20px" }}
+          ></img>
+        </RouterLink>
+      )}
     </div>
   );
 };

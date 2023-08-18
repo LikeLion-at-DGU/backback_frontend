@@ -4,6 +4,7 @@ import ReportButton from "../core/ReportButton";
 import { useCookies } from "react-cookie";
 import DeleteButton from "../core/DeleteButton";
 import RouterLink from "../core/RouterLink";
+import { useState, useEffect } from "react";
 
 export interface CommentProps {
   id: string;
@@ -14,6 +15,11 @@ export interface CommentProps {
 
 const Comment: React.FC<CommentProps> = ({ ...prop }) => {
   const [cookies] = useCookies(["uid"]);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+  useEffect(() => {
+    if (cookies.uid) setIsLogin(true);
+    else setIsLogin(false);
+  }, [cookies]);
   return (
     <div
       style={{
@@ -36,21 +42,23 @@ const Comment: React.FC<CommentProps> = ({ ...prop }) => {
           fontFamily: "MainFont",
         }}
       >
-        <RouterLink
-          href={
-            cookies.uid == prop.writer.profileId
-              ? "/mypage"
-              : "/profile/" + prop.writer.profileId
-          }
-        >
-          <UserInfo
-            nickname={prop.writer.nickname}
-            type={prop.writer.nickname}
-            profileId={prop.writer.nickname}
-            level={prop.writer.level}
-          />
-        </RouterLink>
-        {cookies.uid == prop.writer.profileId ? (
+        {isLogin && (
+          <RouterLink
+            href={
+              cookies.uid == prop.writer.profileId
+                ? "/mypage"
+                : "/profile/" + prop.writer.profileId
+            }
+          >
+            <UserInfo
+              nickname={prop.writer.nickname}
+              type={prop.writer.nickname}
+              profileId={prop.writer.nickname}
+              level={prop.writer.level}
+            />
+          </RouterLink>
+        )}
+        {isLogin && cookies.uid == prop.writer.profileId ? (
           <DeleteButton id={prop.id} type={"comment"} />
         ) : (
           <ReportButton id={prop.id} type={"comment"} />

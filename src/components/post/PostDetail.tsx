@@ -46,6 +46,11 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
   const [scrapopen, setScrapopen] = useState(false);
   const [likepopen, setLikeopen] = useState(false);
   const [cookies] = useCookies(["uid"]);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+  useEffect(() => {
+    if (cookies.uid) setIsLogin(true);
+    else setIsLogin(false);
+  }, [cookies]);
   const date = prop.createdAt.split("T")[0].split("-").join(".");
   const time = prop.createdAt
     .split("T")[1]
@@ -81,7 +86,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
     } catch (error) {}
   };
   const postLike = async () => {
-    if (cookies.uid === undefined) return;
+    if (!isLogin) return;
     try {
       await postApi()
         .likePost(prop.id)
@@ -89,7 +94,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
     } catch (error) {}
   };
   const postScrap = async () => {
-    if (cookies.uid === undefined) return;
+    if (!isLogin) return;
     try {
       if (!prop.isClipped) {
         await postApi().scrapPost(prop.id);
@@ -107,13 +112,13 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
   };
   const [userNickname, setUserNickname] = useState<string>("");
   useEffect(() => {
-    if (cookies.uid === undefined) return;
+    if (!isLogin) return;
     profileApi()
       .getMe()
       .then((res: any) => {
         setUserNickname(res.data.nickname);
       });
-  }, [userNickname, cookies.uid]);
+  }, [userNickname, isLogin]);
 
   return (
     <ScrollContent>
@@ -173,21 +178,23 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
             fontFamily: "MainFont",
           }}
         >
-          <RouterLink
-            href={
-              cookies.uid == prop.writer.profileId
-                ? "/mypage"
-                : "/profile/" + prop.writer.profileId
-            }
-          >
-            <UserInfo
-              nickname={prop.writer.nickname}
-              type={prop.writer.type}
-              profileId={prop.writer.profileId}
-              level={prop.writer.level}
-            />
-          </RouterLink>
-          {cookies.uid &&
+          {isLogin && (
+            <RouterLink
+              href={
+                cookies.uid == prop.writer.profileId
+                  ? "/mypage"
+                  : "/profile/" + prop.writer.profileId
+              }
+            >
+              <UserInfo
+                nickname={prop.writer.nickname}
+                type={prop.writer.type}
+                profileId={prop.writer.profileId}
+                level={prop.writer.level}
+              />
+            </RouterLink>
+          )}
+          {isLogin &&
             (cookies.uid == prop.writer.profileId ? (
               <DeleteButton id={prop.id} type={"post"} />
             ) : (
@@ -278,7 +285,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
           <div style={{ cursor: "pointer", placeItems: "center" }}>
             {!prop.isClipped ? (
               <>
-                {cookies.uid ? (
+                {isLogin ? (
                   <img
                     src="../../../assets/images/noscrap.svg"
                     style={{ height: "22px" }}
@@ -353,7 +360,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
                 paddingTop: "10px",
               }}
             >
-              {cookies.uid ? (
+              {isLogin ? (
                 <button
                   style={{
                     border: "none",

@@ -13,14 +13,19 @@ export default function Home() {
   const [columns, setColumns] = useState<ColumnProps[]>([]);
   const [userType, setUserType] = useState<string>("");
   const [cookies] = useCookies(["uid"]);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
   useEffect(() => {
-    if (cookies.uid === undefined) return;
+    if (cookies.uid) setIsLogin(true);
+    else setIsLogin(false);
+  }, [cookies]);
+  useEffect(() => {
+    if (!isLogin) return;
     profileApi()
       .getMe()
       .then((res) => {
         setUserType(res.data.type);
       });
-  }, [userType, cookies.uid]);
+  }, [userType, isLogin]);
   const getColumns = useCallback(() => {
     postApi()
       .getPosts({ type: "PRO" })
