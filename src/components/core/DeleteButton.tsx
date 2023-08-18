@@ -321,6 +321,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ ...prop }) => {
               fontSize: "12px",
               textAlign: "center",
               border: "1px solid #B7BBC8",
+              borderRadius: "10px 10px 0px 0px",
             }}
           >
             해당 {deleteType}을 삭제하시겠습니까?
