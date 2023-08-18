@@ -81,7 +81,7 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
             width: "100%",
             height: "240px",
             objectFit: "cover",
-            objectPositon: "center",
+            // objectPositon: "center",
           }}
         />
         <ContainerBox>
