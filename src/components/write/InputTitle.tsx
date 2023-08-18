@@ -7,7 +7,13 @@ interface InputTitleProps {
 
 const InputTitle: React.FC<InputTitleProps> = ({ title, onTitleChange }) => {
   return (
-    <div>
+    <div
+      style={{
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
       <input
         type="text"
         value={title}

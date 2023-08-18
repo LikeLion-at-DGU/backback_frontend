@@ -93,20 +93,43 @@ export default function WritePost() {
           display: "block",
         }}
       >
-        <div style={{ flex: "1" }}>
+        <div
+          style={{
+            flex: "1",
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <div
             style={{
               width: "100%",
               height: "60px",
               display: "flex",
+              flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-around",
             }}
           >
-            <div style={{ width: "45%", margin: "-5px" }}>
+            <div
+              style={{
+                flex: "1",
+                display: "flex",
+                justifyContent: "flex-start",
+                paddingLeft: "40px",
+              }}
+            >
               <ExerciseChoice onExerciseSelect={handleExerciseSelect} />
             </div>
-            <div style={{ width: "45%", marginLeft: "20px" }}>
+            <div
+              style={{
+                flex: "1",
+                display: "flex",
+                justifyContent: "flex-end",
+                paddingRight: "40px",
+              }}
+            >
               <PurposeChoice onPurposeSelect={handlePurposeSelect} />
             </div>
           </div>
