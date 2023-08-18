@@ -6,6 +6,7 @@ interface PostsQueryParams {
   exercise?: string;
   type?: string;
   search?: string;
+  page?: number;
 }
 
 interface Post {
@@ -35,6 +36,9 @@ const postApi = () => {
       }
       if (query.search) {
         queryParams.search = query.search;
+      }
+      if (query.page) {
+        queryParams.page = query.page;
       }
       return api.get("/posts", { params: queryParams });
     },
