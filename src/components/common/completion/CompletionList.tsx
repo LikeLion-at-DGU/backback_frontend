@@ -25,7 +25,7 @@ const CompletionList: React.FC<CompletionListProps> = ({ ...prop }) => {
     setLikeopen(!likepopen);
   };
   const listItems = prop.completions.map((item, index) => (
-    <div style={{ width: "33.3%" }}>
+    <div style={{ width: "100%" }}>
       <Completion
         id={item.id}
         key={index.toString()}
@@ -55,10 +55,9 @@ const CompletionList: React.FC<CompletionListProps> = ({ ...prop }) => {
       >
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            margin: "15px 15px 0px 15px",
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 33%)",
+            gridTemplateRows: "repeat(6, 50%)",
           }}
         >
           <div>
