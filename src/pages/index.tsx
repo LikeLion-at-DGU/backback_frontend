@@ -8,14 +8,24 @@ import { useCookies } from "react-cookie";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export async function getServerSideProps() {
+  const banners = await bannerApi()
+    .getBanners()
+    .then((res: any) => {
+      return res.data;
+    });
+
+  return { props: { banners } };
+}
+
+export default function Home(props) {
   const [cookies] = useCookies(["uid"]);
   const [posts, setPosts] = useState([]);
   const [isNext, setIsNext] = useState<boolean>(false);
   const [isPrevious, setIsPrevious] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [total, setTotal] = useState<number>(0);
-  const [banners, setBanners] = useState([]);
+  const [banners, setBanners] = useState(props.banners);
   useEffect(() => {
     if (cookies.uid === undefined) return;
     postApi()
@@ -27,13 +37,6 @@ export default function Home() {
         setTotal(Math.ceil(res.data.count / 20));
       });
   }, [cookies.uid, page]);
-  useEffect(() => {
-    bannerApi()
-      .getBanners()
-      .then((res: any) => {
-        setBanners(res.data);
-      });
-  }, []);
   return (
     <>
       <NavBar />
