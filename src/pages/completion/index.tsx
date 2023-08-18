@@ -3,12 +3,29 @@ import CompletionList from "@/components/common/completion/CompletionList";
 import NavBar from "@/layouts/components/NavBar";
 import { useEffect, useState } from "react";
 
-export default function Home() {
-  const [completions, setCompletions] = useState([]);
-  const [isNext, setIsNext] = useState<boolean>(false);
-  const [isPrevious, setIsPrevious] = useState<boolean>(false);
+export async function getServerSideProps() {
+  const result = await completionApi()
+    .getCompletions({ page: 1 })
+    .then((res: any) => {
+      return res.data;
+    });
+
+  return {
+    props: {
+      completions: result.results,
+      next: result.next !== null,
+      previous: result.previous !== null,
+      total: Math.ceil(result.count / 18),
+    },
+  };
+}
+
+export default function Home(props) {
+  const [completions, setCompletions] = useState(props.completions);
+  const [isNext, setIsNext] = useState<boolean>(props.next);
+  const [isPrevious, setIsPrevious] = useState<boolean>(props.previous);
   const [page, setPage] = useState<number>(1);
-  const [total, setTotal] = useState<number>(0);
+  const [total, setTotal] = useState<number>(props.total);
 
   useEffect(() => {
     completionApi()
