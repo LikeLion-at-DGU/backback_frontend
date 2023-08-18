@@ -8,24 +8,30 @@ import NavBar from "@/layouts/components/NavBar";
 import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
 
-const inter = Inter({ subsets: ["latin"] });
-export default function Home() {
-  const [posts, setPosts] = useState([]);
-  const [columns, setColumns] = useState([]);
-  useEffect(() => {
-    postApi()
-      .getHotOrdinaryPosts()
-      .then((res: any) => {
-        setPosts(res.data);
-      });
-  }, []);
-  useEffect(() => {
-    postApi()
-      .getHotProPosts()
-      .then((res: any) => {
-        setColumns(res.data);
-      });
-  }, []);
+export async function getServerSideProps() {
+  const ords = await postApi()
+    .getHotOrdinaryPosts()
+    .then((res: any) => {
+      return res.data;
+    });
+
+  const pros = await postApi()
+    .getHotProPosts()
+    .then((res: any) => {
+      return res.data;
+    });
+
+  return {
+    props: {
+      posts: ords,
+      columns: pros,
+    },
+  };
+}
+
+export default function Home(props) {
+  const [posts, setPosts] = useState(props.posts);
+  const [columns, setColumns] = useState(props.columns);
   return (
     <>
       <NavBar />

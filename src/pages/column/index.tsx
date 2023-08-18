@@ -9,13 +9,31 @@ import profileApi from "@/apis/profileApi";
 import { useCookies } from "react-cookie";
 import { PostPage } from "@/components/mypage/PostPage";
 
-export default function Home() {
+export async function getServerSideProps() {
+  const result = await postApi()
+    .getPosts({ type: "PRO", page: 1 })
+    .then((res: any) => {
+      return res.data;
+    })
+    .catch((err) => {});
+
+  return {
+    props: {
+      columns: result.results,
+      next: result.next !== null,
+      previous: result.previous !== null,
+      total: Math.ceil(result.count / 20),
+    },
+  };
+}
+
+export default function Home(props) {
   const allowedTypes = ["DOCTOR", "TRAINER"];
-  const [columns, setColumns] = useState<ColumnProps[]>([]);
-  const [isNext, setIsNext] = useState<boolean>(false);
-  const [isPrevious, setIsPrevious] = useState<boolean>(false);
+  const [columns, setColumns] = useState<ColumnProps[]>(props.columns);
+  const [isNext, setIsNext] = useState<boolean>(props.next);
+  const [isPrevious, setIsPrevious] = useState<boolean>(props.previous);
   const [page, setPage] = useState<number>(1);
-  const [total, setTotal] = useState<number>(0);
+  const [total, setTotal] = useState<number>(props.total);
   const [userType, setUserType] = useState<string>("");
   const [cookies] = useCookies(["uid"]);
   const [isLogin, setIsLogin] = useState<boolean>(false);

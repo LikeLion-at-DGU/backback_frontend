@@ -16,15 +16,32 @@ import { PostPage } from "@/components/mypage/PostPage";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
-  const router = useRouter();
+export async function getServerSideProps() {
+  const result = await postApi()
+    .getPosts({ type: "ORDINARY", page: 1 })
+    .then((res: any) => {
+      return res.data;
+    })
+    .catch((err) => {});
+
+  return {
+    props: {
+      posts: result.results,
+      next: result.next !== null,
+      previous: result.previous !== null,
+      total: Math.ceil(result.count / 20),
+    },
+  };
+}
+
+export default function Home(props) {
   const [choose, setChoose] = useState<number[]>([]); // choose 배열을 상태로 선언
   const [find, setFind] = React.useState<number[]>([]);
-  const [posts, setPosts] = React.useState<PostProps[]>([]);
-  const [isNext, setIsNext] = React.useState<boolean>(false);
-  const [isPrevious, setIsPrevious] = React.useState<boolean>(false);
+  const [posts, setPosts] = React.useState<PostProps[]>(props.posts);
+  const [isNext, setIsNext] = React.useState<boolean>(props.next);
+  const [isPrevious, setIsPrevious] = React.useState<boolean>(props.previous);
   const [page, setPage] = React.useState<number>(1);
-  const [total, setTotal] = React.useState<number>(0);
+  const [total, setTotal] = React.useState<number>(props.total);
   const [open, setOpen] = useState(false);
   const [cookies] = useCookies(["uid"]);
   const [isLogin, setIsLogin] = useState<boolean>(false);
