@@ -233,13 +233,13 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
             >
               {!prop.isLiked ? (
                 <img
-                  src="../../../assets/images/like_icon.png"
+                  src="/assets/images/Like_icon.png"
                   style={{ height: "30px" }}
                   onClick={postLike}
                 ></img>
               ) : (
                 <img
-                  src="../../../assets/images/Click_Like_icon.png"
+                  src="/assets/images/Click_Like_icon.png"
                   style={{ height: "30px" }}
                   onClick={postLike}
                 ></img>
