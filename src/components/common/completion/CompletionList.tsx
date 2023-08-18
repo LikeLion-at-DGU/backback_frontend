@@ -3,7 +3,7 @@ import { ScrollContent } from "../../post/PostDetail";
 import RouterLink from "@/components/core/RouterLink";
 import { UserInfoProps } from "../UserInfo";
 
-export interface CompletionListProps extends UserInfoProps {
+export interface CompletionListProps {
   completions: CompletionProps[];
 }
 
