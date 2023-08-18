@@ -51,8 +51,8 @@ const Comment: React.FC<CommentProps> = ({ ...prop }) => {
         >
           <UserInfo
             nickname={prop.writer.nickname}
-            type={prop.writer.nickname}
-            profileId={prop.writer.nickname}
+            type={prop.writer.type}
+            profileId={prop.writer.profileId}
             level={prop.writer.level}
           />
         </RouterLink>
