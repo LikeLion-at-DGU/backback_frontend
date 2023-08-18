@@ -52,7 +52,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ ...prop }) => {
     } else if (
       prop.type === "post" ||
       prop.type === "column" ||
-      prop.typ === "completion"
+      prop.type === "completion"
     ) {
       setDeleteType("게시글");
     }
