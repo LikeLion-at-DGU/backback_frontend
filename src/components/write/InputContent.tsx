@@ -10,7 +10,13 @@ const InputContent: React.FC<InputContentProps> = ({
   onContentChange,
 }) => {
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        width: "100%",
+      }}
+    >
       <textarea
         value={content}
         onChange={onContentChange}
