@@ -1,13 +1,25 @@
 import Completion, { CompletionProps } from "./Completion";
 import { ScrollContent } from "../../post/PostDetail";
 import RouterLink from "@/components/core/RouterLink";
-import { UserInfoProps } from "../UserInfo";
+import { useCookies } from "react-cookie";
+import { useEffect, useState } from "react";
+import MustLogin from "@/components/core/LoginModal";
 
 export interface CompletionListProps {
   completions: CompletionProps[];
 }
 
 const CompletionList: React.FC<CompletionListProps> = ({ ...prop }) => {
+  const [cookies] = useCookies(["uid"]);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [likepopen, setLikeopen] = useState(false);
+  useEffect(() => {
+    if (cookies.uid) setIsLogin(true);
+    else setIsLogin(false);
+  }, [cookies]);
+  const likeOpen = () => {
+    setLikeopen(!likepopen);
+  };
   const listItems = prop.completions.map((item, index) => (
     <div style={{ width: "33.3%" }}>
       <Completion
@@ -62,17 +74,45 @@ const CompletionList: React.FC<CompletionListProps> = ({ ...prop }) => {
             border: "0.5px solid #ccc",
           }}
         >
-          <RouterLink href="/completion/write">
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <span style={{ fontSize: "13px", fontFamily: "MainFont" }}>
-                기록하기
-              </span>
-              <img
-                src="../../../assets/icons/sweat.png"
-                style={{ width: "14px", height: "14px", margin: "3px" }}
-              />
-            </div>
-          </RouterLink>
+          {isLogin ? (
+            <RouterLink href="/completion/write">
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  cursor: "pointer",
+                }}
+              >
+                <span style={{ fontSize: "13px", fontFamily: "MainFont" }}>
+                  기록하기
+                </span>
+                <img
+                  src="../../../assets/icons/sweat.png"
+                  style={{ width: "14px", height: "14px", margin: "3px" }}
+                />
+              </div>
+            </RouterLink>
+          ) : (
+            <>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  cursor: "pointer",
+                }}
+                onClick={() => setLikeopen(true)}
+              >
+                <span style={{ fontSize: "13px", fontFamily: "MainFont" }}>
+                  기록하기
+                </span>
+                <img
+                  src="../../../assets/icons/sweat.png"
+                  style={{ width: "14px", height: "14px", margin: "3px" }}
+                />
+              </div>
+              {likepopen && <MustLogin onClick={likeOpen} />}
+            </>
+          )}
         </div>
       </div>
     </ScrollContent>
