@@ -4,6 +4,7 @@ import ImageSwiper from "../core/ImageSwiper";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useCookies } from "react-cookie";
 import RouterLink from "../core/RouterLink";
+import { useEffect, useState } from "react";
 
 export interface HomeProps {
   posts: PostProps[];
@@ -12,6 +13,12 @@ export interface HomeProps {
 
 const Homepage: React.FC<HomeProps> = ({ ...prop }) => {
   const [cookies] = useCookies(["uid"]);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+  useEffect(() => {
+    if (cookies.uid) setIsLogin(true);
+    else setIsLogin(false);
+  }, [cookies]);
+
   const listItems = prop.posts.map((item, index) => (
     <Post
       id={item.id}
@@ -54,7 +61,7 @@ const Homepage: React.FC<HomeProps> = ({ ...prop }) => {
         >
           내 팔로워 게시물
         </div>
-        {cookies.uid !== undefined ? (
+        {isLogin ? (
           prop.posts.length ? (
             listItems
           ) : (
