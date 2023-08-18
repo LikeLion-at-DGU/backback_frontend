@@ -61,17 +61,15 @@ const CompletionList: React.FC<CompletionListProps> = ({ ...prop }) => {
             margin: "15px 15px 0px 15px",
           }}
         >
-          <div>
-            {listItems}
-            <PostPage
-              page={prop.postPageProps.page}
-              isNext={prop.postPageProps.isNext}
-              isPrevious={prop.postPageProps.isPrevious}
-              setPage={prop.postPageProps.setPage}
-              total={prop.postPageProps.total}
-            />
-          </div>
+          <div>{listItems}</div>
         </div>
+        <PostPage
+          page={prop.postPageProps.page}
+          isNext={prop.postPageProps.isNext}
+          isPrevious={prop.postPageProps.isPrevious}
+          setPage={prop.postPageProps.setPage}
+          total={prop.postPageProps.total}
+        />
         <div
           style={{
             display: "inline-block",
