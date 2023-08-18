@@ -1,4 +1,5 @@
 import Column, { ColumnProps } from "./Column";
+import { ScrollContent } from "../post/PostDetail";
 
 export interface ColumnListProps {
   columns: ColumnProps[];
@@ -22,18 +23,20 @@ const ColumnList: React.FC<ColumnListProps> = ({ ...prop }) => {
     />
   ));
   return (
-    <div
-      style={{
-        display: "grid",
-        width: "100%",
-        gridTemplateColumns: "repeat(2, 1fr)",
-        overflow: "auto",
-        scrollBehavior: "smooth",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      {listItems}
+    <div style={{ width: "100%", padding: "15px" }}>
+      <div
+        style={{
+          display: "grid",
+          width: "100%",
+          gridTemplateColumns: "repeat(2, 1fr)",
+          overflow: "auto",
+          scrollBehavior: "smooth",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {listItems}
+      </div>
     </div>
   );
 };

@@ -10,6 +10,8 @@ import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useCallback, useState } from "react";
+import { useCookies } from "react-cookie";
+import MustLogin from "@/components/core/LoginModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +21,13 @@ export default function Home() {
   const [find, setFind] = React.useState<number[]>([]);
   const [posts, setPosts] = React.useState<PostProps[]>([]);
   const [open, setOpen] = useState(false);
+  const [cookies] = useCookies(["uid"]);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+  useEffect(() => {
+    if (cookies.uid) setIsLogin(true);
+    else setIsLogin(false);
+  }, [cookies]);
+  const [isopen, setIsopen] = useState(false);
 
   const handlechoose = (e: number) => {
     if (choose.includes(e)) {
@@ -27,6 +36,9 @@ export default function Home() {
     } else {
       setChoose([...choose, e]);
     }
+  };
+  const modalOpen = () => {
+    setIsopen(!isopen);
   };
 
   const handleopen = () => {
@@ -39,7 +51,7 @@ export default function Home() {
         setPosts(res.data.results);
       })
       .catch((err) => {});
-  }, [setPosts, postApi]);
+  }, [postApi]);
 
   const getPostsByCategory = useCallback(
     async (choose: string) => {
@@ -104,18 +116,35 @@ export default function Home() {
               borderBottom: "1px solid #B7BBC8",
             }}
           >
-            <RouterLink href="/post/write">
-              <div
-                style={{
-                  textAlign: "left",
-                  flex: "1",
-                  fontSize: "14px",
-                  fontFamily: "MainFont",
-                }}
-              >
-                글쓰기
-              </div>
-            </RouterLink>
+            {isLogin ? (
+              <RouterLink href="/post/write">
+                <div
+                  style={{
+                    textAlign: "left",
+                    flex: "1",
+                    fontSize: "14px",
+                    fontFamily: "MainFont",
+                  }}
+                >
+                  글쓰기
+                </div>
+              </RouterLink>
+            ) : (
+              <>
+                <div
+                  style={{
+                    textAlign: "left",
+                    flex: "1",
+                    fontSize: "14px",
+                    fontFamily: "MainFont",
+                  }}
+                  onClick={() => setIsopen(true)}
+                >
+                  글쓰기
+                </div>
+                {isopen && <MustLogin onClick={modalOpen} />}
+              </>
+            )}
             <div
               style={{
                 flex: "1",

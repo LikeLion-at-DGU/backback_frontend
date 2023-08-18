@@ -12,6 +12,7 @@ import { useCookies } from "react-cookie";
 import DeleteButton from "../core/DeleteButton";
 import RouterLink from "../core/RouterLink";
 import profileApi from "@/apis/profileApi";
+import MustLogin from "../core/LoginModal";
 
 export interface PostDetailProps extends CommentListProps {
   id: string;
@@ -42,7 +43,14 @@ export const ScrollContent = styled.div`
   }
 `;
 export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
+  const [scrapopen, setScrapopen] = useState(false);
+  const [likepopen, setLikeopen] = useState(false);
   const [cookies] = useCookies(["uid"]);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+  useEffect(() => {
+    if (cookies.uid) setIsLogin(true);
+    else setIsLogin(false);
+  }, [cookies]);
   const date = prop.createdAt.split("T")[0].split("-").join(".");
   const time = prop.createdAt
     .split("T")[1]
@@ -52,11 +60,13 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
     .join(":");
   const createdAt = `${date} ${time}`;
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
-  // const category =
-  //   exercise_options[prop.exercise - 1] +
-  //   " / " +
-  //   purpose_options[prop.purpose - 1];
   const [category, setCateogry] = useState<string>("");
+  const scrapOpen = () => {
+    setScrapopen(!scrapopen);
+  };
+  const likeOpen = () => {
+    setLikeopen(!likepopen);
+  };
   useEffect(() => {
     if (prop.exercise && prop.purpose) {
       const category =
@@ -76,6 +86,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
     } catch (error) {}
   };
   const postLike = async () => {
+    if (!isLogin) return;
     try {
       await postApi()
         .likePost(prop.id)
@@ -83,6 +94,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
     } catch (error) {}
   };
   const postScrap = async () => {
+    if (!isLogin) return;
     try {
       if (!prop.isClipped) {
         await postApi().scrapPost(prop.id);
@@ -100,13 +112,13 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
   };
   const [userNickname, setUserNickname] = useState<string>("");
   useEffect(() => {
-    if (cookies.uid === undefined) return;
+    if (!isLogin) return;
     profileApi()
       .getMe()
       .then((res: any) => {
         setUserNickname(res.data.nickname);
       });
-  }, [userNickname, cookies.uid]);
+  }, [userNickname, isLogin]);
 
   return (
     <ScrollContent>
@@ -168,7 +180,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
         >
           <RouterLink
             href={
-              cookies.uid == prop.writer.profileId
+              isLogin && cookies.uid == prop.writer.profileId
                 ? "/mypage"
                 : "/profile/" + prop.writer.profileId
             }
@@ -180,7 +192,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
               level={prop.writer.level}
             />
           </RouterLink>
-          {cookies.uid &&
+          {isLogin &&
             (cookies.uid == prop.writer.profileId ? (
               <DeleteButton id={prop.id} type={"post"} />
             ) : (
@@ -233,13 +245,13 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
             >
               {!prop.isLiked ? (
                 <img
-                  src="../../../assets/images/like_icon.png"
+                  src="/assets/images/Like_icon.png"
                   style={{ height: "30px" }}
                   onClick={postLike}
                 ></img>
               ) : (
                 <img
-                  src="../../../assets/images/Click_Like_icon.png"
+                  src="/assets/images/Click_Like_icon.png"
                   style={{ height: "30px" }}
                   onClick={postLike}
                 ></img>
@@ -270,11 +282,24 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
           </div>
           <div style={{ cursor: "pointer", placeItems: "center" }}>
             {!prop.isClipped ? (
-              <img
-                src="../../../assets/images/noscrap.svg"
-                style={{ height: "22px" }}
-                onClick={postScrap}
-              ></img>
+              <>
+                {isLogin ? (
+                  <img
+                    src="../../../assets/images/noscrap.svg"
+                    style={{ height: "22px" }}
+                    onClick={postScrap}
+                  ></img>
+                ) : (
+                  <>
+                    <img
+                      src="../../../assets/images/noscrap.svg"
+                      style={{ height: "22px" }}
+                      onClick={() => setScrapopen(true)}
+                    ></img>
+                    {scrapopen && <MustLogin onClick={scrapOpen} />}
+                  </>
+                )}
+              </>
             ) : (
               <img
                 src="../../../assets/images/Click_Scrap_icon.png"
@@ -333,7 +358,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
                 paddingTop: "10px",
               }}
             >
-              {cookies.uid ? (
+              {isLogin ? (
                 <button
                   style={{
                     border: "none",
@@ -350,7 +375,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
                   등록
                 </button>
               ) : (
-                <RouterLink href="/login">
+                <>
                   <div
                     style={{
                       display: "flex",
@@ -365,10 +390,12 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
                       fontFamily: "MainFont",
                       padding: "10px",
                     }}
+                    onClick={() => setLikeopen(true)}
                   >
                     로그인 후 이용 가능
                   </div>
-                </RouterLink>
+                  {likepopen && <MustLogin onClick={likeOpen} />}
+                </>
               )}
             </div>
           </div>

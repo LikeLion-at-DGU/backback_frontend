@@ -38,15 +38,12 @@ const Column: React.FC<ColumnProps> = ({ ...prop }) => {
     <RouterLink href={`/column/${prop.id}`}>
       <div
         style={{
-          minHeight: "280px",
+          height: "280px",
+          width: "165px",
           alignItems: "center",
           display: "inline-block",
           flexDirection: "column",
-          margin: `${
-            prop.index !== undefined && prop.index % 2 === 0
-              ? "13px 10px 13px 15px"
-              : "13px 15px 13px 10px"
-          }`,
+          margin: "13px 0px 13px 0px",
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
         }}
       >
@@ -59,6 +56,8 @@ const Column: React.FC<ColumnProps> = ({ ...prop }) => {
             height: "100px",
             display: "flex",
             alignItems: "center",
+            objectFit: "cover",
+            objectPosition: "center",
           }}
         />
         <div

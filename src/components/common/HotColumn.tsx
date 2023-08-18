@@ -52,7 +52,9 @@ const HotColumn: React.FC<HotColumnProps> = ({ ...prop }) => {
         }}
       >
         <img
-          src={prop.image}
+          src={
+            prop.image ? prop.image : "../../assets/images/ColumnDefault.png"
+          }
           style={{
             width: "100%",
             height: "86.12px",

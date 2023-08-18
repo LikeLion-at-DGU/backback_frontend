@@ -7,6 +7,7 @@ import React, { useRef } from "react";
 import gymApi from "@/apis/gymApi";
 import { AxiosError, isAxiosError } from "axios";
 import { useCookies } from "react-cookie";
+import { useState, useEffect } from "react";
 
 interface ContentProps {
   content: string;
@@ -41,6 +42,11 @@ export const ContainerBox = styled.div`
 
 const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
   const [cookies] = useCookies(["uid"]);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+  useEffect(() => {
+    if (cookies.uid) setIsLogin(true);
+    else setIsLogin(false);
+  }, [cookies]);
   const exercises = prop.info.exercises.join(" / ");
   const certifications = prop.info.certifications?.join("\n");
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
@@ -81,7 +87,7 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
             width: "100%",
             height: "240px",
             objectFit: "cover",
-            objectPositon: "center",
+            // objectPositon: "center",
           }}
         />
         <ContainerBox>
@@ -105,7 +111,7 @@ const GymDetail: React.FC<GymDetailProps> = ({ ...prop }) => {
             >
               {prop.name}
             </div>
-            {cookies.uid && <ReportButton id={prop.id} type={"gym"} />}
+            {isLogin && <ReportButton id={prop.id} type={"gym"} />}
           </div>
           <div style={{ width: "100%", fontSize: "16px", marginBottom: "5px" }}>
             {prop.address}

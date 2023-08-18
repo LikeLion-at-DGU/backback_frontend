@@ -27,7 +27,6 @@ const PostList: React.FC<PostListProps> = ({ ...prop }) => {
         display: "block",
         flexDirection: "column",
         alignItems: "center",
-        padding: "0px 15px 0px 15px",
         flex: "1",
         overflow: "auto",
         scrollBehavior: "smooth",
