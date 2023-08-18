@@ -181,7 +181,12 @@ export default function Home(props) {
               }}
             >
               <div
-                style={{ textAlign: "right", fontSize: "14px", height: "100%" }}
+                style={{
+                  textAlign: "right",
+                  fontSize: "14px",
+                  height: "100%",
+                  position: "relative",
+                }}
                 onClick={handleopen}
               >
                 모든 카테고리
@@ -202,13 +207,60 @@ export default function Home(props) {
                     style={{ width: "14px", height: "8px", marginLeft: "5px" }}
                   ></img>
                 )}
+                {open && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "20px",
+                      right: "0px",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <img
+                      src="../../../../assets/images/category.png"
+                      style={{ height: "10px" }}
+                    ></img>
+                    <div
+                      style={{
+                        width: "110px",
+                        height: "auto",
+                        borderRadius: "10px",
+                        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.3)",
+                        backgroundColor: "white",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        padding: "10px",
+                      }}
+                    >
+                      {categorylist}
+                      <div
+                        style={{
+                          width: "70px",
+                          height: "25px",
+                          marginBottom: "5px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontSize: "12px",
+                          cursor: "pointer",
+                        }}
+                        onClick={handlesearch}
+                      >
+                        선택완료
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
-              {open && (
+              {/* {open && (
                 <div
                   style={{
                     position: "absolute",
-                    top: "157px",
-                    left: "260px",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
@@ -251,7 +303,7 @@ export default function Home(props) {
                     </div>
                   </div>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </div>
