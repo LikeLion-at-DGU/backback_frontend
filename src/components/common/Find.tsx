@@ -89,7 +89,7 @@ const Find: React.FC<FindProps> = ({ ...props }) => {
                 style={{ width: "30px", height: "24px", marginLeft: "auto" }}
               >
                 <img
-                  src="../../../assets/images/Find_icon.png"
+                  src="../../../assets/images/find_icon.png"
                   style={{ width: "100%" }}
                   alt="Search Icon"
                 />

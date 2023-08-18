@@ -114,9 +114,9 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
         >
           <RouterLink
             href={
-              isLogin && cookies.uid == prop.writer.profileId
+              isLogin && cookies.uid == prop.writer?.profileId
                 ? "/mypage"
-                : "/profile/" + prop.writer.profileId
+                : "/profile/" + prop.writer?.profileId
             }
           >
             <UserInfo

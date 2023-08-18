@@ -56,8 +56,8 @@ const CompletionList: React.FC<CompletionListProps> = ({ ...prop }) => {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(3, 33%)",
-            gridTemplateRows: "repeat(6, 25%)",
+            gridTemplateColumns: "repeat(3, 33.3%)",
+            gridTemplateRows: "repeat(6, 16.66%)",
           }}
         >
           {listItems}

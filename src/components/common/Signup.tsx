@@ -13,13 +13,13 @@ const Signup = () => {
           alt="kakaologin"
         />
       </LoginButton>
-      <LoginButton loginUrl={`${LOGIN_DOMAIN}/accounts/google/login`}>
+      {/* <LoginButton loginUrl={`${LOGIN_DOMAIN}/accounts/google/login`}>
         <img
           src="../../../assets/images/googlelogin.png"
           style={{ height: "50px", width: "250px", marginTop: "15px" }}
           alt="googlelogin"
         />
-      </LoginButton>
+      </LoginButton> */}
     </div>
   );
 };
