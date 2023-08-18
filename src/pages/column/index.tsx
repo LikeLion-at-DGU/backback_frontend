@@ -7,10 +7,15 @@ import postApi from "@/apis/postApi";
 import RouterLink from "@/components/core/RouterLink";
 import profileApi from "@/apis/profileApi";
 import { useCookies } from "react-cookie";
+import { PostPage } from "@/components/mypage/PostPage";
 
 export default function Home() {
   const allowedTypes = ["DOCTOR", "TRAINER"];
   const [columns, setColumns] = useState<ColumnProps[]>([]);
+  const [isNext, setIsNext] = useState<boolean>(false);
+  const [isPrevious, setIsPrevious] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [total, setTotal] = useState<number>(0);
   const [userType, setUserType] = useState<string>("");
   const [cookies] = useCookies(["uid"]);
   const [isLogin, setIsLogin] = useState<boolean>(false);
@@ -28,12 +33,15 @@ export default function Home() {
   }, [userType, isLogin]);
   const getColumns = useCallback(() => {
     postApi()
-      .getPosts({ type: "PRO" })
+      .getPosts({ type: "PRO", page: page })
       .then((res: any) => {
         setColumns(res.data.results);
+        setIsNext(res.data.next !== null);
+        setIsPrevious(res.data.previous !== null);
+        setTotal(Math.ceil(res.data.count / 20));
       })
       .catch((err) => {});
-  }, [postApi, setColumns]);
+  }, [postApi, setColumns, page]);
   useEffect(() => {
     getColumns();
   }, [getColumns]);
@@ -69,6 +77,13 @@ export default function Home() {
           </div>
         </div>
         <ColumnList columns={...columns} />
+        <PostPage
+          page={page}
+          isNext={isNext}
+          isPrevious={isPrevious}
+          setPage={setPage}
+          total={total}
+        />
       </ScrollContent>
     </>
   );
