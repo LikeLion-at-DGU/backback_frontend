@@ -2,10 +2,15 @@ import React, { ReactNode } from "react";
 import styled from "styled-components";
 import Header from "./components/Header";
 import BottomBar from "./components/BottomBar";
+import backgroundImage from "../../public/assets/images/PageWrapper.png";
 
 interface LayoutProps {
   children: ReactNode;
 }
+
+const PageWrapper = styled.div`
+  background-color: #f5f5f5;
+`;
 
 const Container = styled.div`
   width: 100%;
@@ -20,11 +25,13 @@ const Container = styled.div`
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <Container>
-      <Header />
-      {children}
-      <BottomBar />
-    </Container>
+    <PageWrapper>
+      <Container>
+        <Header />
+        {children}
+        <BottomBar />
+      </Container>
+    </PageWrapper>
   );
 };
 
