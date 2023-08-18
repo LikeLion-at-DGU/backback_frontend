@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Carousel } from "react-responsive-carousel";
 import styled from "styled-components";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -47,16 +48,17 @@ const ImageSwiper: React.FC<ImagesProps> = ({ ...prop }) => {
     </div>
   ));
   return (
-    <CustomCarousel
-      infiniteLoop={true}
-      autoPlay={true}
-      interval={3000}
-      showThumbs={false}
-      showStatus={false}
-      showArrows={false}
-    >
-      {listItems}
-    </CustomCarousel>
+    <></>
+    // <CustomCarousel
+    //   infiniteLoop={true}
+    //   autoPlay={true}
+    //   interval={3000}
+    //   showThumbs={false}
+    //   showStatus={false}
+    //   showArrows={false}
+    // >
+    //   {listItems}
+    // </CustomCarousel>
   );
 };
 
