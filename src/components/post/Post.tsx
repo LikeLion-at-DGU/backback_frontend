@@ -36,6 +36,7 @@ const Post: React.FC<PostProps> = ({ ...prop }) => {
           fontSize: "16px",
           borderBottom: "1px solid #B7BBC8",
           margin: "0px",
+          padding: "0px 10px 0px 10px",
         }}
       >
         <div
@@ -60,8 +61,9 @@ const Post: React.FC<PostProps> = ({ ...prop }) => {
             style={{
               fontSize: "10px",
               marginLeft: "auto",
-              marginRight: "22px",
+              marginRight: "17px",
               fontFamily: "MainFont",
+              justifyContent: "flex-end",
             }}
           >
             {createdAt}

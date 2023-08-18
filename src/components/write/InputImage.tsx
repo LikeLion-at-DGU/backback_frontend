@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ImageCarousel from "../core/ImageCarousel";
 
 interface InputImageProps {
   onChange: (files: FileList | null) => void;
@@ -62,26 +63,11 @@ const InputImage: React.FC<InputImageProps> = ({ onChange, previewCount }) => {
       <div
         style={{
           width: "100%",
-          overflow: "auto",
-          display: "flex",
-          alignItems: "center",
-          marginTop: "10px",
+          paddingTop: "10px",
+          borderBottom: "1px solid #B7BBC8",
         }}
       >
-        {previewImages.map((item, index) => (
-          <div key={index}>
-            <img
-              src={item}
-              alt={`Slide ${index}`}
-              style={{
-                borderRadius: "10px",
-                marginRight: "10px",
-                height: "160px",
-                width: "160px",
-              }}
-            />
-          </div>
-        ))}
+        <ImageCarousel images={previewImages} />
       </div>
     </div>
   );

@@ -33,36 +33,38 @@ export default function Home() {
     getColumns();
   }, [getColumns]);
   return (
-    <ScrollContent>
+    <>
       <NavBar />
-      <div style={{ width: "100%", padding: "0px 15px 0px 15px" }}>
-        <div
-          style={{
-            width: "100%",
-            height: "45px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-around",
-            borderBottom: "1px solid #B7BBC8",
-          }}
-        >
-          {allowedTypes.includes(userType) ? (
-            <div
-              style={{
-                fontFamily: "MainFont",
-                fontSize: "14px",
-                marginRight: "auto",
-                marginLeft: "12px",
-              }}
-            >
-              <RouterLink href="/column/write">칼럼 작성하기</RouterLink>
-            </div>
-          ) : (
-            <></>
-          )}
+      <ScrollContent>
+        <div style={{ width: "100%", padding: "0px 15px 0px 15px" }}>
+          <div
+            style={{
+              width: "100%",
+              height: "45px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-around",
+              borderBottom: "1px solid #B7BBC8",
+            }}
+          >
+            {allowedTypes.includes(userType) ? (
+              <div
+                style={{
+                  fontFamily: "MainFont",
+                  fontSize: "14px",
+                  marginRight: "auto",
+                  marginLeft: "12px",
+                }}
+              >
+                <RouterLink href="/column/write">칼럼 작성하기</RouterLink>
+              </div>
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
-      </div>
-      <ColumnList columns={...columns} />
-    </ScrollContent>
+        <ColumnList columns={...columns} />
+      </ScrollContent>
+    </>
   );
 }

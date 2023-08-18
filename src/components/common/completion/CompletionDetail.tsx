@@ -31,14 +31,12 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
     .join(":");
   const createdAt = `${date} ${time}`;
   const completionLike = async () => {
+    if (!cookies.uid) return;
     try {
       await completionApi()
         .likeCompletion(prop.id)
         .then(() => window.location.reload());
-    } catch (error) {
-      if (isAxiosError(error)) {
-      }
-    }
+    } catch (error) {}
   };
 
   const [cookies] = useCookies(["uid"]);
