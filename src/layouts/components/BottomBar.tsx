@@ -68,14 +68,12 @@ const Header: React.FC = () => {
           style={{ height: "20px", width: "17px" }}
         ></img>
       </RouterLink>
-      {isLogin && (
-        <RouterLink href={cookies.uid ? "/mypage" : "/login"}>
-          <img
-            src="../../../assets/images/Mypage_icon.png"
-            style={{ height: "20px" }}
-          ></img>
-        </RouterLink>
-      )}
+      <RouterLink href={isLogin ? "/mypage" : "/login"}>
+        <img
+          src="../../../assets/images/Mypage_icon.png"
+          style={{ height: "20px" }}
+        ></img>
+      </RouterLink>
     </div>
   );
 };

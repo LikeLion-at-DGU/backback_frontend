@@ -42,22 +42,20 @@ const Comment: React.FC<CommentProps> = ({ ...prop }) => {
           fontFamily: "MainFont",
         }}
       >
-        {isLogin && (
-          <RouterLink
-            href={
-              cookies.uid == prop.writer.profileId
-                ? "/mypage"
-                : "/profile/" + prop.writer.profileId
-            }
-          >
-            <UserInfo
-              nickname={prop.writer.nickname}
-              type={prop.writer.nickname}
-              profileId={prop.writer.nickname}
-              level={prop.writer.level}
-            />
-          </RouterLink>
-        )}
+        <RouterLink
+          href={
+            isLogin && cookies.uid == prop.writer.profileId
+              ? "/mypage"
+              : "/profile/" + prop.writer.profileId
+          }
+        >
+          <UserInfo
+            nickname={prop.writer.nickname}
+            type={prop.writer.nickname}
+            profileId={prop.writer.nickname}
+            level={prop.writer.level}
+          />
+        </RouterLink>
         {isLogin && cookies.uid == prop.writer.profileId ? (
           <DeleteButton id={prop.id} type={"comment"} />
         ) : (

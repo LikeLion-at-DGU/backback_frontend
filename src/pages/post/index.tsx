@@ -51,7 +51,7 @@ export default function Home() {
         setPosts(res.data.results);
       })
       .catch((err) => {});
-  }, [, postApi]);
+  }, [postApi]);
 
   const getPostsByCategory = useCallback(
     async (choose: string) => {
