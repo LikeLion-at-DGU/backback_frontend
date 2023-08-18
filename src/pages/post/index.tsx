@@ -12,6 +12,7 @@ import React, { useEffect } from "react";
 import { useCallback, useState } from "react";
 import { useCookies } from "react-cookie";
 import MustLogin from "@/components/core/LoginModal";
+import { PostPage } from "@/components/mypage/PostPage";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,10 @@ export default function Home() {
   const [choose, setChoose] = useState<number[]>([]); // choose 배열을 상태로 선언
   const [find, setFind] = React.useState<number[]>([]);
   const [posts, setPosts] = React.useState<PostProps[]>([]);
+  const [isNext, setIsNext] = React.useState<boolean>(false);
+  const [isPrevious, setIsPrevious] = React.useState<boolean>(false);
+  const [page, setPage] = React.useState<number>(1);
+  const [total, setTotal] = React.useState<number>(0);
   const [open, setOpen] = useState(false);
   const [cookies] = useCookies(["uid"]);
   const [isLogin, setIsLogin] = useState<boolean>(false);
@@ -46,12 +51,15 @@ export default function Home() {
   };
   const getPosts = useCallback(async () => {
     await postApi()
-      .getPosts({ type: "ORDINARY" })
+      .getPosts({ type: "ORDINARY", page: page })
       .then((res: any) => {
         setPosts(res.data.results);
+        setIsNext(res.data.next !== null);
+        setIsPrevious(res.data.previous !== null);
+        setTotal(Math.ceil(res.data.count / 20));
       })
       .catch((err) => {});
-  }, [postApi]);
+  }, [setPosts, postApi, page]);
 
   const getPostsByCategory = useCallback(
     async (choose: string) => {
@@ -244,6 +252,13 @@ export default function Home() {
         >
           <PostList posts={...posts} />
         </div>
+        <PostPage
+          page={page}
+          isNext={isNext}
+          isPrevious={isPrevious}
+          setPage={setPage}
+          total={total}
+        />
       </ScrollContent>
     </>
   );

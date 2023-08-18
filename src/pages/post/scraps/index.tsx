@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useCallback } from "react";
+import { PostPage } from "@/components/mypage/PostPage";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,15 +31,22 @@ export interface ScrapProps {
 export default function Home() {
   const router = useRouter();
   const [posts, setPosts] = React.useState<ScrapProps[]>([]);
+  const [isNext, setIsNext] = React.useState<boolean>(false);
+  const [isPrevious, setIsPrevious] = React.useState<boolean>(false);
+  const [page, setPage] = React.useState<number>(1);
+  const [total, setTotal] = React.useState<number>(0);
 
   const getPosts = useCallback(async () => {
     await postApi()
-      .scrappedPost()
+      .scrappedPost({ page })
       .then((res: any) => {
         setPosts(res.data.results);
+        setIsNext(res.data.next !== null);
+        setIsPrevious(res.data.previous !== null);
+        setTotal(Math.ceil(res.data.count / 20));
       })
       .catch((err) => {});
-  }, [setPosts, postApi]);
+  }, [setPosts, postApi, page]);
 
   useEffect(() => {
     getPosts();
@@ -83,6 +91,13 @@ export default function Home() {
         >
           <ScrapList posts={...posts} />
         </div>
+        <PostPage
+          page={page}
+          isNext={isNext}
+          isPrevious={isPrevious}
+          setPage={setPage}
+          total={total}
+        />
       </ScrollContent>
     </>
   );

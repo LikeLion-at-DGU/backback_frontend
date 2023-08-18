@@ -6,6 +6,7 @@ interface PostsQueryParams {
   exercise?: string;
   type?: string;
   search?: string;
+  page?: number;
 }
 
 interface Post {
@@ -35,6 +36,9 @@ const postApi = () => {
       }
       if (query.search) {
         queryParams.search = query.search;
+      }
+      if (query.page) {
+        queryParams.page = query.page;
       }
       return api.get("/posts", { params: queryParams });
     },
@@ -74,7 +78,8 @@ const postApi = () => {
       api.post(`/posts/${id}/report`, { reason: data.reason }),
     scrapPost: (id: number | string) => api.post(`/posts/${id}/clip`, {}),
     scrapDelete: (id: number | string) => api.delete(`/posts/${id}/clip`),
-    scrappedPost: () => api.get(`/posts/clips`),
+    scrappedPost: (query: { page: number }) =>
+      api.get(`/posts/clips`, { params: query }),
     likePost: (id: number | string) => api.post(`/posts/${id}/like`, {}),
     getPostComments: (id: number | string) => api.get(`/posts/${id}/comments`),
     postPostComment: (id: number | string, data: { content: string }) =>

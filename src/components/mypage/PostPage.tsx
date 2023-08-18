@@ -1,4 +1,4 @@
-interface PostPageProps {
+export interface PostPageProps {
   page: number;
   isNext: boolean;
   isPrevious: boolean;
