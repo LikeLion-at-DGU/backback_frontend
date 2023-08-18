@@ -4,7 +4,7 @@ interface PostsQueryParams {
   followers?: boolean;
   purpose?: string;
   exercise?: string;
-  type?: "ORDINARY" | "PRO";
+  type?: string;
   search?: string;
 }
 
@@ -13,7 +13,7 @@ interface Post {
   purpose?: number;
   exercise?: number;
   content: string;
-  type?: "ORDINARY" | "PRO";
+  type?: string;
   images?: File[]; // 아마 파일일텐데
 }
 
