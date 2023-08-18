@@ -57,10 +57,10 @@ const CompletionList: React.FC<CompletionListProps> = ({ ...prop }) => {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 33%)",
-            gridTemplateRows: "repeat(6, 50%)",
+            gridTemplateRows: "repeat(6, 25%)",
           }}
         >
-          <div>{listItems}</div>
+          {listItems}
         </div>
         <PostPage
           page={prop.postPageProps.page}
