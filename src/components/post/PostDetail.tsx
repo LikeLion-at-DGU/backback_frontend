@@ -358,45 +358,23 @@ export const PostDetail: React.FC<PostDetailProps> = ({ ...prop }) => {
                 paddingTop: "10px",
               }}
             >
-              {isLogin ? (
-                <button
-                  style={{
-                    border: "none",
-                    borderRadius: "10px",
-                    backgroundColor: "#B7BBC8",
-                    width: "38px",
-                    height: "30px",
-                    fontSize: "14px",
-                    cursor: "pointer",
-                    fontFamily: "MainFont",
-                  }}
-                  onClick={handleSubmit}
-                >
-                  등록
-                </button>
-              ) : (
-                <>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      border: "none",
-                      borderRadius: "10px",
-                      backgroundColor: "#B7BBC8",
-                      height: "30px",
-                      fontSize: "14px",
-                      cursor: "pointer",
-                      fontFamily: "MainFont",
-                      padding: "10px",
-                    }}
-                    onClick={() => setLikeopen(true)}
-                  >
-                    로그인 후 이용 가능
-                  </div>
-                  {likepopen && <MustLogin onClick={likeOpen} />}
-                </>
-              )}
+              <button
+                style={{
+                  border: "none",
+                  borderRadius: "10px",
+                  backgroundColor: "#B7BBC8",
+                  width: "38px",
+                  height: "30px",
+                  fontSize: "14px",
+                  cursor: "pointer",
+                  fontFamily: "MainFont",
+                  boxShadow: "0px 4px 5px rgba(0, 0, 0, 0.4)",
+                }}
+                onClick={isLogin ? handleSubmit : () => setLikeopen(true)}
+              >
+                등록
+              </button>
+              {likepopen && <MustLogin onClick={likeOpen} />}
             </div>
           </div>
         </div>
