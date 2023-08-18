@@ -22,6 +22,11 @@ export default function Home() {
   const [posts, setPosts] = React.useState<PostProps[]>([]);
   const [open, setOpen] = useState(false);
   const [cookies] = useCookies(["uid"]);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+  useEffect(() => {
+    if (cookies.uid) setIsLogin(true);
+    else setIsLogin(false);
+  }, [cookies]);
   const [isopen, setIsopen] = useState(false);
 
   const handlechoose = (e: number) => {
@@ -46,7 +51,7 @@ export default function Home() {
         setPosts(res.data.results);
       })
       .catch((err) => {});
-  }, [setPosts, postApi]);
+  }, [postApi]);
 
   const getPostsByCategory = useCallback(
     async (choose: string) => {
@@ -111,7 +116,7 @@ export default function Home() {
               borderBottom: "1px solid #B7BBC8",
             }}
           >
-            {cookies.uid ? (
+            {isLogin ? (
               <RouterLink href="/post/write">
                 <div
                   style={{

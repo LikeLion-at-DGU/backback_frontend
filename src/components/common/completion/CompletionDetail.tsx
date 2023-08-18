@@ -6,6 +6,7 @@ import completionApi from "@/apis/completionApi";
 import { isAxiosError } from "../../../../node_modules/axios/index";
 import { useCookies } from "react-cookie";
 import RouterLink from "@/components/core/RouterLink";
+import { useState, useEffect } from "react";
 
 export interface CompletionDetailProps extends UserInfoProps {
   id: string;
@@ -30,8 +31,14 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
     .slice(0, 2)
     .join(":");
   const createdAt = `${date} ${time}`;
+  const [cookies] = useCookies(["uid"]);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+  useEffect(() => {
+    if (cookies.uid) setIsLogin(true);
+    else setIsLogin(false);
+  }, [cookies]);
   const completionLike = async () => {
-    if (!cookies.uid) return;
+    if (!isLogin) return;
     try {
       await completionApi()
         .likeCompletion(prop.id)
@@ -39,7 +46,6 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
     } catch (error) {}
   };
 
-  const [cookies] = useCookies(["uid"]);
   return (
     <ScrollContent>
       <div
@@ -112,7 +118,7 @@ export const CompletionDetail: React.FC<CompletionDetailProps> = ({
             profileId={prop.writer?.profileId}
             level={prop.writer?.level}
           />
-          {cookies.uid &&
+          {isLogin &&
             (cookies.uid == prop.writer?.profileId ? (
               <DeleteButton id={prop.id} type={"completion"} />
             ) : (
