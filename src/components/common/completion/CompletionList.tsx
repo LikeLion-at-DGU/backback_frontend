@@ -2,9 +2,12 @@ import Completion, { CompletionProps } from "./Completion";
 import { ScrollContent } from "../../post/PostDetail";
 import RouterLink from "@/components/core/RouterLink";
 import { UserInfoProps } from "../UserInfo";
+import { PostPageProps } from "@/components/mypage/PostPage";
+import { PostPage } from "@/components/mypage/PostPage";
 
 export interface CompletionListProps {
   completions: CompletionProps[];
+  postPageProps: PostPageProps;
 }
 
 const CompletionList: React.FC<CompletionListProps> = ({ ...prop }) => {
@@ -45,7 +48,16 @@ const CompletionList: React.FC<CompletionListProps> = ({ ...prop }) => {
             margin: "15px 15px 0px 15px",
           }}
         >
-          {listItems}
+          <div>
+            {listItems}
+            <PostPage
+              page={prop.postPageProps.page}
+              isNext={prop.postPageProps.isNext}
+              isPrevious={prop.postPageProps.isPrevious}
+              setPage={prop.postPageProps.setPage}
+              total={prop.postPageProps.total}
+            />
+          </div>
         </div>
         <div
           style={{

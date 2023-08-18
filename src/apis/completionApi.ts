@@ -8,7 +8,8 @@ interface Completion {
 
 const completionApi = () => {
   return {
-    getCompletions: () => api.get("/completions"),
+    getCompletions: (query: { page: number }) =>
+      api.get("/completions", { params: query }),
     postCompletion: (data: Completion) => {
       const formData = new FormData();
       formData.append("title", data.title);
