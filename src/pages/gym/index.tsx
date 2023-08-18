@@ -176,7 +176,22 @@ export default function Home() {
         <div style={{ padding: "0px 15px 0px 15px" }}>
           {mapopen &&
             (ishave ? (
-              <KakaoMap latitude={lat} longitude={lng} gyms={gymlocation} />
+              <>
+                <KakaoMap latitude={lat} longitude={lng} gyms={gymlocation} />
+                <img
+                  src="../../../assets/images/Cancel_icon.png"
+                  style={{
+                    height: "15px",
+                    width: "15px",
+                    position: "absolute",
+                    top: "195px",
+                    right: "25px",
+                    zIndex: "10",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setMapopen(false)}
+                ></img>
+              </>
             ) : (
               <div
                 style={{
