@@ -12,19 +12,20 @@ const Completion: React.FC<CompletionProps> = ({ ...prop }) => {
   return (
     <div
       style={{
-        display: "flex",
-        flexDirection: "row",
-        flexWrap: "wrap",
-        width: "100%",
-        height: "120px",
+        position: "relative",
+        paddingBottom: "100%",
+        overflow: "hidden",
       }}
     >
       <RouterLink href={`/completion/${prop.id}`}>
         <img
           src={prop.image}
           style={{
-            height: "100%",
+            position: "absolute",
+            top: "0",
+            left: "0",
             width: "100%",
+            height: "100%",
             objectFit: "cover",
             // objectPositon: "center",
           }}
