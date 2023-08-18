@@ -1,10 +1,10 @@
 import Post, { PostProps } from "../post/Post";
 import { ScrollContent } from "../post/PostDetail";
-import ImageSwiper from "../core/ImageSwiper";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useCookies } from "react-cookie";
 import RouterLink from "../core/RouterLink";
 import { useEffect, useState } from "react";
+import ImageSlide from "../core/ImageSlide";
 
 export interface HomeProps {
   posts: PostProps[];
@@ -49,11 +49,12 @@ const Homepage: React.FC<HomeProps> = ({ ...prop }) => {
           scrollBehavior: "smooth",
         }}
       >
-        <ImageSwiper images={prop.images} />
+        {/* <ImageSlide images={prop.images} /> */}
+        <ImageSlide items={prop.images} />
         <div
           style={{
             display: "flex",
-            padding: "15px 0px 10px 13px",
+            padding: "26px 0px 10px 13px",
             width: "100%",
             fontSize: "14px",
             borderBottom: "1px solid #B7BBC8",
@@ -92,12 +93,13 @@ const Homepage: React.FC<HomeProps> = ({ ...prop }) => {
                 alignItems: "center",
                 border: "none",
                 borderRadius: "10px",
-                backgroundColor: "lightpink",
+                backgroundColor: "#ECA7A7",
                 height: "30px",
                 fontSize: "14px",
                 cursor: "pointer",
                 fontFamily: "MainFont",
                 padding: "20px",
+                boxShadow: "0px 4px 5px rgba(0, 0, 0, 0.4)",
               }}
             >
               <RouterLink href="/login">간편 로그인하러가기</RouterLink>
