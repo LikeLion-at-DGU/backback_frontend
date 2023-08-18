@@ -5,10 +5,13 @@ import { useCookies } from "react-cookie";
 import RouterLink from "../core/RouterLink";
 import { useEffect, useState } from "react";
 import ImageSlide from "../core/ImageSlide";
+import { PostPageProps } from "../mypage/PostPage";
+import { PostPage } from "../mypage/PostPage";
 
 export interface HomeProps {
   posts: PostProps[];
   images: string[];
+  postPageProps: PostPageProps;
 }
 
 const Homepage: React.FC<HomeProps> = ({ ...prop }) => {
@@ -64,7 +67,16 @@ const Homepage: React.FC<HomeProps> = ({ ...prop }) => {
         </div>
         {isLogin ? (
           prop.posts.length ? (
-            listItems
+            <div>
+              {listItems}
+              <PostPage
+                page={prop.postPageProps.page}
+                isNext={prop.postPageProps.isNext}
+                isPrevious={prop.postPageProps.isPrevious}
+                setPage={prop.postPageProps.setPage}
+                total={prop.postPageProps.total}
+              />
+            </div>
           ) : (
             <div style={{ textAlign: "center", marginTop: "50px" }}>
               팔로우한 사람이 없거나, <br />

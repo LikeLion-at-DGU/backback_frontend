@@ -11,15 +11,22 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   const [cookies] = useCookies(["uid"]);
   const [posts, setPosts] = useState([]);
+  const [isNext, setIsNext] = useState<boolean>(false);
+  const [isPrevious, setIsPrevious] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [total, setTotal] = useState<number>(0);
   const [banners, setBanners] = useState([]);
   useEffect(() => {
     if (cookies.uid === undefined) return;
     postApi()
-      .getPosts({ followers: true })
+      .getPosts({ followers: true, page: page })
       .then((res: any) => {
         setPosts(res.data.results);
+        setIsNext(res.data.next !== null);
+        setIsPrevious(res.data.previous !== null);
+        setTotal(Math.ceil(res.data.count / 20));
       });
-  }, [cookies.uid]);
+  }, [cookies.uid, page]);
   useEffect(() => {
     bannerApi()
       .getBanners()
@@ -30,7 +37,17 @@ export default function Home() {
   return (
     <>
       <NavBar />
-      <HomePage images={...banners} posts={...posts} />
+      <HomePage
+        images={banners}
+        posts={posts}
+        postPageProps={{
+          page: page,
+          isNext: isNext,
+          isPrevious: isPrevious,
+          total: total,
+          setPage: setPage,
+        }}
+      />
     </>
   );
 }
