@@ -102,7 +102,7 @@ const Post: React.FC<PostProps> = ({ ...prop }) => {
           }}
         >
           <img
-            src="../../../assets/images/like_icon.png"
+            src="../../../assets/images/Like_icon.png"
             style={{
               height: "16px",
               marginRight: "5px",
